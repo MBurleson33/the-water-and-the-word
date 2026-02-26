@@ -476,6 +476,8 @@
     footer { flex-direction: column; gap: 12px; text-align: center; }
   }
 </style>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -650,76 +652,17 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-let videos = [
-  {
-    id: 1,
-    ytId: 'KTdPaFSgA7Q',
-    title: 'The Four Horsemen — What Does Revelation Really Say?',
-    category: 'Revelation Series',
-    date: 'November 12, 2024',
-    duration: '28:44',
-    description: 'A deep dive into Revelation 6 and the four horsemen of the apocalypse. We examine the original Greek, the historical interpretations, and what these seals mean for the world today.',
-    tags: ['Revelation', 'End Times', 'Apocalypse', 'Four Horsemen', 'Seals', 'Greek Exegesis', 'John', 'Second Coming'],
-    thumb: 'https://i.ytimg.com/vi/KTdPaFSgA7Q/hqdefault.jpg'
-  },
-  {
-    id: 2,
-    ytId: 'Z7-whHPnBaI',
-    title: 'Daniel\'s 70 Weeks — The Timeline of Prophecy',
-    category: 'Daniel Series',
-    date: 'October 28, 2024',
-    duration: '34:12',
-    description: 'The 70 Weeks prophecy in Daniel 9 is one of the most precise prophetic passages in all of Scripture. This episode unpacks it verse by verse and traces its remarkable fulfillment.',
-    tags: ['Daniel', 'Prophecy', '70 Weeks', 'Israel', 'Messiah', 'Old Testament', 'Timeline', 'Fulfillment'],
-    thumb: 'https://i.ytimg.com/vi/Z7-whHPnBaI/hqdefault.jpg'
-  },
-  {
-    id: 3,
-    ytId: 'uSD4vsh1zDA',
-    title: 'Signs of the Times — Israel, the Nations, and Matthew 24',
-    category: 'Current Events & Prophecy',
-    date: 'October 5, 2024',
-    duration: '22:07',
-    description: 'Jesus outlined specific signs that would precede His return. This episode examines Matthew 24 in light of current events — what is being fulfilled, and what is still ahead.',
-    tags: ['Matthew 24', 'Israel', 'Signs', 'Second Coming', 'Nations', 'Tribulation', 'Rapture', 'Jesus'],
-    thumb: 'https://i.ytimg.com/vi/uSD4vsh1zDA/hqdefault.jpg'
-  },
-  {
-    id: 4,
-    ytId: 'IUN664s7N-c',
-    title: 'The Gog and Magog War — Ezekiel 38 Explained',
-    category: 'Ezekiel Series',
-    date: 'September 18, 2024',
-    duration: '31:55',
-    description: 'Ezekiel 38 describes a massive coalition attack against Israel in the last days. Who are Gog and Magog? Is this Russia? Is this before or after the Rapture? We examine it carefully.',
-    tags: ['Ezekiel', 'Gog and Magog', 'Russia', 'Israel', 'War', 'Last Days', 'Middle East', 'Prophecy'],
-    thumb: 'https://i.ytimg.com/vi/IUN664s7N-c/hqdefault.jpg'
-  },
-  {
-    id: 5,
-    ytId: 'nGt9jAkWie4',
-    title: 'The Rapture Question — Pre, Mid, or Post Tribulation?',
-    category: 'Theology & Doctrine',
-    date: 'September 2, 2024',
-    duration: '41:20',
-    description: 'One of the most debated questions in eschatology. This episode lays out all three primary views fairly, examines the key scriptures on each side, and offers a reasoned conclusion.',
-    tags: ['Rapture', 'Tribulation', 'Eschatology', 'Doctrine', 'Thessalonians', 'Church', 'Resurrection', 'Pre-Trib'],
-    thumb: 'https://i.ytimg.com/vi/nGt9jAkWie4/hqdefault.jpg'
-  },
-  {
-    id: 6,
-    ytId: 'Y7f2bGYFMls',
-    title: 'The Holy Spirit and Spiritual Gifts — Are They Still Active?',
-    category: 'Holy Spirit',
-    date: 'August 14, 2024',
-    duration: '26:38',
-    description: 'A frank and Spirit-led examination of whether the gifts of prophecy, tongues, and healing are still active in the church today, and what Scripture teaches about how they should operate.',
-    tags: ['Holy Spirit', 'Spiritual Gifts', 'Prophecy', 'Tongues', 'Healing', 'Charismatic', 'Scripture', 'Church'],
-    thumb: 'https://i.ytimg.com/vi/Y7f2bGYFMls/hqdefault.jpg'
-  }
-];
+// ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
+// Replace these two values with your own from the Supabase setup guide
+const SUPABASE_URL      = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 
+// Client is initialized after DOM loads to ensure the CDN script is ready
+let _supabase = null;
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+// Videos are loaded from Supabase on page load. This is the live in-memory cache.
+let videos = [];
 let currentVideoId = null;
 let activeTag = null;
 
@@ -915,7 +858,7 @@ function generateTags() {
   }, 900);
 }
 
-function addVideo() {
+async function addVideo() {
   const ytRaw = document.getElementById('admin-yt').value.trim();
   const title = document.getElementById('admin-title').value.trim();
   const cat = document.getElementById('admin-cat').value.trim();
@@ -927,16 +870,28 @@ function addVideo() {
 
   const ytId = extractYtId(ytRaw);
   const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : ['Bible Study'];
-  const newId = videos.length ? Math.max(...videos.map(v => v.id)) + 1 : 1;
 
-  videos.unshift({
-    id: newId, ytId, title,
+  const newVideo = {
+    yt_id: ytId,
+    title,
     category: cat || 'Uncategorized',
     date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-    duration: dur, description: desc || title,
+    duration: dur,
+    description: desc || title,
     tags,
     thumb: `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`
-  });
+  };
+
+  const { data, error } = await _supabase.from('videos').insert([newVideo]).select();
+
+  if (error) {
+    showToast('Error saving video: ' + error.message);
+    return;
+  }
+
+  // Add to local cache using returned row (includes the database-generated id)
+  const saved = dbRowToVideo(data[0]);
+  videos.unshift(saved);
 
   // Reset form
   ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-tags-hidden'].forEach(id => { document.getElementById(id).value = ''; });
@@ -949,9 +904,13 @@ function addVideo() {
   showToast('Episode published successfully');
 }
 
-function deleteVideo(id) {
+async function deleteVideo(id) {
+  const { error } = await _supabase.from('videos').delete().eq('id', id);
+  if (error) { showToast('Error removing video: ' + error.message); return; }
   videos = videos.filter(v => v.id !== id);
   renderAdminList();
+  renderTopicPills();
+  renderLatest();
   showToast('Episode removed');
 }
 
@@ -1020,6 +979,45 @@ document.getElementById('admin-modal').addEventListener('click', function(e) {
   if (e.target === this) closeAdminModal();
 });
 
+// ── SUPABASE HELPERS ─────────────────────────────────────────────────────────
+// Maps a Supabase database row to the video object shape the site uses
+function dbRowToVideo(row) {
+  return {
+    id: row.id,
+    ytId: row.yt_id,
+    title: row.title,
+    category: row.category || 'Uncategorized',
+    date: row.date || '',
+    duration: row.duration || '—',
+    description: row.description || '',
+    tags: Array.isArray(row.tags) ? row.tags : [],
+    thumb: row.thumb || `https://i.ytimg.com/vi/${row.yt_id}/hqdefault.jpg`
+  };
+}
+
+async function loadVideos() {
+  // Show loading state
+  document.getElementById('video-grid').innerHTML =
+    '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;letter-spacing:0.08em;">Loading episodes…</div>';
+
+  const { data, error } = await _supabase
+    .from('videos')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Supabase load error:', error);
+    document.getElementById('video-grid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;">Could not load videos. Check your Supabase config.</div>';
+    return;
+  }
+
+  videos = (data || []).map(dbRowToVideo);
+  renderGrid(videos);
+  renderTopicPills();
+  renderLatest();
+}
+
 // ── LATEST EPISODE ───────────────────────────────────────────────────────────
 function renderLatest() {
   if (!videos.length) return;
@@ -1038,9 +1036,18 @@ function renderLatest() {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
-renderGrid(videos);
-renderTopicPills();
-renderLatest();
+window.addEventListener('DOMContentLoaded', () => {
+  // Guard: show a clear message if keys haven't been filled in yet
+  if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
+    document.getElementById('video-grid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;letter-spacing:0.06em;">⚙️ Supabase not yet connected.<br>Open index.html and replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY.</div>';
+    return;
+  }
+
+  // Safe to initialize now — CDN script is guaranteed to be loaded
+  _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  loadVideos();
+});
 </script>
 </body>
 </html>
