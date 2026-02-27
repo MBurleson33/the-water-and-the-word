@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Title, description, or transcript required' });
   }
 
-  // Build the content section — include transcript if provided
   let contentSection = '';
   if (title)       contentSection += `Title: ${title}\n`;
   if (description) contentSection += `Description: ${description}\n`;
@@ -38,7 +37,7 @@ Analyze the video content below and generate 8-14 highly specific, searchable ta
 - Key figures (e.g. "Antichrist", "Holy Spirit", "Jesus", "Israel")
 - Themes and topics (e.g. "End Times", "Spiritual Warfare", "Prayer", "Faith")
 
-Return ONLY a JSON array of tag strings. No explanation, no markdown, just the raw JSON array.
+IMPORTANT: Return ONLY a raw JSON array of strings. No markdown, no backticks, no explanation. Just the array.
 
 ${contentSection}
 
@@ -55,8 +54,18 @@ Example output: ["Revelation", "Matthew 24", "End Times", "Israel", "Second Comi
       return res.status(500).json({ error: 'Anthropic API error', detail: data });
     }
 
-    const raw = data.content[0].text.trim();
-    const tags = JSON.parse(raw);
+    // Strip any markdown formatting Claude might have added and parse
+    let raw = data.content[0].text.trim();
+    raw = raw.replace(/```json\s*/gi, '').replace(/```\s*/gi, '').trim();
+
+    // Extract just the array portion in case there's any surrounding text
+    const arrayMatch = raw.match(/\[[\s\S]*\]/);
+    if (!arrayMatch) {
+      console.error('No array found in response:', raw);
+      return res.status(500).json({ error: 'Could not parse tags from response', raw });
+    }
+
+    const tags = JSON.parse(arrayMatch[0]);
 
     return res.status(200).json({ tags });
 
