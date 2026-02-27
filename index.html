@@ -912,7 +912,7 @@ function renderGrid(list) {
       <div class="video-meta">${v.category}</div>
       <div class="video-title">${v.title}</div>
       <div class="video-excerpt">${v.description.substring(0, 110)}…</div>
-      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag">${t}</span>`).join('')}</div>
+      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" onclick="event.stopPropagation();searchFromTag('${t}')" style="cursor:pointer;">${t}</span>`).join('')}</div>
     </div>
   `).join('');
 }
