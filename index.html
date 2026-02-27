@@ -72,7 +72,7 @@
     color: var(--ink);
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 300;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.7;
     min-height: 100vh;
   }
@@ -96,13 +96,13 @@
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
     transition: color 0.2s;
   }
   .nav-links a:hover, .nav-links a.active { color: var(--ink); }
   .nav-admin-btn {
     background: var(--ink); color: var(--cream) !important;
-    padding: 7px 18px; font-size: 10px !important; letter-spacing: 0.16em;
+    padding: 8px 20px; font-size: 12px !important; letter-spacing: 0.14em;
     border-radius: 2px; transition: background 0.2s !important;
   }
   .nav-admin-btn:hover { background: var(--gold) !important; color: var(--ink) !important; }
@@ -124,7 +124,7 @@
     animation: fadeUp 0.7s ease both;
   }
   .hero-eyebrow {
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 20px;
   }
   .hero h1 {
@@ -150,7 +150,7 @@
   .search-wrap input {
     width: 100%; padding: 14px 50px 14px 20px;
     background: var(--white); border: 1px solid var(--border);
-    font-family: 'Josefin Sans', sans-serif; font-size: 13px; font-weight: 300;
+    font-family: 'Josefin Sans', sans-serif; font-size: 15px; font-weight: 300;
     color: var(--ink); outline: none; letter-spacing: 0.05em;
     transition: border-color 0.2s;
   }
@@ -173,8 +173,8 @@
   .topic-pill {
     padding: 5px 14px;
     border: 1px solid var(--border); background: transparent;
-    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
     cursor: pointer; transition: all 0.2s;
   }
   .topic-pill:hover, .topic-pill.active {
@@ -211,7 +211,7 @@
   .latest-thumb:hover .latest-play-btn { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
   .latest-play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
   .latest-label {
-    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 16px;
   }
   .latest-title {
@@ -224,12 +224,12 @@
     font-size: 13px; color: rgba(250,248,244,0.6); line-height: 1.8; margin-bottom: 24px;
   }
   .latest-meta {
-    font-size: 10px; letter-spacing: 0.12em; color: rgba(250,248,244,0.4);
+    font-size: 12px; letter-spacing: 0.1em; color: rgba(250,248,244,0.4);
     margin-bottom: 28px;
   }
   .latest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
   .latest-tag {
-    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(250,248,244,0.5); border: 1px solid rgba(250,248,244,0.2);
     padding: 3px 10px; transition: all 0.2s;
   }
@@ -239,8 +239,8 @@
   .latest-watch-btn {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 12px 28px; background: var(--gold); color: var(--ink);
-    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
-    letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;
     border: none; transition: all 0.2s;
   }
   .latest-watch-btn:hover { background: #FAF8F4; }
@@ -255,8 +255,8 @@
   .latest-desc-full.open { display: block; }
   .latest-expand-btn {
     background: none; border: none; padding: 0;
-    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
-    letter-spacing: 0.14em; text-transform: uppercase;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
     color: rgba(250,248,244,0.4); cursor: pointer;
     display: inline-flex; align-items: center; gap: 6px;
     margin-bottom: 20px; margin-top: 4px;
@@ -272,7 +272,7 @@
     display: flex; align-items: center; gap: 16px;
   }
   .section-label span {
-    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
   }
   .section-label::after {
     content: ''; flex: 1; height: 1px; background: var(--border);
@@ -283,8 +283,8 @@
     display: inline-flex; align-items: center; gap: 8px;
     margin-top: 20px; padding: 8px 16px;
     background: transparent; border: 1px solid var(--border);
-    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
     cursor: pointer; transition: all 0.2s;
   }
   .transcript-toggle:hover { border-color: var(--gold); color: var(--gold); }
@@ -293,7 +293,7 @@
   .transcript-box {
     margin-top: 12px; padding: 20px 24px;
     background: var(--cream); border: 1px solid var(--border);
-    font-size: 13px; color: var(--muted); line-height: 1.9;
+    font-size: 15px; color: var(--muted); line-height: 1.9;
     max-height: 320px; overflow-y: auto;
     display: none;
   }
@@ -339,26 +339,28 @@
   .video-duration {
     position: absolute; bottom: 8px; right: 8px;
     background: rgba(26,24,20,0.75); color: white;
-    font-size: 10px; letter-spacing: 0.08em; padding: 2px 6px;
+    font-size: 11px; letter-spacing: 0.06em; padding: 3px 8px;
   }
-  .video-meta { font-size: 10px; color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; padding: 16px 16px 0; }
+  .video-meta { font-size: 11px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; padding: 16px 16px 0; }
   .video-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 400; line-height: 1.3;
+    font-size: 22px; font-weight: 400; line-height: 1.3;
     color: var(--ink); margin-bottom: 8px; padding: 0 16px;
   }
-  .video-excerpt { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; padding: 0 16px; }
+  .video-excerpt { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; padding: 0 16px; }
   .video-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px; }
   .video-tag {
-    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--muted); border: 1px solid var(--border); padding: 2px 8px;
+    position: relative; z-index: 2; cursor: pointer; transition: all 0.2s;
   }
+  .video-tag:hover { color: var(--gold); border-color: var(--gold); }
 
   /* ── VIDEO PLAYER PAGE ── */
   .player-page { padding: 80px 56px 60px; max-width: 1400px; margin: 0 auto; }
   .player-back {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); cursor: pointer; margin-bottom: 32px;
     transition: color 0.2s; background: none; border: none;
   }
@@ -370,17 +372,17 @@
     aspect-ratio: 16/9; width: 100%; background: #000; margin-bottom: 28px;
   }
   .player-embed iframe { width: 100%; height: 100%; border: none; }
-  .player-category { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .player-category { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .player-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 36px; font-weight: 300; line-height: 1.2;
     margin-bottom: 16px;
   }
-  .player-date { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 20px; }
+  .player-date { font-size: 13px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 20px; }
   .player-desc { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
   .player-tags { display: flex; flex-wrap: wrap; gap: 8px; }
   .player-tag {
-    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--muted); border: 1px solid var(--border); padding: 4px 12px;
     cursor: pointer; transition: all 0.2s;
   }
@@ -389,7 +391,7 @@
   /* ── RELATED SIDEBAR ── */
   .related-sidebar {}
   .sidebar-title {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--muted); margin-bottom: 24px; padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
   }
@@ -406,10 +408,10 @@
   .related-info {}
   .related-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-weight: 400; line-height: 1.3;
+    font-size: 16px; font-weight: 400; line-height: 1.3;
     color: var(--ink); margin-bottom: 4px;
   }
-  .related-cat { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+  .related-cat { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
 
   /* ── ABOUT PAGE ── */
   .about-page { max-width: 960px; margin: 0 auto; padding: 80px 56px; }
@@ -419,7 +421,7 @@
     font-size: 52px; font-weight: 300; line-height: 1.1; margin-bottom: 32px;
   }
   .about-page h1 em { font-style: italic; color: var(--gold); }
-  .about-body { font-size: 14px; color: var(--muted); line-height: 2; }
+  .about-body { font-size: 16px; color: var(--muted); line-height: 2; }
   .about-body p { margin-bottom: 20px; }
   .about-body strong { color: var(--ink); font-weight: 400; }
   .about-verse {
@@ -430,7 +432,7 @@
     font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300;
     font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px;
   }
-  .about-verse cite { font-size: 11px; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; }
+  .about-verse cite { font-size: 13px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
 
   /* ── ADMIN PAGE ── */
   .admin-page { max-width: 900px; margin: 0 auto; padding: 80px 56px; }
@@ -438,10 +440,10 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 40px; font-weight: 300; margin-bottom: 8px;
   }
-  .admin-sub { font-size: 12px; color: var(--muted); margin-bottom: 40px; letter-spacing: 0.05em; }
+  .admin-sub { font-size: 14px; color: var(--muted); margin-bottom: 40px; letter-spacing: 0.04em; }
   .form-group { margin-bottom: 24px; }
   .form-group label {
-    display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    display: block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--muted); margin-bottom: 8px;
   }
   .form-group input, .form-group textarea, .form-group select {
@@ -457,7 +459,7 @@
   .ai-tag-btn {
     width: 100%; padding: 12px; margin-top: 8px;
     background: rgba(184,150,90,0.08); border: 1px dashed var(--gold-light);
-    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
     letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
     cursor: pointer; transition: all 0.2s;
   }
@@ -469,7 +471,7 @@
   }
   .tag-output .gen-tag {
     display: inline-block; margin: 3px;
-    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
     background: rgba(184,150,90,0.12); color: var(--gold);
     padding: 3px 10px; border: 1px solid rgba(184,150,90,0.3);
   }
@@ -483,7 +485,7 @@
   .submit-btn:hover { background: var(--gold); color: var(--ink); }
   .admin-list { margin-top: 48px; }
   .admin-list-title {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); margin-bottom: 20px; padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
   }
@@ -493,10 +495,10 @@
   }
   .admin-video-row img { width: 80px; aspect-ratio: 16/9; object-fit: cover; }
   .admin-row-info { flex: 1; }
-  .admin-row-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; margin-bottom: 2px; }
-  .admin-row-meta { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+  .admin-row-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; margin-bottom: 2px; }
+  .admin-row-meta { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
   .admin-row-del {
-    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--muted); background: none; border: 1px solid var(--border);
     padding: 4px 10px; cursor: pointer; transition: all 0.2s;
   }
@@ -513,7 +515,7 @@
   .results-close {
     display: inline-flex; align-items: center; gap: 6px;
     background: none; border: 1px solid var(--border); padding: 5px 12px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
     cursor: pointer; transition: all 0.2s;
   }
@@ -786,7 +788,7 @@
 <script>
 // ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
 // Replace these two values with your own from the Supabase setup guide
-const SUPABASE_URL      = 'https://zcdhoxqsbpujpiwbbrgw.supabase.co';
+const SUPABASE_URL      = 'https://zcdhoxqsbpujpiwbbrgw.supabase.coL';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjZGhveHFzYnB1anBpd2Jicmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTk2NTksImV4cCI6MjA4Nzc3NTY1OX0.EemlKMnlL4LjSxS3M_nGKmsYO8Xp-YsawWcyNpgbCc4';
 
 // Client is initialized after DOM loads to ensure the CDN script is ready
@@ -912,7 +914,7 @@ function renderGrid(list) {
       <div class="video-meta">${v.category}</div>
       <div class="video-title">${v.title}</div>
       <div class="video-excerpt">${v.description.substring(0, 110)}…</div>
-      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" onclick="event.stopPropagation();searchFromTag('${t}')" style="cursor:pointer;">${t}</span>`).join('')}</div>
+      <div class="video-tags" onclick="event.stopPropagation()">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${t.replace(/"/g, '&quot;')}" onclick="handleTagClick(event)">${t}</span>`).join('')}</div>
     </div>
   `).join('');
 }
@@ -966,6 +968,12 @@ function openVideo(id) {
       </div>
     </div>
   `).join('') || '<p style="font-size:12px;color:var(--muted)">No related episodes yet.</p>';
+}
+
+function handleTagClick(e) {
+  e.stopPropagation();
+  const tag = e.currentTarget.dataset.tag;
+  if (tag) searchFromTag(tag);
 }
 
 function searchFromTag(tag) {
