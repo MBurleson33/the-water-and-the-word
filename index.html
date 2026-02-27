@@ -668,6 +668,10 @@ let activeTag = null;
 
 // ── ROUTING ───────────────────────────────────────────────────────────────────
 function showPage(page, id) {
+  // Stop video playing when navigating away from player
+  if (page !== 'player') {
+    document.getElementById('player-embed').innerHTML = '';
+  }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
@@ -1051,5 +1055,3 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
-
