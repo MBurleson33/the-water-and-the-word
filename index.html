@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Water and the Word — Prophetic Video Journal</title>
+
+<!-- ── PRIMARY SEO ── -->
+<title>The Water and the Word — Christian Prophecy Video Journal</title>
+<meta name="description" content="The Water and the Word is a prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Watch, search, and discover episodes on Revelation, Daniel, Israel, and more.">
+<meta name="keywords" content="Christian prophecy, biblical prophecy, end times, Revelation, Daniel, Israel, Holy Spirit, rapture, tribulation, second coming, Bible study, prophetic word, eschatology">
+<meta name="author" content="The Water and the Word">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://thewaterandtheword.com/">
+
+<!-- ── OPEN GRAPH (Facebook, LinkedIn, iMessage previews) ── -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Water and the Word">
+<meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal">
+<meta property="og:description" content="A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Episodes on Revelation, Daniel, Israel, and more.">
+<meta property="og:url" content="https://thewaterandtheword.com/">
+<meta property="og:locale" content="en_US">
+
+<!-- ── TWITTER / X CARD ── -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Water and the Word — Christian Prophecy Video Journal">
+<meta name="twitter:description" content="A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit.">
+<meta name="twitter:site" content="@thewaterandtheword">
+
+<!-- ── STRUCTURED DATA (Google Rich Results) ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Water and the Word",
+  "url": "https://thewaterandtheword.com/",
+  "description": "A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://thewaterandtheword.com/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- ── PERFORMANCE ── -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="dns-prefetch" href="https://www.youtube.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -460,8 +506,19 @@
   .results-header {
     max-width: 1400px; margin: 0 auto; padding: 32px 48px 0;
     font-size: 13px; color: var(--muted);
+    display: none; align-items: center; justify-content: space-between;
   }
+  .results-header.visible { display: flex; }
   .results-header strong { color: var(--ink); font-weight: 400; }
+  .results-close {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid var(--border); padding: 5px 12px;
+    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .results-close:hover { border-color: var(--ink); color: var(--ink); }
+  .results-close svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
   /* ── NO RESULTS ── */
   .no-results {
@@ -508,9 +565,14 @@
     .video-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
     .player-layout { grid-template-columns: 1fr; }
     .player-page, .about-page, .admin-page { padding: 80px 20px 40px; }
-    .section-label { padding: 0 20px; }
+    .section-label { padding: 40px 20px 0; }
+    .results-header { padding: 24px 20px 0; flex-wrap: wrap; gap: 12px; }
     .form-row { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
+    .search-wrap { margin: 0 auto 40px; }
+    .topics { padding: 0 16px; }
+    .hero-section { padding-bottom: 8px; }
+    .no-results { padding: 48px 20px; }
   }
 </style>
 <!-- Supabase -->
@@ -519,7 +581,9 @@
 <body>
 
 <!-- NAV -->
-<nav>
+<a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;padding:8px 16px;background:var(--gold);color:var(--ink);font-size:12px;" onfocus="this.style.left='0'">Skip to content</a>
+<header role="banner">
+<nav aria-label="Main navigation">
   <a class="nav-logo" href="#" onclick="showPage('home')">The Water <span>&</span> the Word</a>
   <div class="nav-links">
     <a href="#" onclick="showPage('home')" class="active" id="nav-home">Videos</a>
@@ -527,8 +591,10 @@
     <a href="#" onclick="promptAdminLogin()" class="nav-admin-btn" id="nav-admin" style="display:none">+ Add Video</a>
   </div>
 </nav>
+</header>
 
 <!-- HOME PAGE -->
+<main id="main-content">
 <div id="page-home" class="page active">
 <div class="hero-section">
   <div class="hero">
@@ -537,7 +603,7 @@
     <p>Exploring Scripture, prophetic signs, and the movement of the Spirit in our time.</p>
     <div class="divider"></div>
     <div class="search-wrap">
-      <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)">
+      <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
       <button>
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
@@ -572,7 +638,13 @@
     </div>
   </div>
 
-  <div id="results-header" class="results-header" style="display:none"></div>
+  <div id="results-header" class="results-header">
+    <span id="results-header-text"></span>
+    <button class="results-close" onclick="clearSearch()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Clear Search
+    </button>
+  </div>
   <div class="section-label" id="section-label"><span>All Episodes</span></div>
   <div class="video-grid" id="video-grid"></div>
   <div class="no-results" id="no-results" style="display:none">
@@ -678,8 +750,10 @@
   </div>
 </div>
 
+</main>
+
 <!-- FOOTER -->
-<footer>
+<footer role="contentinfo">
   <div class="footer-logo">The Water <span>&</span> the Word</div>
   <div class="footer-copy">© 2025 The Water and the Word — All Rights Reserved</div>
 </footer>
@@ -768,13 +842,21 @@ function filterByTag(tag) {
 }
 
 // ── SEARCH & RENDER ───────────────────────────────────────────────────────────
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  handleSearch('');
+  document.getElementById('search-input').focus();
+}
+
 function handleSearch(query) {
   const q = query.toLowerCase().trim();
   const label = document.getElementById('section-label');
   const header = document.getElementById('results-header');
   let filtered = videos;
 
+  // Show/hide clear button and adjust input padding
   const latestSection = document.getElementById('latest-section');
+  const headerText = document.getElementById('results-header-text');
   if (q) {
     latestSection.classList.remove('visible');
     filtered = videos.filter(v => {
@@ -787,16 +869,16 @@ function handleSearch(query) {
     });
     label.style.display = 'none';
     if (filtered.length > 0) {
-      header.style.display = 'block';
-      header.innerHTML = `Showing <strong>${filtered.length}</strong> result${filtered.length !== 1 ? 's' : ''} for <strong>"${query}"</strong>`;
+      header.classList.add('visible');
+      headerText.innerHTML = `Showing <strong>${filtered.length}</strong> result${filtered.length !== 1 ? 's' : ''} for <strong>"${query}"</strong>`;
     } else {
-      header.style.display = 'none';
+      header.classList.remove('visible');
     }
   } else {
     activeTag = null;
     renderTopicPills();
     label.style.display = 'flex';
-    header.style.display = 'none';
+    header.classList.remove('visible');
     latestSection.classList.add('visible');
   }
 
@@ -807,17 +889,21 @@ function renderGrid(list) {
   const grid = document.getElementById('video-grid');
   const none = document.getElementById('no-results');
   const isSearching = document.getElementById('search-input').value.trim().length > 0;
-  if (list.length === 0) {
+
+  // When not searching, exclude the latest video — it's already in the hero
+  const latestId = videos.length > 0 ? videos[0].id : null;
+  const displayList = isSearching ? list : list.filter(v => v.id !== latestId);
+
+  if (displayList.length === 0) {
     grid.innerHTML = '';
-    // Only show "no results" message if user is actively searching
     none.style.display = isSearching ? 'block' : 'none';
     return;
   }
   none.style.display = 'none';
-  grid.innerHTML = list.map(v => `
+  grid.innerHTML = displayList.map(v => `
     <div class="video-card" onclick="showPage('player', ${v.id})">
       <div class="video-thumb">
-        <img src="${v.thumb}" alt="${v.title}" onerror="this.src='https://via.placeholder.com/480x270/E8E4DC/B8965A?text=Episode'">
+        <img src="${v.thumb}" alt="${v.title} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/E8E4DC/B8965A?text=Episode'">
         <div class="play-overlay">
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
