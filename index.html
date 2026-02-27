@@ -165,7 +165,7 @@
   .latest-thumb:hover .latest-play-btn { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
   .latest-play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
   .latest-label {
-    font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 16px;
   }
   .latest-title {
@@ -204,13 +204,29 @@
     .latest-section { padding: 40px 20px; }
   }
 
+  /* ── LATEST DESC EXPAND ── */
+  .latest-desc-full { display: none; }
+  .latest-desc-full.open { display: block; }
+  .latest-expand-btn {
+    background: none; border: none; padding: 0;
+    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(250,248,244,0.4); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-bottom: 24px; margin-top: -16px;
+    transition: color 0.2s;
+  }
+  .latest-expand-btn:hover { color: var(--gold-light); }
+  .latest-expand-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
+  .latest-expand-btn.open svg { transform: rotate(180deg); }
+
   /* ── SECTION LABEL ── */
   .section-label {
-    max-width: 1400px; margin: 0 auto 28px; padding: 0 48px;
+    max-width: 1400px; margin: 0 auto 28px; padding: 48px 48px 0;
     display: flex; align-items: center; gap: 16px;
   }
   .section-label span {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
   }
   .section-label::after {
     content: ''; flex: 1; height: 1px; background: var(--border);
@@ -543,6 +559,11 @@
         <h2 class="latest-title" id="latest-title"></h2>
         <div class="latest-meta" id="latest-meta"></div>
         <p class="latest-desc" id="latest-desc"></p>
+        <p class="latest-desc latest-desc-full" id="latest-desc-full"></p>
+        <button class="latest-expand-btn" id="latest-expand-btn" onclick="toggleLatestDesc()" style="display:none;">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          Read More
+        </button>
         <div class="latest-tags" id="latest-tags"></div>
         <button class="latest-watch-btn" id="latest-watch-btn">
           Watch Now <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -785,9 +806,11 @@ function handleSearch(query) {
 function renderGrid(list) {
   const grid = document.getElementById('video-grid');
   const none = document.getElementById('no-results');
+  const isSearching = document.getElementById('search-input').value.trim().length > 0;
   if (list.length === 0) {
     grid.innerHTML = '';
-    none.style.display = 'block';
+    // Only show "no results" message if user is actively searching
+    none.style.display = isSearching ? 'block' : 'none';
     return;
   }
   none.style.display = 'none';
@@ -867,6 +890,18 @@ function searchFromTag(tag) {
     activeTag = tag;
     renderTopicPills();
   }, 50);
+}
+
+function toggleLatestDesc() {
+  const full = document.getElementById('latest-desc-full');
+  const short = document.getElementById('latest-desc');
+  const btn = document.getElementById('latest-expand-btn');
+  const isOpen = full.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  short.style.display = isOpen ? 'none' : 'block';
+  btn.innerHTML = isOpen
+    ? '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Show Less'
+    : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
 }
 
 function toggleTranscript() {
@@ -1099,7 +1134,21 @@ function renderLatest() {
   document.getElementById('latest-thumb').onclick = () => showPage('player', v.id);
   document.getElementById('latest-title').innerHTML = v.title.replace(/—/, '<em>—</em>');
   document.getElementById('latest-meta').textContent = v.category + ' · ' + v.date + ' · ' + v.duration;
-  document.getElementById('latest-desc').textContent = v.description.substring(0, 160) + '…';
+  const fullDesc = v.description;
+  const shortDesc = fullDesc.length > 160 ? fullDesc.substring(0, 160) + '…' : fullDesc;
+  document.getElementById('latest-desc').textContent = shortDesc;
+  document.getElementById('latest-desc-full').textContent = fullDesc;
+
+  const expandBtn = document.getElementById('latest-expand-btn');
+  const fullDescEl = document.getElementById('latest-desc-full');
+  if (fullDesc.length > 160) {
+    expandBtn.style.display = 'inline-flex';
+    fullDescEl.classList.remove('open');
+    expandBtn.classList.remove('open');
+    expandBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
+  } else {
+    expandBtn.style.display = 'none';
+  }
   document.getElementById('latest-tags').innerHTML = v.tags.slice(0, 5).map(t =>
     `<span class="latest-tag" onclick="searchFromTag('${t}')" style="cursor:pointer">${t}</span>`).join('');
   document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
