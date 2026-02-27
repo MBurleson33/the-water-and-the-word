@@ -216,6 +216,27 @@
     content: ''; flex: 1; height: 1px; background: var(--border);
   }
 
+  /* ── TRANSCRIPT TOGGLE ── */
+  .transcript-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 20px; padding: 8px 16px;
+    background: transparent; border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .transcript-toggle:hover { border-color: var(--gold); color: var(--gold); }
+  .transcript-toggle svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
+  .transcript-toggle.open svg { transform: rotate(180deg); }
+  .transcript-box {
+    margin-top: 12px; padding: 20px 24px;
+    background: var(--cream); border: 1px solid var(--border);
+    font-size: 13px; color: var(--muted); line-height: 1.9;
+    max-height: 320px; overflow-y: auto;
+    display: none;
+  }
+  .transcript-box.open { display: block; animation: fadeUp 0.3s ease both; }
+
   /* ── VIDEO GRID ── */
   .video-grid {
     max-width: 1400px; margin: 0 auto;
@@ -553,6 +574,13 @@
         <div class="player-date" id="player-date"></div>
         <p class="player-desc" id="player-desc"></p>
         <div class="player-tags" id="player-tags"></div>
+        <div id="transcript-section" style="display:none;">
+          <button class="transcript-toggle" id="transcript-toggle" onclick="toggleTranscript()">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            Read Transcript
+          </button>
+          <div class="transcript-box" id="transcript-box"></div>
+        </div>
       </div>
       <div class="related-sidebar">
         <div class="sidebar-title">Related Episodes</div>
@@ -605,12 +633,17 @@
       </div>
     </div>
     <div class="form-group">
-      <label>Description</label>
-      <textarea id="admin-desc" placeholder="Paste your video description here…" style="min-height:80px;"></textarea>
+      <label>Description <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— shown publicly on the site</span></label>
+      <textarea id="admin-desc" placeholder="Write a short description of the episode. This appears on the video card and player page…" style="min-height:100px;"></textarea>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;margin:8px 0 24px;">
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+      <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">AI Tagging</span>
+      <div style="flex:1;height:1px;background:var(--border);"></div>
     </div>
     <div class="form-group">
-      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:none;font-family:'Josefin Sans',sans-serif;">(optional but recommended — copy from YouTube's "Show transcript" feature)</span></label>
-      <textarea id="admin-transcript" placeholder="Paste the full YouTube transcript here for best AI tagging results…" style="min-height:140px;"></textarea>
+      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— used for tag generation &amp; shown to viewers on request. Copy from YouTube's "Show transcript" feature.</span></label>
+      <textarea id="admin-transcript" placeholder="Paste the full YouTube transcript here…" style="min-height:160px;"></textarea>
       <button class="ai-tag-btn" onclick="generateTags()">✦ Generate AI Tags with Claude</button>
       <div class="tag-output" id="tag-output"><span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span></div>
       <input type="hidden" id="admin-tags-hidden">
@@ -790,6 +823,20 @@ function openVideo(id) {
   document.getElementById('player-tags').innerHTML = v.tags
     .map(t => `<span class="player-tag" onclick="searchFromTag('${t}')">${t}</span>`).join('');
 
+  // Show transcript toggle if transcript exists
+  const transcriptSection = document.getElementById('transcript-section');
+  const transcriptBox = document.getElementById('transcript-box');
+  const transcriptToggle = document.getElementById('transcript-toggle');
+  if (v.transcript) {
+    transcriptSection.style.display = 'block';
+    transcriptBox.textContent = v.transcript;
+    transcriptBox.classList.remove('open');
+    transcriptToggle.classList.remove('open');
+    transcriptToggle.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read Transcript';
+  } else {
+    transcriptSection.style.display = 'none';
+  }
+
   // Related videos — find by shared tags
   const related = videos
     .filter(x => x.id !== id)
@@ -820,6 +867,16 @@ function searchFromTag(tag) {
     activeTag = tag;
     renderTopicPills();
   }, 50);
+}
+
+function toggleTranscript() {
+  const box = document.getElementById('transcript-box');
+  const btn = document.getElementById('transcript-toggle');
+  const isOpen = box.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.innerHTML = isOpen
+    ? '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Hide Transcript'
+    : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read Transcript';
 }
 
 // ── ADMIN ─────────────────────────────────────────────────────────────────────
@@ -880,6 +937,8 @@ async function addVideo() {
   const ytId = extractYtId(ytRaw);
   const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : ['Bible Study'];
 
+  const transcript = document.getElementById('admin-transcript').value.trim();
+
   const newVideo = {
     yt_id: ytId,
     title,
@@ -887,6 +946,7 @@ async function addVideo() {
     date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
     duration: dur,
     description: desc || title,
+    transcript: transcript || '',
     tags,
     thumb: `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`
   };
@@ -903,7 +963,7 @@ async function addVideo() {
   videos.unshift(saved);
 
   // Reset form
-  ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => { document.getElementById(id).value = ''; });
+  ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
   document.getElementById('tag-output').innerHTML = '<span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span>';
   document.querySelector('.ai-tag-btn').textContent = '✦ Generate AI Tags with Claude';
 
@@ -999,6 +1059,7 @@ function dbRowToVideo(row) {
     date: row.date || '',
     duration: row.duration || '—',
     description: row.description || '',
+    transcript: row.transcript || '',
     tags: Array.isArray(row.tags) ? row.tags : [],
     thumb: row.thumb || `https://i.ytimg.com/vi/${row.yt_id}/hqdefault.jpg`
   };
