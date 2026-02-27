@@ -1,14 +1,19 @@
 export default async function handler(req, res) {
-  // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { title, description } = req.body;
+  const { title, description, transcript } = req.body;
 
-  if (!title && !description) {
-    return res.status(400).json({ error: 'Title or description required' });
+  if (!title && !description && !transcript) {
+    return res.status(400).json({ error: 'Title, description, or transcript required' });
   }
+
+  // Build the content section — include transcript if provided
+  let contentSection = '';
+  if (title)       contentSection += `Title: ${title}\n`;
+  if (description) contentSection += `Description: ${description}\n`;
+  if (transcript)  contentSection += `\nTranscript:\n${transcript.substring(0, 8000)}\n`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -26,14 +31,18 @@ export default async function handler(req, res) {
             role: 'user',
             content: `You are a tagging assistant for a Christian prophecy video platform called "The Water and the Word".
 
-Given this video title and description, generate a list of 8-12 relevant tags. Tags should be specific, searchable keywords related to the content — things like scripture references, theological concepts, prophetic topics, named books of the Bible, key figures, and themes.
+Analyze the video content below and generate 8-14 highly specific, searchable tags. Focus on:
+- Specific books of the Bible mentioned (e.g. "Revelation", "Daniel", "Ezekiel")
+- Chapter or passage references (e.g. "Matthew 24", "Daniel 9", "Revelation 6")
+- Theological and prophetic concepts (e.g. "Rapture", "Tribulation", "Second Coming")
+- Key figures (e.g. "Antichrist", "Holy Spirit", "Jesus", "Israel")
+- Themes and topics (e.g. "End Times", "Spiritual Warfare", "Prayer", "Faith")
 
 Return ONLY a JSON array of tag strings. No explanation, no markdown, just the raw JSON array.
 
-Title: ${title || ''}
-Description: ${description || ''}
+${contentSection}
 
-Example output format: ["Revelation", "End Times", "Israel", "Matthew 24", "Second Coming", "Prophecy", "Tribulation", "Holy Spirit"]`
+Example output: ["Revelation", "Matthew 24", "End Times", "Israel", "Second Coming", "Tribulation", "Antichrist", "Prophecy"]`
           }
         ]
       })
@@ -46,7 +55,6 @@ Example output format: ["Revelation", "End Times", "Israel", "Matthew 24", "Seco
       return res.status(500).json({ error: 'Anthropic API error', detail: data });
     }
 
-    // Parse the tag array from Claude's response
     const raw = data.content[0].text.trim();
     const tags = JSON.parse(raw);
 
