@@ -533,7 +533,7 @@
   }
   .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--muted); }
   .footer-logo span { color: var(--gold); }
-  .footer-copy { font-size: 10px; letter-spacing: 0.1em; color: var(--muted); }
+  .footer-copy { font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -755,7 +755,7 @@
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div class="footer-logo">The Water <span>&</span> the Word</div>
-  <div class="footer-copy">© 2025 The Water and the Word — All Rights Reserved</div>
+  <div class="footer-copy">© 2026 The Water and the Word — All Rights Reserved</div>
 </footer>
 
 <!-- ADMIN LOGIN MODAL -->
@@ -797,6 +797,7 @@ let _supabase = null;
 let videos = [];
 let currentVideoId = null;
 let activeTag = null;
+let latestVideoId = null; // tracks which video is shown in the hero
 
 // ── ROUTING ───────────────────────────────────────────────────────────────────
 function showPage(page, id) {
@@ -891,8 +892,7 @@ function renderGrid(list) {
   const isSearching = document.getElementById('search-input').value.trim().length > 0;
 
   // When not searching, exclude the latest video — it's already in the hero
-  const latestId = videos.length > 0 ? videos[0].id : null;
-  const displayList = isSearching ? list : list.filter(v => v.id !== latestId);
+  const displayList = isSearching ? list : list.filter(v => v.id !== latestVideoId);
 
   if (displayList.length === 0) {
     grid.innerHTML = '';
@@ -1204,15 +1204,16 @@ async function loadVideos() {
   }
 
   videos = (data || []).map(dbRowToVideo);
-  renderGrid(videos);
-  renderTopicPills();
   renderLatest();
+  renderTopicPills();
+  renderGrid(videos);
 }
 
 // ── LATEST EPISODE ───────────────────────────────────────────────────────────
 function renderLatest() {
   if (!videos.length) return;
   const v = videos[0];
+  latestVideoId = v.id; // keep track for grid exclusion
   const section = document.getElementById('latest-section');
   section.classList.add('visible');
   document.getElementById('latest-thumb-img').src = v.thumb;
