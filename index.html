@@ -65,6 +65,31 @@
     --white: #FFFFFF;
   }
 
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cream: #141210;
+      --ink: #F0EDE8;
+      --gold: #C8A86A;
+      --gold-light: #D4B483;
+      --muted: #8A8278;
+      --border: #2A2724;
+      --white: #1E1C18;
+    }
+    nav { background: rgba(20,18,16,0.95); }
+    .hero-section { background: #181510; }
+    .video-card { background: #1E1C18; }
+    .search-wrap input { background: #1E1C18; }
+    .latest-section { background: #0E0C0A; }
+    .transcript-box { background: #181510; }
+    .admin-modal-inner { background: #1E1C18; }
+    .form-group input, .form-group textarea { background: #181510; color: var(--ink); }
+    .tag-output { background: #181510; }
+    .admin-video-row { background: #181510; border-color: var(--border); }
+    footer { background: #0E0C0A; border-color: var(--border); }
+    .toast { background: var(--ink); color: var(--cream); }
+    .skeleton { background: linear-gradient(90deg, #2a2724 25%, #332f2b 50%, #2a2724 75%); }
+  }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -542,12 +567,53 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
   .video-card:nth-child(1) { animation-delay: 0.05s; }
   .video-card:nth-child(2) { animation-delay: 0.1s; }
   .video-card:nth-child(3) { animation-delay: 0.15s; }
   .video-card:nth-child(4) { animation-delay: 0.2s; }
   .video-card:nth-child(5) { animation-delay: 0.25s; }
   .video-card:nth-child(6) { animation-delay: 0.3s; }
+
+  /* Respect user's OS motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ── SKELETON LOADING ── */
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px; padding: 0 48px 80px;
+    max-width: 1400px; margin: 0 auto;
+  }
+  .skeleton-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--border) 25%, var(--cream) 50%, var(--border) 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+  }
+  .skeleton-thumb { width: 100%; aspect-ratio: 16/9; }
+  .skeleton-body { padding: 16px; }
+  .skeleton-line {
+    height: 12px; margin-bottom: 10px; border-radius: 2px;
+  }
+  .skeleton-title { width: 85%; height: 18px; margin-bottom: 14px; }
+  .skeleton-short { width: 55%; }
+  .skeleton-tags { display: flex; gap: 8px; margin-top: 14px; }
+  .skeleton-tag { width: 60px; height: 22px; border-radius: 2px; }
 
   /* ── TOAST ── */
   .toast {
@@ -785,6 +851,20 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- DELETE CONFIRMATION MODAL -->
+<div id="delete-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(26,24,20,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:var(--white);border:1px solid var(--border);padding:40px;max-width:440px;width:90%;text-align:center;">
+    <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Confirm Delete</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:8px;line-height:1.3;">Remove this episode?</p>
+    <p id="delete-confirm-title" style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.5;"></p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:28px;">This will permanently delete it from your database and cannot be undone.</p>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button onclick="closeDeleteModal()" style="flex:1;max-width:160px;padding:12px;background:none;border:1px solid var(--border);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Cancel</button>
+      <button onclick="confirmDelete()" style="flex:1;max-width:160px;padding:12px;background:#c0392b;border:1px solid #c0392b;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:white;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#a93226'" onmouseout="this.style.background='#c0392b'">Yes, Remove</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
 // Replace these two values with your own from the Supabase setup guide
@@ -800,6 +880,7 @@ let videos = [];
 let currentVideoId = null;
 let activeTag = null;
 let latestVideoId = null; // tracks which video is shown in the hero
+let pendingDeleteId = null; // tracks which video is pending delete confirmation
 
 // ── ROUTING ───────────────────────────────────────────────────────────────────
 function showPage(page, id) {
@@ -827,7 +908,7 @@ function renderTopicPills() {
   const container = document.getElementById('topic-pills');
   const topics = getAllTopics();
   container.innerHTML = topics.map(t =>
-    `<button class="topic-pill${activeTag === t ? ' active' : ''}" onclick="filterByTag('${t}')">${t}</button>`
+    `<button class="topic-pill${activeTag === t ? ' active' : ''}" data-tag="${t.replace(/"/g, '&quot;')}">${t}</button>`
   ).join('');
 }
 
@@ -903,7 +984,7 @@ function renderGrid(list) {
   }
   none.style.display = 'none';
   grid.innerHTML = displayList.map(v => `
-    <div class="video-card" onclick="showPage('player', ${v.id})">
+    <div class="video-card" data-id="${v.id}">
       <div class="video-thumb">
         <img src="${v.thumb}" alt="${v.title} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/E8E4DC/B8965A?text=Episode'">
         <div class="play-overlay">
@@ -914,7 +995,7 @@ function renderGrid(list) {
       <div class="video-meta">${v.category}</div>
       <div class="video-title">${v.title}</div>
       <div class="video-excerpt">${v.description.substring(0, 110)}…</div>
-      <div class="video-tags" onclick="event.stopPropagation()">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${t.replace(/"/g, '&quot;')}" onclick="handleTagClick(event)">${t}</span>`).join('')}</div>
+      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${t.replace(/"/g, '&quot;')}">${t}</span>`).join('')}</div>
     </div>
   `).join('');
 }
@@ -932,7 +1013,7 @@ function openVideo(id) {
   document.getElementById('player-date').textContent = v.date;
   document.getElementById('player-desc').textContent = v.description;
   document.getElementById('player-tags').innerHTML = v.tags
-    .map(t => `<span class="player-tag" onclick="searchFromTag('${t}')">${t}</span>`).join('');
+    .map(t => `<span class="player-tag" data-tag="${t.replace(/"/g, '&quot;')}">${t}</span>`).join('');
 
   // Show transcript toggle if transcript exists
   const transcriptSection = document.getElementById('transcript-section');
@@ -958,7 +1039,7 @@ function openVideo(id) {
     .map(x => x.v);
 
   document.getElementById('related-list').innerHTML = related.map(r => `
-    <div class="related-card" onclick="openVideo(${r.id})">
+    <div class="related-card" data-id="${r.id}">
       <div class="related-thumb">
         <img src="${r.thumb}" alt="${r.title}" onerror="this.src='https://via.placeholder.com/160x90/E8E4DC/B8965A?text=Ep'">
       </div>
@@ -968,12 +1049,6 @@ function openVideo(id) {
       </div>
     </div>
   `).join('') || '<p style="font-size:12px;color:var(--muted)">No related episodes yet.</p>';
-}
-
-function handleTagClick(e) {
-  e.stopPropagation();
-  const tag = e.currentTarget.dataset.tag;
-  if (tag) searchFromTag(tag);
 }
 
 function searchFromTag(tag) {
@@ -1102,14 +1177,33 @@ async function addVideo() {
   showToast('Episode published successfully');
 }
 
-async function deleteVideo(id) {
+function deleteVideo(id) {
+  // Find video title for the confirmation message
+  const v = videos.find(x => x.id === id);
+  const title = v ? v.title : 'this episode';
+  pendingDeleteId = id;
+  document.getElementById('delete-confirm-title').textContent = `"${title.substring(0, 60)}${title.length > 60 ? '…' : ''}"`;
+  document.getElementById('delete-modal').style.display = 'flex';
+}
+
+async function confirmDelete() {
+  if (!pendingDeleteId) return;
+  const id = pendingDeleteId;
+  pendingDeleteId = null;
+  closeDeleteModal();
   const { error } = await _supabase.from('videos').delete().eq('id', id);
   if (error) { showToast('Error removing video: ' + error.message); return; }
   videos = videos.filter(v => v.id !== id);
   renderAdminList();
   renderTopicPills();
   renderLatest();
+  renderGrid(videos);
   showToast('Episode removed');
+}
+
+function closeDeleteModal() {
+  document.getElementById('delete-modal').style.display = 'none';
+  pendingDeleteId = null;
 }
 
 function renderAdminList() {
@@ -1172,9 +1266,12 @@ function checkAdminPassword() {
   }
 }
 
-// Close modal on backdrop click
+// Close modals on backdrop click
 document.getElementById('admin-modal').addEventListener('click', function(e) {
   if (e.target === this) closeAdminModal();
+});
+document.getElementById('delete-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeDeleteModal();
 });
 
 // ── SUPABASE HELPERS ─────────────────────────────────────────────────────────
@@ -1196,8 +1293,23 @@ function dbRowToVideo(row) {
 
 async function loadVideos() {
   // Show loading state
-  document.getElementById('video-grid').innerHTML =
-    '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;letter-spacing:0.08em;">Loading episodes…</div>';
+  // Show skeleton cards while loading
+  const skeletonCard = `
+    <div class="skeleton-card">
+      <div class="skeleton skeleton-thumb"></div>
+      <div class="skeleton-body">
+        <div class="skeleton skeleton-line skeleton-short"></div>
+        <div class="skeleton skeleton-line skeleton-title"></div>
+        <div class="skeleton skeleton-line" style="width:90%"></div>
+        <div class="skeleton skeleton-line" style="width:75%"></div>
+        <div class="skeleton-tags">
+          <div class="skeleton skeleton-tag"></div>
+          <div class="skeleton skeleton-tag"></div>
+          <div class="skeleton skeleton-tag" style="width:80px"></div>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('video-grid').innerHTML = skeletonCard.repeat(6);
 
   const { data, error } = await _supabase
     .from('videos')
@@ -1245,11 +1357,59 @@ function renderLatest() {
     expandBtn.style.display = 'none';
   }
   document.getElementById('latest-tags').innerHTML = v.tags.slice(0, 5).map(t =>
-    `<span class="latest-tag" onclick="searchFromTag('${t}')" style="cursor:pointer">${t}</span>`).join('');
+    `<span class="latest-tag" data-tag="${t.replace(/"/g, '&quot;')}" style="cursor:pointer">${t}</span>`).join('');
   document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+// ── DELEGATED CLICK HANDLER ───────────────────────────────────────────────────
+// Single listener handles all interactive elements reliably on both desktop
+// and mobile touch — avoids stopPropagation issues between nested elements
+document.addEventListener('click', function(e) {
+
+  // Video grid tag click
+  const videoTag = e.target.closest('.video-tag');
+  if (videoTag && videoTag.dataset.tag) {
+    searchFromTag(videoTag.dataset.tag);
+    return;
+  }
+
+  // Video grid card click (but not if a tag was clicked)
+  const card = e.target.closest('.video-card');
+  if (card && card.dataset.id) {
+    showPage('player', parseInt(card.dataset.id));
+    return;
+  }
+
+  // Player page tag click
+  const playerTag = e.target.closest('.player-tag');
+  if (playerTag && playerTag.dataset.tag) {
+    searchFromTag(playerTag.dataset.tag);
+    return;
+  }
+
+  // Latest episode tag click
+  const latestTag = e.target.closest('.latest-tag');
+  if (latestTag && latestTag.dataset.tag) {
+    searchFromTag(latestTag.dataset.tag);
+    return;
+  }
+
+  // Topic pill click
+  const pill = e.target.closest('.topic-pill');
+  if (pill && pill.dataset.tag) {
+    filterByTag(pill.dataset.tag);
+    return;
+  }
+
+  // Related video card click
+  const related = e.target.closest('.related-card');
+  if (related && related.dataset.id) {
+    openVideo(parseInt(related.dataset.id));
+    return;
+  }
+});
+
 window.addEventListener('DOMContentLoaded', () => {
   // Guard: show a clear message if keys haven't been filled in yet
   if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
@@ -1265,4 +1425,3 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
