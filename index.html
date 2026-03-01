@@ -126,16 +126,11 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .nav-logo {
-    display: flex; align-items: center; text-decoration: none;
-    height: 48px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400; letter-spacing: 0.02em; line-height: 1;
+    color: var(--ink); text-decoration: none;
   }
-  .nav-logo img {
-    height: 44px; width: auto;
-    /* In dark mode, if the logo is dark it won't show — invert it */
-  }
-  @media (prefers-color-scheme: dark) {
-    .nav-logo img { filter: brightness(0) invert(1); }
-  }
+  .nav-logo span { color: var(--gold); }
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
@@ -672,9 +667,7 @@
 <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;padding:8px 16px;background:var(--gold);color:var(--ink);font-size:12px;" onfocus="this.style.left='0'">Skip to content</a>
 <header role="banner">
 <nav aria-label="Main navigation">
-  <a class="nav-logo" href="#" onclick="showPage('home')">
-    <img src="/public/images/The Water and the Word Logo.svg" alt="The Water and the Word" />
-  </a>
+  <a class="nav-logo" href="#" onclick="showPage('home')">The Water <span>&</span> the Word</a>
   <div class="nav-links">
     <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
     <a href="#" onclick="showPage('about')" id="nav-about">About</a>
