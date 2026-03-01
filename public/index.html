@@ -5,28 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ── PRIMARY SEO ── -->
-<title>The Water and the Word — Christian Prophecy Video Journal</title>
-<meta name="description" content="The Water and the Word — Where the Spirit Leads, We Bear Witness. Faith journey videos, testimonies, and Scripture-grounded stories of the Holy Spirit moving in our time.">
+<title id="meta-title">The Water and the Word — Christian Prophecy Video Journal</title>
+<meta name="description" id="meta-desc" content="The Water and the Word — Where the Spirit Leads, We Bear Witness. Faith journey videos, testimonies, and Scripture-grounded stories of the Holy Spirit moving in our time.">
 <meta name="keywords" content="Christian prophecy, biblical prophecy, end times, Revelation, Daniel, Israel, Holy Spirit, rapture, tribulation, second coming, Bible study, prophetic word, eschatology">
 <meta name="author" content="The Water and the Word">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://thewaterandtheword.com/">
+<link rel="canonical" href="https://thewaterandtheword.com/" id="meta-canonical">
 
-<!-- ── OPEN GRAPH (Facebook, LinkedIn, iMessage previews) ── -->
-<meta property="og:type" content="website">
+<!-- ── OPEN GRAPH ── -->
+<meta property="og:type" content="website" id="og-type">
 <meta property="og:site_name" content="The Water and the Word">
-<meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal">
-<meta property="og:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit moving in our time.">
-<meta property="og:url" content="https://thewaterandtheword.com/">
+<meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal" id="og-title">
+<meta property="og:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit moving in our time." id="og-desc">
+<meta property="og:url" content="https://thewaterandtheword.com/" id="og-url">
+<meta property="og:image" content="" id="og-image">
 <meta property="og:locale" content="en_US">
 
 <!-- ── TWITTER / X CARD ── -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Water and the Word — Christian Prophecy Video Journal">
-<meta name="twitter:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit.">
+<meta name="twitter:title" content="The Water and the Word — Christian Prophecy Video Journal" id="tw-title">
+<meta name="twitter:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit." id="tw-desc">
 <meta name="twitter:site" content="@thewaterandtheword">
+<meta name="twitter:image" content="" id="tw-image">
 
-<!-- ── STRUCTURED DATA (Google Rich Results) ── -->
+<!-- ── STRUCTURED DATA ── -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,17 +47,18 @@
 }
 </script>
 
-<!-- ── PERFORMANCE ── -->
 <!-- ── FAVICON ── -->
 <link rel="icon" type="image/png" href="images/The Water and the Word Logo.png">
 <link rel="apple-touch-icon" href="images/The Water and the Word Logo.png">
 
+<!-- ── FONTS & PERFORMANCE ── -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://i.ytimg.com">
 <link rel="dns-prefetch" href="https://www.youtube.com">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -68,7 +71,6 @@
     --border: #DDD9D2;
     --white: #FFFFFF;
     --deep: #262D33;
-    /* Latest episode hero text — light tints on dark background */
     --hero-text: #F4F2EE;
     --hero-text-60: rgba(244,242,238,0.72);
     --hero-text-50: rgba(244,242,238,0.62);
@@ -86,11 +88,6 @@
       --border: #3A4048;
       --white: #363D44;
       --deep: #1A2028;
-      --hero-text: #F4F2EE;
-      --hero-text-60: rgba(244,242,238,0.72);
-      --hero-text-50: rgba(244,242,238,0.62);
-      --hero-text-40: rgba(244,242,238,0.50);
-      --hero-text-20: rgba(244,242,238,0.25);
     }
     nav { background: rgba(38,45,51,0.96); }
     .nav-links a { color: #8A94A0 !important; }
@@ -109,14 +106,16 @@
     .toast { background: var(--ink); color: var(--cream); }
     .skeleton { background: linear-gradient(90deg, #3A4048 25%, #444C54 50%, #3A4048 75%); }
     .hero-logo { filter: brightness(0) invert(1); }
-    .video-tag { border-color: #5A6470; color: #9AA4B0; }
-    .topic-pill { border-color: #5A6470; color: #9AA4B0; }
+    .video-tag, .topic-pill, .player-tag { border-color: #5A6470; color: #9AA4B0; }
     .latest-tag { border-color: rgba(244,242,238,0.35); }
-    .player-tag { border-color: #5A6470; color: #9AA4B0; }
+    .shelf-section { background: #1E2530; }
+    .shelf-card { background: #2E3338; }
+    .prayer-form-inner { background: #262D33; border-color: var(--border); }
+    .reaction-btn { background: rgba(80,144,207,0.1); border-color: #5A6470; }
+    .sort-select { background: var(--white); color: var(--ink); border-color: var(--border); }
   }
 
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--cream);
     color: var(--ink);
@@ -133,8 +132,7 @@
     background: rgba(244,242,238,0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
-    padding: 0 40px;
-    height: 72px;
+    padding: 0 40px; height: 72px;
     display: flex; align-items: center; justify-content: space-between;
   }
   .nav-links { display: flex; gap: 32px; align-items: center; }
@@ -150,12 +148,6 @@
     font-size: 18px; font-style: italic; font-weight: 300;
     color: var(--muted); letter-spacing: 0.02em;
   }
-  .nav-admin-btn {
-    background: var(--ink); color: var(--cream) !important;
-    padding: 8px 20px; font-size: 12px !important; letter-spacing: 0.14em;
-    border-radius: 2px; transition: background 0.2s !important;
-  }
-  .nav-admin-btn:hover { background: var(--gold) !important; color: var(--cream) !important; }
 
   /* ── PAGES ── */
   .page { display: none; padding-top: 64px; min-height: 100vh; }
@@ -166,7 +158,6 @@
     background: radial-gradient(ellipse at 50% 0%, var(--cream) 0%, var(--white) 65%);
     border-bottom: 1px solid var(--border);
     box-shadow: 0 2px 16px rgba(71,75,80,0.07);
-    position: relative;
   }
   .hero {
     padding: 100px 40px 80px;
@@ -174,30 +165,15 @@
     text-align: center;
     animation: fadeUp 0.7s ease both;
   }
-  .hero-logo-wrap {
-    display: flex; justify-content: center; margin-bottom: 64px;
-  }
-  .hero-logo {
-    height: 140px; width: auto;
-  }
-  .hero-eyebrow {
-    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 20px; white-space: nowrap;
-  }
+  .hero-logo-wrap { display: flex; justify-content: center; margin-bottom: 64px; }
+  .hero-logo { height: 140px; width: auto; }
   .hero p {
     font-size: 19px; color: var(--muted); max-width: 680px; margin: 0 auto 36px;
     letter-spacing: 0.03em;
   }
-  .divider {
-    width: 48px; height: 2px; background: linear-gradient(90deg, #5090CF, #3698FA);
-    margin: 0 auto 48px; border-radius: 2px;
-  }
 
   /* ── SEARCH ── */
-  .search-wrap {
-    max-width: 720px; margin: 0 auto 36px;
-    position: relative;
-  }
+  .search-wrap { max-width: 720px; margin: 0 auto 36px; position: relative; }
   .search-wrap input {
     width: 100%; padding: 16px 56px 16px 24px;
     background: var(--white); border: 1px solid var(--border);
@@ -210,11 +186,10 @@
   .search-wrap input:focus { border-color: var(--gold); box-shadow: 0 2px 16px rgba(80,144,207,0.12); }
   .search-wrap input::placeholder { color: var(--muted); }
   .search-wrap button {
-    position: absolute; right: 0; top: 0; bottom: 0;
-    width: 52px; background: var(--gold); border: none; cursor: pointer;
+    position: absolute; right: 0; top: 0; bottom: 0; width: 52px;
+    background: var(--gold); border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    border-radius: 0 2px 2px 0;
-    transition: background 0.2s;
+    border-radius: 0 2px 2px 0; transition: background 0.2s;
   }
   .search-wrap button:hover { background: var(--ink); }
   .search-wrap button svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2; }
@@ -236,29 +211,94 @@
     border: 1px solid var(--border); background: transparent;
     font-family: 'Josefin Sans', sans-serif; font-size: 12px;
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
-    cursor: pointer; transition: all 0.25s;
-    border-radius: 2px;
+    cursor: pointer; transition: all 0.25s; border-radius: 2px;
   }
   .topic-pill:hover, .topic-pill.active {
-    border-color: var(--gold); color: var(--white);
-    background: var(--gold);
+    border-color: var(--gold); color: var(--white); background: var(--gold);
+  }
+  .topic-pill .pill-count {
+    display: inline-block; margin-left: 6px;
+    font-size: 10px; opacity: 0.7;
   }
 
-  /* ── LATEST EPISODE FEATURE ── */
-  .latest-section {
-    background: #262D33;
-    padding: 56px 0;
-    display: none;
+  /* ── START HERE SHELVES ── */
+  .shelves-section {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 0 40px;
   }
+  .shelves-header {
+    max-width: 1400px; margin: 0 auto 8px; padding: 0 48px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .shelves-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--ink);
+  }
+  .shelves-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-style: italic; color: var(--muted);
+    margin: 0;
+  }
+  .shelf {
+    margin-top: 32px;
+  }
+  .shelf-label {
+    max-width: 1400px; margin: 0 auto 14px; padding: 0 48px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .shelf-label-text {
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+  .shelf-label-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0;
+  }
+  .shelf-label-line { flex: 1; height: 1px; background: var(--border); }
+  .shelf-label-see-all {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); background: none; border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif; transition: opacity 0.2s;
+  }
+  .shelf-label-see-all:hover { opacity: 0.7; }
+  .shelf-scroll {
+    padding: 0 48px;
+    overflow-x: auto; overflow-y: visible;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .shelf-scroll::-webkit-scrollbar { display: none; }
+  .shelf-track {
+    display: flex; gap: 20px;
+    min-width: max-content; padding-bottom: 4px;
+  }
+  .shelf-card {
+    width: 220px; flex-shrink: 0; cursor: pointer;
+    background: var(--cream);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s;
+    border: 1px solid transparent;
+  }
+  .shelf-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(71,75,80,0.14); border-color: var(--border); }
+  .shelf-card-thumb {
+    width: 100%; aspect-ratio: 16/9; overflow: hidden;
+    background: var(--border); position: relative;
+  }
+  .shelf-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .shelf-card:hover .shelf-card-thumb img { transform: scale(1.06); }
+  .shelf-card-body { padding: 10px 12px 12px; }
+  .shelf-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 400; line-height: 1.3; color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .shelf-card-cat { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+
+  /* ── LATEST EPISODE FEATURE ── */
+  .latest-section { background: #262D33; padding: 56px 0; display: none; }
   .latest-section.visible { display: block; }
   .latest-inner {
-    max-width: 1400px; margin: 0 auto;
-    padding: 0 48px;
+    max-width: 1400px; margin: 0 auto; padding: 0 48px;
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
   }
-  .latest-thumb {
-    position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer;
-  }
+  .latest-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
   .latest-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .latest-thumb:hover img { transform: scale(1.04); }
   .latest-play {
@@ -269,37 +309,26 @@
   .latest-play-btn {
     width: 64px; height: 64px; border-radius: 50%;
     background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.6);
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center; transition: all 0.3s;
   }
   .latest-thumb:hover .latest-play-btn { background: #5090CF; border-color: #5090CF; transform: scale(1.08); }
   .latest-play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
-  .latest-label {
-    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: #7AAEDD; margin-bottom: 16px;
-  }
+  .latest-label { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #7AAEDD; margin-bottom: 16px; }
   .latest-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(26px, 3vw, 42px); font-weight: 300; line-height: 1.2;
     color: #F0EDF8; margin-bottom: 16px;
   }
   .latest-title em { font-style: italic; color: var(--gold-light); }
-  .latest-desc {
-    font-size: 18px; color: rgba(235,232,228,0.75); line-height: 1.85; margin-bottom: 24px;
-  }
-  .latest-meta {
-    font-size: 12px; letter-spacing: 0.1em; color: rgba(235,232,228,0.5);
-    margin-bottom: 28px;
-  }
+  .latest-desc { font-size: 18px; color: rgba(235,232,228,0.75); line-height: 1.85; margin-bottom: 24px; }
+  .latest-meta { font-size: 12px; letter-spacing: 0.1em; color: rgba(235,232,228,0.5); margin-bottom: 28px; }
   .latest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
   .latest-tag {
     font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--hero-text-50); border: 1px solid var(--hero-text-20);
     padding: 3px 10px; transition: all 0.2s;
   }
-  .latest-tag:hover {
-    color: #7AAEDD; border-color: #5090CF; background: rgba(80,144,207,0.1);
-  }
+  .latest-tag:hover { color: #7AAEDD; border-color: #5090CF; background: rgba(80,144,207,0.1); }
   .latest-watch-btn {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 12px 28px; background: #5090CF; color: #FFFFFF;
@@ -309,13 +338,6 @@
   }
   .latest-watch-btn:hover { background: #3A78B8; }
   .latest-watch-btn svg { width: 14px; height: 14px; fill: #FFFFFF; margin-left: 2px; }
-  @media (max-width: 768px) {
-    .latest-inner { grid-template-columns: 1fr; gap: 28px; }
-    .latest-section { padding: 40px 0; }
-    .latest-inner { padding: 0 20px; }
-  }
-
-  /* ── LATEST DESC EXPAND ── */
   .latest-desc-full { display: none; }
   .latest-desc-full.open { display: block; }
   .latest-expand-btn {
@@ -324,45 +346,53 @@
     letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--hero-text-40); cursor: pointer;
     display: inline-flex; align-items: center; gap: 6px;
-    margin-bottom: 20px; margin-top: 4px;
-    transition: color 0.2s;
+    margin-bottom: 20px; margin-top: 4px; transition: color 0.2s;
   }
   .latest-expand-btn:hover { color: var(--gold-light); }
   .latest-expand-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
   .latest-expand-btn.open svg { transform: rotate(180deg); }
 
-  /* ── SECTION LABEL ── */
+  /* ── SECTION LABEL + SORT ── */
   .section-label {
     max-width: 1400px; margin: 0 auto 28px; padding: 48px 48px 0;
     display: flex; align-items: center; gap: 16px;
   }
   .section-label span {
     font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    white-space: nowrap;
   }
-  .section-label::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
-
-  /* ── TRANSCRIPT TOGGLE ── */
-  .transcript-toggle {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 20px; padding: 8px 16px;
-    background: transparent; border: 1px solid var(--border);
-    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+  .section-label-line { flex: 1; height: 1px; background: var(--border); }
+  .sort-select {
+    font-family: 'Josefin Sans', sans-serif; font-size: 11px;
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    background: var(--white); border: 1px solid var(--border);
+    padding: 6px 10px; outline: none; cursor: pointer;
+    transition: border-color 0.2s;
+    -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2358697A'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 24px;
+  }
+  .sort-select:focus { border-color: var(--gold); }
+
+  /* ── RESULTS HEADER ── */
+  .results-header {
+    max-width: 1400px; margin: 0 auto; padding: 32px 48px 0;
+    font-size: 18px; color: var(--muted);
+    display: none; align-items: center; justify-content: space-between;
+  }
+  .results-header.visible { display: flex; }
+  .results-header strong { color: var(--ink); font-weight: 400; }
+  .results-close {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid var(--border); padding: 5px 12px;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
     cursor: pointer; transition: all 0.2s;
   }
-  .transcript-toggle:hover { border-color: var(--gold); color: var(--gold); }
-  .transcript-toggle svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
-  .transcript-toggle.open svg { transform: rotate(180deg); }
-  .transcript-box {
-    margin-top: 12px; padding: 20px 24px;
-    background: var(--cream); border: 1px solid var(--border);
-    font-size: 19px; color: var(--muted); line-height: 1.9;
-    max-height: 320px; overflow-y: auto;
-    display: none;
-  }
-  .transcript-box.open { display: block; animation: fadeUp 0.3s ease both; }
+  .results-close:hover { border-color: var(--ink); color: var(--ink); }
+  .results-close svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
   /* ── VIDEO GRID ── */
   .video-grid {
@@ -383,20 +413,15 @@
     position: relative; aspect-ratio: 16/9;
     background: var(--border); overflow: hidden; margin-bottom: 16px;
   }
-  .video-thumb img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+  .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .video-card:hover .video-thumb img { transform: scale(1.06); }
   .play-overlay {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     background: rgba(26,24,20,0); transition: background 0.3s;
   }
   .video-card:hover .play-overlay { background: rgba(54,152,250,0.15); }
   .play-btn {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: #5090CF;
+    width: 52px; height: 52px; border-radius: 50%; background: #5090CF;
     display: flex; align-items: center; justify-content: center;
     opacity: 0; transform: scale(0.7) translateY(6px);
     transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -424,6 +449,31 @@
   }
   .video-tag:hover { color: var(--gold); border-color: var(--gold); }
 
+  /* ── EMPTY STATE ── */
+  .no-results {
+    grid-column: 1 / -1; text-align: center;
+    padding: 80px 40px;
+  }
+  .no-results-icon {
+    font-size: 36px; margin-bottom: 16px; opacity: 0.5;
+  }
+  .no-results-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300; color: var(--ink); margin-bottom: 10px;
+  }
+  .no-results-sub {
+    font-size: 16px; color: var(--muted); margin-bottom: 28px; line-height: 1.7;
+  }
+  .no-results-suggestions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .no-results-suggestion {
+    padding: 6px 16px;
+    border: 1px solid var(--border); background: transparent;
+    font-family: 'Josefin Sans', sans-serif; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .no-results-suggestion:hover { border-color: var(--gold); color: var(--gold); }
+
   /* ── VIDEO PLAYER PAGE ── */
   .player-page { padding: 80px 56px 60px; max-width: 1400px; margin: 0 auto; }
   .player-back {
@@ -435,17 +485,10 @@
   .player-back:hover { color: var(--ink); }
   .player-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
   .player-layout { display: grid; grid-template-columns: 1fr 400px; gap: 56px; }
-  .player-main {}
-  .player-embed {
-    aspect-ratio: 16/9; width: 100%; background: #000; margin-bottom: 28px;
-  }
+  .player-embed { aspect-ratio: 16/9; width: 100%; background: #000; margin-bottom: 28px; }
   .player-embed iframe { width: 100%; height: 100%; border: none; }
   .player-category { font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-  .player-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 300; line-height: 1.2;
-    margin-bottom: 16px;
-  }
+  .player-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.2; margin-bottom: 16px; }
   .player-date { font-size: 15px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 20px; }
   .player-desc { font-size: 19px; color: var(--muted); line-height: 1.85; margin-bottom: 24px; }
   .player-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -456,27 +499,108 @@
   }
   .player-tag:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── SHARE BUTTON ── */
+  /* ── SHARE ROW ── */
   .player-share-row {
-    display: flex; align-items: center; gap: 12px;
-    margin-top: 24px; padding-top: 24px;
-    border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);
   }
   .share-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; background: none;
-    border: 1px solid var(--border);
+    padding: 10px 20px; background: none; border: 1px solid var(--border);
     font-family: 'Josefin Sans', sans-serif; font-size: 11px;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted); cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
   }
   .share-btn:hover { border-color: var(--gold); color: var(--gold); }
   .share-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
-  .share-confirm {
-    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gold); opacity: 0; transition: opacity 0.3s;
-  }
+  .share-confirm { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); opacity: 0; transition: opacity 0.3s; }
   .share-confirm.show { opacity: 1; }
+
+  /* ── TRANSCRIPT ── */
+  .transcript-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 20px; padding: 8px 16px;
+    background: transparent; border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .transcript-toggle:hover { border-color: var(--gold); color: var(--gold); }
+  .transcript-toggle svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
+  .transcript-toggle.open svg { transform: rotate(180deg); }
+  .transcript-box {
+    margin-top: 12px; padding: 20px 24px;
+    background: var(--cream); border: 1px solid var(--border);
+    font-size: 17px; color: var(--muted); line-height: 1.9;
+    max-height: 320px; overflow-y: auto; display: none;
+  }
+  .transcript-box.open { display: block; animation: fadeUp 0.3s ease both; }
+
+  /* ── REACTION & PRAYER ── */
+  .community-section {
+    margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border);
+  }
+  .community-title {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px;
+  }
+  .reaction-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 24px; background: rgba(80,144,207,0.07);
+    border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.25s; margin-bottom: 24px;
+  }
+  .reaction-btn:hover, .reaction-btn.reacted {
+    background: rgba(80,144,207,0.15); border-color: var(--gold); color: var(--gold);
+  }
+  .reaction-btn .reaction-dove { font-size: 16px; line-height: 1; }
+  .reaction-count { font-size: 13px; opacity: 0.7; }
+  .prayer-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: none; border: none; padding: 0;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: color 0.2s;
+    margin-left: 16px;
+  }
+  .prayer-toggle:hover { color: var(--gold); }
+  .prayer-toggle svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
+  .prayer-toggle.open svg { transform: rotate(180deg); }
+  .prayer-form-wrap { display: none; margin-top: 20px; animation: fadeUp 0.3s ease both; }
+  .prayer-form-wrap.open { display: block; }
+  .prayer-form-inner {
+    padding: 24px; background: var(--white); border: 1px solid var(--border);
+  }
+  .prayer-form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 300; color: var(--ink); margin-bottom: 6px;
+  }
+  .prayer-form-sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+  .prayer-input {
+    width: 100%; padding: 10px 14px; margin-bottom: 12px;
+    background: var(--cream); border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 14px; font-weight: 300;
+    color: var(--ink); outline: none; letter-spacing: 0.03em;
+    transition: border-color 0.2s;
+  }
+  .prayer-input:focus { border-color: var(--gold); }
+  .prayer-input::placeholder { color: var(--muted); }
+  textarea.prayer-input { min-height: 100px; resize: vertical; }
+  .prayer-submit {
+    padding: 10px 28px; background: var(--ink); color: var(--cream);
+    border: none; font-family: 'Josefin Sans', sans-serif; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .prayer-submit:hover { background: var(--gold); }
+  .prayer-sent {
+    display: none; font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic; color: var(--gold);
+    padding: 12px 0; text-align: center;
+  }
+  .prayer-sent.show { display: block; }
 
   /* ── RELATED SIDEBAR ── */
   .related-sidebar {}
@@ -485,57 +609,31 @@
     color: var(--muted); margin-bottom: 24px; padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
   }
-  .related-card {
-    display: flex; gap: 12px; margin-bottom: 20px; cursor: pointer;
-    transition: opacity 0.2s;
-  }
+  .related-card { display: flex; gap: 12px; margin-bottom: 20px; cursor: pointer; transition: opacity 0.2s; }
   .related-card:hover { opacity: 0.75; }
-  .related-thumb {
-    width: 100px; flex-shrink: 0; aspect-ratio: 16/9;
-    background: var(--border); overflow: hidden;
-  }
+  .related-thumb { width: 100px; flex-shrink: 0; aspect-ratio: 16/9; background: var(--border); overflow: hidden; }
   .related-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .related-info {}
-  .related-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; font-weight: 400; line-height: 1.3;
-    color: var(--ink); margin-bottom: 4px;
-  }
+  .related-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; line-height: 1.3; color: var(--ink); margin-bottom: 4px; }
   .related-cat { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
 
   /* ── ABOUT PAGE ── */
   .about-page { max-width: 960px; margin: 0 auto; padding: 80px 56px; }
-  .about-page .hero-eyebrow { text-align: left; margin-bottom: 12px; }
-  .about-page h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 52px; font-weight: 300; line-height: 1.1; margin-bottom: 32px;
-  }
+  .about-page .hero-eyebrow { text-align: left; margin-bottom: 12px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+  .about-page h1 { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; line-height: 1.1; margin-bottom: 32px; }
   .about-page h1 em { font-style: italic; color: var(--gold); }
   .about-body { font-size: 20px; color: var(--muted); line-height: 2; }
   .about-body p { margin-bottom: 20px; }
   .about-body strong { color: var(--ink); font-weight: 400; }
-  .about-verse {
-    margin: 40px 0; padding: 28px 32px;
-    border-left: 2px solid var(--gold); background: rgba(184,150,90,0.04);
-  }
-  .about-verse p {
-    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300;
-    font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px;
-  }
+  .about-verse { margin: 40px 0; padding: 28px 32px; border-left: 2px solid var(--gold); background: rgba(184,150,90,0.04); }
+  .about-verse p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
   .about-verse cite { font-size: 14px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
 
   /* ── ADMIN PAGE ── */
   .admin-page { max-width: 900px; margin: 0 auto; padding: 80px 56px; }
-  .admin-page h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px; font-weight: 300; margin-bottom: 8px;
-  }
+  .admin-page h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; margin-bottom: 8px; }
   .admin-sub { font-size: 14px; color: var(--muted); margin-bottom: 40px; letter-spacing: 0.04em; }
   .form-group { margin-bottom: 24px; }
-  .form-group label {
-    display: block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 8px;
-  }
+  .form-group label { display: block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
   .form-group input, .form-group textarea, .form-group select {
     width: 100%; padding: 12px 16px;
     background: var(--white); border: 1px solid var(--border);
@@ -556,8 +654,7 @@
   .ai-tag-btn:hover { background: rgba(184,150,90,0.15); }
   .tag-output {
     margin-top: 12px; padding: 14px 16px;
-    background: var(--white); border: 1px solid var(--border);
-    min-height: 48px;
+    background: var(--white); border: 1px solid var(--border); min-height: 48px;
   }
   .tag-output .gen-tag {
     display: inline-block; margin: 3px;
@@ -566,127 +663,47 @@
     padding: 3px 10px; border: 1px solid rgba(184,150,90,0.3);
   }
   .submit-btn {
-    width: 100%; padding: 16px;
-    background: var(--ink); color: var(--cream);
+    width: 100%; padding: 16px; background: var(--ink); color: var(--cream);
     border: none; font-family: 'Josefin Sans', sans-serif;
     font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
     cursor: pointer; transition: background 0.2s; margin-top: 8px;
   }
   .submit-btn:hover { background: var(--gold); color: var(--ink); }
   .admin-list { margin-top: 48px; }
-  .admin-list-title {
-    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 20px; padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .admin-video-row {
-    display: flex; align-items: center; gap: 16px;
-    padding: 14px 0; border-bottom: 1px solid var(--border);
-  }
+  .admin-list-title { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .admin-video-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
   .admin-video-row img { width: 80px; aspect-ratio: 16/9; object-fit: cover; }
   .admin-row-info { flex: 1; }
   .admin-row-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; margin-bottom: 2px; }
   .admin-row-meta { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
-  .admin-row-del {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); background: none; border: 1px solid var(--border);
-    padding: 4px 10px; cursor: pointer; transition: all 0.2s;
-  }
+  .admin-row-del { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--border); padding: 4px 10px; cursor: pointer; transition: all 0.2s; }
   .admin-row-del:hover { border-color: #c0392b; color: #c0392b; }
 
-  /* ── SEARCH RESULTS HEADER ── */
-  .results-header {
-    max-width: 1400px; margin: 0 auto; padding: 32px 48px 0;
-    font-size: 18px; color: var(--muted);
-    display: none; align-items: center; justify-content: space-between;
-  }
-  .results-header.visible { display: flex; }
-  .results-header strong { color: var(--ink); font-weight: 400; }
-  .results-close {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: none; border: 1px solid var(--border); padding: 5px 12px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-    cursor: pointer; transition: all 0.2s;
-  }
-  .results-close:hover { border-color: var(--ink); color: var(--ink); }
-  .results-close svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2.5; }
-
-  /* ── NO RESULTS ── */
-  .no-results {
-    text-align: center; padding: 80px 40px; color: var(--muted);
-  }
-  .no-results p { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; }
-
   /* ── FOOTER ── */
-  footer {
-    background: var(--deep);
-    border-top: none;
-    padding: 64px 48px 40px;
-  }
+  footer { background: var(--deep); padding: 64px 48px 40px; }
   .footer-inner {
     max-width: 1400px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(244,242,238,0.1);
+    padding-bottom: 48px; border-bottom: 1px solid rgba(244,242,238,0.1);
   }
-  .footer-brand {}
-  .footer-brand img {
-    height: 64px; width: auto; margin-bottom: 16px;
-    filter: brightness(0) invert(1);
-  }
-  .footer-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-style: italic; font-weight: 300;
-    color: rgba(244,242,238,0.75);
-    line-height: 1.5; letter-spacing: 0.01em;
-    max-width: 260px; margin-top: 4px;
-  }
-  .footer-col-title {
-    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(244,242,238,0.4); margin-bottom: 16px;
-  }
+  .footer-brand img { height: 64px; width: auto; margin-bottom: 16px; filter: brightness(0) invert(1); }
+  .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(244,242,238,0.75); line-height: 1.5; letter-spacing: 0.01em; max-width: 260px; margin-top: 4px; }
+  .footer-col-title { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,242,238,0.4); margin-bottom: 16px; }
   .footer-links { list-style: none; }
   .footer-links li { margin-bottom: 10px; }
-  .footer-links a {
-    font-size: 16px; color: rgba(244,242,238,0.65);
-    text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em;
-  }
+  .footer-links a { font-size: 16px; color: rgba(244,242,238,0.65); text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em; }
   .footer-links a:hover { color: var(--gold); }
-  .footer-verse {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-style: italic; font-weight: 300;
-    color: rgba(244,242,238,0.55); line-height: 1.7;
-    margin-bottom: 8px;
-  }
-  .footer-verse-ref {
-    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold);
-  }
-  .footer-bottom {
-    max-width: 1400px; margin: 0 auto;
-    padding-top: 28px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  .footer-verse { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(244,242,238,0.55); line-height: 1.7; margin-bottom: 8px; }
+  .footer-verse-ref { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+  .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
   .footer-copy { font-size: 13px; letter-spacing: 0.08em; color: rgba(244,242,238,0.3); }
-  .footer-back-top {
-    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(244,242,238,0.35); background: none; border: none;
-    cursor: pointer; transition: color 0.2s; font-family: 'Josefin Sans', sans-serif;
-    display: flex; align-items: center; gap: 6px;
-  }
+  .footer-back-top { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,242,238,0.35); background: none; border: none; cursor: pointer; transition: color 0.2s; font-family: 'Josefin Sans', sans-serif; display: flex; align-items: center; gap: 6px; }
   .footer-back-top:hover { color: var(--gold); }
   .footer-back-top svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
 
   /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes shimmer {
-    0% { background-position: -400px 0; }
-    100% { background-position: 400px 0; }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
   .video-card:nth-child(1) { animation-delay: 0.05s; }
   .video-card:nth-child(2) { animation-delay: 0.1s; }
   .video-card:nth-child(3) { animation-delay: 0.15s; }
@@ -694,58 +711,32 @@
   .video-card:nth-child(5) { animation-delay: 0.25s; }
   .video-card:nth-child(6) { animation-delay: 0.3s; }
 
-  /* Respect user's OS motion preference */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     html { scroll-behavior: auto; }
   }
 
-  /* ── SKELETON LOADING ── */
-  .skeleton-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 32px; padding: 0 48px 80px;
-    max-width: 1400px; margin: 0 auto;
-  }
-  .skeleton-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .skeleton {
-    background: linear-gradient(90deg, var(--border) 25%, var(--cream) 50%, var(--border) 75%);
-    background-size: 800px 100%;
-    animation: shimmer 1.4s infinite linear;
-  }
+  /* ── SKELETON ── */
+  .skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; padding: 0 48px 80px; max-width: 1400px; margin: 0 auto; }
+  .skeleton-card { background: var(--white); border: 1px solid var(--border); overflow: hidden; }
+  .skeleton { background: linear-gradient(90deg, var(--border) 25%, var(--cream) 50%, var(--border) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
   .skeleton-thumb { width: 100%; aspect-ratio: 16/9; }
   .skeleton-body { padding: 16px; }
-  .skeleton-line {
-    height: 12px; margin-bottom: 10px; border-radius: 2px;
-  }
+  .skeleton-line { height: 12px; margin-bottom: 10px; border-radius: 2px; }
   .skeleton-title { width: 85%; height: 18px; margin-bottom: 14px; }
   .skeleton-short { width: 55%; }
   .skeleton-tags { display: flex; gap: 8px; margin-top: 14px; }
   .skeleton-tag { width: 60px; height: 22px; border-radius: 2px; }
 
   /* ── TOAST ── */
-  .toast {
-    position: fixed; bottom: 32px; right: 32px; z-index: 999;
-    background: var(--ink); color: var(--cream);
-    padding: 12px 24px; font-size: 11px; letter-spacing: 0.12em;
-    transform: translateY(80px); opacity: 0;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
+  .toast { position: fixed; bottom: 32px; right: 32px; z-index: 999; background: var(--ink); color: var(--cream); padding: 12px 24px; font-size: 11px; letter-spacing: 0.12em; transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
   .toast.show { transform: translateY(0); opacity: 1; }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 0 20px; }
     .nav-links { gap: 16px; }
     .nav-tagline { display: none; }
-
     .hero { padding: 48px 20px 40px; }
     .video-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
     .player-layout { grid-template-columns: 1fr; }
@@ -757,23 +748,25 @@
     .footer-inner { grid-template-columns: 1fr; gap: 36px; }
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
     .footer-tagline { max-width: 100%; }
-    .search-wrap { margin: 0 auto 40px; }
     .topics { padding: 0 16px; }
-    .hero-section { padding-bottom: 8px; }
-    .no-results { padding: 48px 20px; }
+    .shelf-scroll { padding: 0 20px; }
+    .shelves-header { padding: 0 20px; }
+    .shelf-label { padding: 0 20px; }
+    .latest-inner { grid-template-columns: 1fr; gap: 28px; padding: 0 20px; }
+    .latest-section { padding: 40px 0; }
   }
 </style>
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- Skip nav -->
 <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;padding:8px 16px;background:var(--gold);color:var(--ink);font-size:12px;" onfocus="this.style.left='0'">Skip to content</a>
+
 <header role="banner">
 <nav aria-label="Main navigation">
   <div class="nav-links">
-    <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a href="/" onclick="goHome(event)" class="active" id="nav-home">Home</a>
     <a href="#" onclick="showPage('about')" id="nav-about">About</a>
   </div>
   <div class="nav-right">
@@ -782,35 +775,46 @@
 </nav>
 </header>
 
-<!-- HOME PAGE -->
 <main id="main-content">
-<div id="page-home" class="page active">
-<div class="hero-section">
-  <div class="hero">
-    <div class="hero-logo-wrap">
-      <img src="images/The Water and the Word Logo.png" alt="The Water and the Word" class="hero-logo">
-    </div>
-    <div class="search-wrap">
-      <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
-      <button>
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-    </div>
-    <p class="topics-helper">The Spirit moves with intention, and every episode is part of a bigger story.<br>Start with a topic below or use the search above to see how it all connects.</p>
-    <div class="topics" id="topic-pills"></div>
-  </div>
-</div>
 
+<!-- ══ HOME PAGE ══ -->
+<div id="page-home" class="page active">
+  <div class="hero-section">
+    <div class="hero">
+      <div class="hero-logo-wrap">
+        <img src="images/The Water and the Word Logo.png" alt="The Water and the Word" class="hero-logo">
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
+        <button aria-label="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <p class="topics-helper">The Spirit moves with intention, and every episode is part of a bigger story.<br>Start with a topic below or use the search above to see how it all connects.</p>
+      <div class="topics" id="topic-pills"></div>
+    </div>
+  </div>
+
+  <!-- START HERE SHELVES -->
+  <div id="shelves-section" class="shelves-section" style="display:none;">
+    <div class="shelves-header">
+      <h2>Start Here</h2>
+      <p>— curated by topic</p>
+    </div>
+    <div id="shelves-container"></div>
+  </div>
+
+  <!-- LATEST EPISODE -->
   <div id="latest-section" class="latest-section">
     <div class="latest-inner">
-      <div class="latest-thumb" id="latest-thumb" onclick="">
+      <div class="latest-thumb" id="latest-thumb">
         <img id="latest-thumb-img" src="" alt="">
         <div class="latest-play">
           <div class="latest-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
       </div>
       <div class="latest-info">
-        <div class="latest-label">&#10022; Latest Episode</div>
+        <div class="latest-label">✦ Latest Episode</div>
         <h2 class="latest-title" id="latest-title"></h2>
         <div class="latest-meta" id="latest-meta"></div>
         <p class="latest-desc" id="latest-desc"></p>
@@ -834,17 +838,23 @@
       Clear Search
     </button>
   </div>
-  <div class="section-label" id="section-label"><span>All Episodes</span></div>
-  <div class="video-grid" id="video-grid"></div>
-  <div class="no-results" id="no-results" style="display:none">
-    <p>No videos found for that search.</p>
+
+  <div class="section-label" id="section-label">
+    <span>All Episodes</span>
+    <div class="section-label-line"></div>
+    <select class="sort-select" id="sort-select" onchange="applySortAndRender()" aria-label="Sort episodes">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+    </select>
   </div>
+
+  <div class="video-grid" id="video-grid"></div>
 </div>
 
-<!-- VIDEO PLAYER PAGE -->
+<!-- ══ VIDEO PLAYER PAGE ══ -->
 <div id="page-player" class="page">
   <div class="player-page">
-    <button class="player-back" onclick="showPage('home')">
+    <button class="player-back" onclick="goHome(null)">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to all videos
     </button>
@@ -856,6 +866,7 @@
         <div class="player-date" id="player-date"></div>
         <p class="player-desc" id="player-desc"></p>
         <div class="player-tags" id="player-tags"></div>
+
         <div class="player-share-row">
           <button class="share-btn" onclick="shareEpisode()">
             <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
@@ -867,6 +878,8 @@
           </button>
           <span class="share-confirm" id="share-confirm">✓ Copied!</span>
         </div>
+
+        <!-- TRANSCRIPT -->
         <div id="transcript-section" style="display:none;">
           <button class="transcript-toggle" id="transcript-toggle" onclick="toggleTranscript()">
             <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
@@ -874,7 +887,37 @@
           </button>
           <div class="transcript-box" id="transcript-box"></div>
         </div>
+
+        <!-- COMMUNITY: REACTION + PRAYER -->
+        <div class="community-section">
+          <div class="community-title">Community</div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;">
+            <button class="reaction-btn" id="reaction-btn" onclick="handleReaction()">
+              <span class="reaction-dove">🕊</span>
+              <span id="reaction-label">This spoke to me</span>
+              <span class="reaction-count" id="reaction-count"></span>
+            </button>
+            <button class="prayer-toggle" id="prayer-toggle" onclick="togglePrayerForm()">
+              <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              Leave a Prayer Request
+            </button>
+          </div>
+
+          <div class="prayer-form-wrap" id="prayer-form-wrap">
+            <div class="prayer-form-inner">
+              <div class="prayer-form-title">Share your prayer request</div>
+              <p class="prayer-form-sub">Your request will be received with care and held in prayer. You may share anonymously.</p>
+              <input class="prayer-input" type="text" id="prayer-name" placeholder="Your name (optional)">
+              <textarea class="prayer-input" id="prayer-message" placeholder="Write your prayer request here…"></textarea>
+              <button class="prayer-submit" onclick="submitPrayer()">Submit Prayer Request</button>
+              <div class="prayer-sent" id="prayer-sent">
+                🕊 Your prayer has been received. You are not alone.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="related-sidebar">
         <div class="sidebar-title">Related Episodes</div>
         <div id="related-list"></div>
@@ -883,7 +926,7 @@
   </div>
 </div>
 
-<!-- ABOUT PAGE -->
+<!-- ══ ABOUT PAGE ══ -->
 <div id="page-about" class="page">
   <div class="about-page">
     <div class="hero-eyebrow">The Voice Behind The Channel</div>
@@ -901,15 +944,14 @@
   </div>
 </div>
 
-<!-- ADMIN PAGE -->
+<!-- ══ ADMIN PAGE ══ -->
 <div id="page-admin" class="page">
   <div class="admin-page">
     <h2>Video Library Admin</h2>
-    <p class="admin-sub">Add a new episode to The Water and the Word. Paste your YouTube URL and use AI tagging to auto-generate searchable keywords.</p>
-
+    <p class="admin-sub">Add a new episode to The Water and the Word.</p>
     <div class="form-group">
       <label>YouTube Video URL or ID</label>
-      <input type="text" id="admin-yt" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+      <input type="text" id="admin-yt" placeholder="https://www.youtube.com/watch?v=…">
     </div>
     <div class="form-group">
       <label>Episode Title</label>
@@ -926,8 +968,8 @@
       </div>
     </div>
     <div class="form-group">
-      <label>Description <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— shown publicly on the site</span></label>
-      <textarea id="admin-desc" placeholder="Write a short description of the episode. This appears on the video card and player page…" style="min-height:100px;"></textarea>
+      <label>Description <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— shown publicly</span></label>
+      <textarea id="admin-desc" style="min-height:100px;" placeholder="Write a short description…"></textarea>
     </div>
     <div style="display:flex;align-items:center;gap:16px;margin:8px 0 24px;">
       <div style="flex:1;height:1px;background:var(--border);"></div>
@@ -935,14 +977,13 @@
       <div style="flex:1;height:1px;background:var(--border);"></div>
     </div>
     <div class="form-group">
-      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— used for tag generation &amp; shown to viewers on request. Copy from YouTube's "Show transcript" feature.</span></label>
-      <textarea id="admin-transcript" placeholder="Paste the full YouTube transcript here…" style="min-height:160px;"></textarea>
+      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— paste from YouTube's "Show transcript" feature</span></label>
+      <textarea id="admin-transcript" style="min-height:160px;" placeholder="Paste full YouTube transcript here…"></textarea>
       <button class="ai-tag-btn" onclick="generateTags()">✦ Generate AI Tags with Claude</button>
       <div class="tag-output" id="tag-output"><span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span></div>
       <input type="hidden" id="admin-tags-hidden">
     </div>
     <button class="submit-btn" onclick="addVideo()">Publish Episode</button>
-
     <div class="admin-list">
       <div class="admin-list-title">Published Episodes</div>
       <div id="admin-video-list"></div>
@@ -962,7 +1003,7 @@
     <div>
       <div class="footer-col-title">Navigate</div>
       <ul class="footer-links">
-        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="/" onclick="goHome(event)">Home</a></li>
         <li><a href="#" onclick="showPage('about')">About</a></li>
         <li><a href="https://www.youtube.com/@thewaterandtheword" target="_blank" rel="noopener">YouTube Channel</a></li>
       </ul>
@@ -995,17 +1036,11 @@
     <button onclick="checkAdminPassword()"
       style="width:100%;padding:14px;background:var(--ink);color:var(--cream);border:none;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;margin-bottom:12px;"
       onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'"
-      onmouseout="this.style.background='var(--ink)';this.style.color='var(--cream)'">
-      Enter
-    </button>
+      onmouseout="this.style.background='var(--ink)';this.style.color='var(--cream)'">Enter</button>
     <button onclick="closeAdminModal()"
-      style="background:none;border:none;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;">
-      Cancel
-    </button>
+      style="background:none;border:none;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;">Cancel</button>
   </div>
 </div>
-
-<div class="toast" id="toast"></div>
 
 <!-- DELETE CONFIRMATION MODAL -->
 <div id="delete-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(26,24,20,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
@@ -1016,69 +1051,176 @@
     <p style="font-size:12px;color:var(--muted);margin-bottom:28px;">This will permanently delete it from your database and cannot be undone.</p>
     <div style="display:flex;gap:12px;justify-content:center;">
       <button onclick="closeDeleteModal()" style="flex:1;max-width:160px;padding:12px;background:none;border:1px solid var(--border);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Cancel</button>
-      <button onclick="confirmDelete()" style="flex:1;max-width:160px;padding:12px;background:#c0392b;border:1px solid #c0392b;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:white;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#a93226'" onmouseout="this.style.background='#c0392b'">Yes, Remove</button>
+      <button onclick="confirmDelete()" style="flex:1;max-width:160px;padding:12px;background:#c0392b;border:1px solid #c0392b;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:white;cursor:pointer;" onmouseover="this.style.background='#a93226'" onmouseout="this.style.background='#c0392b'">Yes, Remove</button>
     </div>
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
-// ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
-// Replace these two values with your own from the Supabase setup guide
+// ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL      = 'https://zcdhoxqsbpujpiwbbrgw.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjZGhveHFzYnB1anBpd2Jicmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTk2NTksImV4cCI6MjA4Nzc3NTY1OX0.EemlKMnlL4LjSxS3M_nGKmsYO8Xp-YsawWcyNpgbCc4';
+const ADMIN_PASSWORD    = 'watw2026';
 
-// Client is initialized after DOM loads to ensure the CDN script is ready
 let _supabase = null;
-
-// ── DATA ──────────────────────────────────────────────────────────────────────
-// Videos are loaded from Supabase on page load. This is the live in-memory cache.
 let videos = [];
 let currentVideoId = null;
 let activeTag = null;
-let latestVideoId = null; // tracks which video is shown in the hero
-let pendingDeleteId = null; // tracks which video is pending delete confirmation
+let latestVideoId = null;
+let pendingDeleteId = null;
+let reactedVideos = new Set(JSON.parse(localStorage.getItem('watw_reactions') || '[]'));
 
-// ── ROUTING ───────────────────────────────────────────────────────────────────
-function showPage(page, id) {
-  // Stop video playing when navigating away from player
-  if (page !== 'player') {
-    document.getElementById('player-embed').innerHTML = '';
+// ── URL / DEEP LINK ROUTING ────────────────────────────────────────────────────
+function getWatchParam() {
+  return new URLSearchParams(window.location.search).get('watch');
+}
+
+function setWatchParam(ytId) {
+  const url = new URL(window.location.href);
+  if (ytId) {
+    url.searchParams.set('watch', ytId);
+  } else {
+    url.searchParams.delete('watch');
   }
+  history.pushState({}, '', url.toString());
+}
+
+function goHome(e) {
+  if (e) e.preventDefault();
+  setWatchParam(null);
+  showPage('home');
+}
+
+// Update <meta> tags dynamically for OG/Twitter previews per episode
+function updateMeta(v) {
+  if (!v) {
+    document.getElementById('meta-title').textContent = 'The Water and the Word — Christian Prophecy Video Journal';
+    document.getElementById('meta-desc').content = 'Where the Spirit Leads, We Bear Witness.';
+    document.getElementById('og-title').content = 'The Water and the Word — Christian Prophecy Video Journal';
+    document.getElementById('og-desc').content = 'Where the Spirit Leads, We Bear Witness.';
+    document.getElementById('og-url').content = 'https://thewaterandtheword.com/';
+    document.getElementById('og-image').content = '';
+    document.getElementById('og-type').content = 'website';
+    document.getElementById('tw-title').content = 'The Water and the Word — Christian Prophecy Video Journal';
+    document.getElementById('tw-desc').content = 'Where the Spirit Leads, We Bear Witness.';
+    document.getElementById('tw-image').content = '';
+    document.getElementById('meta-canonical').href = 'https://thewaterandtheword.com/';
+    return;
+  }
+  const title = `${v.title} — The Water and the Word`;
+  const desc = v.description.substring(0, 160);
+  const url = `https://thewaterandtheword.com/?watch=${v.ytId}`;
+  const img = `https://i.ytimg.com/vi/${v.ytId}/maxresdefault.jpg`;
+  document.getElementById('meta-title').textContent = title;
+  document.getElementById('meta-desc').content = desc;
+  document.getElementById('og-title').content = title;
+  document.getElementById('og-desc').content = desc;
+  document.getElementById('og-url').content = url;
+  document.getElementById('og-image').content = img;
+  document.getElementById('og-type').content = 'video.other';
+  document.getElementById('tw-title').content = title;
+  document.getElementById('tw-desc').content = desc;
+  document.getElementById('tw-image').content = img;
+  document.getElementById('meta-canonical').href = url;
+}
+
+// Handle browser back/forward
+window.addEventListener('popstate', () => {
+  const ytId = getWatchParam();
+  if (ytId) {
+    const v = videos.find(x => x.ytId === ytId);
+    if (v) { showPageDirect('player'); openVideo(v.id); }
+  } else {
+    showPageDirect('home');
+    updateMeta(null);
+  }
+});
+
+// ── PAGE ROUTING ──────────────────────────────────────────────────────────────
+function showPageDirect(page) {
+  if (page !== 'player') document.getElementById('player-embed').innerHTML = '';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   if (document.getElementById('nav-' + page)) document.getElementById('nav-' + page).classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function showPage(page, id) {
+  showPageDirect(page);
   if (page === 'player' && id) openVideo(id);
   if (page === 'admin') renderAdminList();
 }
 
 // ── TOPIC PILLS ───────────────────────────────────────────────────────────────
+function getTagCounts() {
+  const counts = {};
+  videos.forEach(v => v.tags.forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  return counts;
+}
+
 function getAllTopics() {
-  const all = {};
-  videos.forEach(v => v.tags.forEach(t => { all[t] = (all[t] || 0) + 1; }));
-  return Object.entries(all).sort((a, b) => b[1] - a[1]).slice(0, 14).map(e => e[0]);
+  const counts = getTagCounts();
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 14).map(e => e[0]);
 }
 
 function renderTopicPills() {
   const container = document.getElementById('topic-pills');
+  const counts = getTagCounts();
   const topics = getAllTopics();
   container.innerHTML = topics.map(t =>
-    `<button class="topic-pill${activeTag === t ? ' active' : ''}" data-tag="${t.replace(/"/g, '&quot;')}">${t}</button>`
+    `<button class="topic-pill${activeTag === t ? ' active' : ''}" data-tag="${t.replace(/"/g,'&quot;')}">${t}<span class="pill-count">${counts[t]}</span></button>`
   ).join('');
 }
 
-function filterByTag(tag) {
-  if (activeTag === tag) {
-    activeTag = null;
-    document.getElementById('search-input').value = '';
-    handleSearch('');
-  } else {
-    activeTag = tag;
-    document.getElementById('search-input').value = tag;
-    handleSearch(tag);
+// ── START HERE SHELVES ────────────────────────────────────────────────────────
+function renderShelves() {
+  const counts = getTagCounts();
+  // Pick top 4 tags with at least 2 videos each
+  const topTags = Object.entries(counts)
+    .filter(([,c]) => c >= 2)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4)
+    .map(([tag]) => tag);
+
+  if (topTags.length === 0) {
+    document.getElementById('shelves-section').style.display = 'none';
+    return;
   }
-  renderTopicPills();
+
+  document.getElementById('shelves-section').style.display = 'block';
+  const container = document.getElementById('shelves-container');
+
+  container.innerHTML = topTags.map(tag => {
+    const tagVideos = videos.filter(v => v.tags.includes(tag)).slice(0, 8);
+    const cards = tagVideos.map(v => `
+      <div class="shelf-card" data-id="${v.id}">
+        <div class="shelf-card-thumb">
+          <img src="${v.thumb}" alt="${v.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/220x124/F4F2EE/5090CF?text=Episode'">
+        </div>
+        <div class="shelf-card-body">
+          <div class="shelf-card-title">${v.title}</div>
+          <div class="shelf-card-cat">${v.category}</div>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="shelf">
+        <div class="shelf-label">
+          <div class="shelf-label-dot"></div>
+          <span class="shelf-label-text">${tag}</span>
+          <div class="shelf-label-line"></div>
+          <button class="shelf-label-see-all" data-shelf-tag="${tag.replace(/"/g,'&quot;')}">See all →</button>
+        </div>
+        <div class="shelf-scroll">
+          <div class="shelf-track">${cards}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 // ── SEARCH & RENDER ───────────────────────────────────────────────────────────
@@ -1092,25 +1234,24 @@ function handleSearch(query) {
   const q = query.toLowerCase().trim();
   const label = document.getElementById('section-label');
   const header = document.getElementById('results-header');
+  const headerText = document.getElementById('results-header-text');
+  const latestSection = document.getElementById('latest-section');
+  const shelvesSection = document.getElementById('shelves-section');
   let filtered = videos;
 
-  // Show/hide clear button and adjust input padding
-  const latestSection = document.getElementById('latest-section');
-  const headerText = document.getElementById('results-header-text');
   if (q) {
     latestSection.classList.remove('visible');
-    filtered = videos.filter(v => {
-      return (
-        v.title.toLowerCase().includes(q) ||
-        v.description.toLowerCase().includes(q) ||
-        v.category.toLowerCase().includes(q) ||
-        v.tags.some(t => t.toLowerCase().includes(q))
-      );
-    });
+    shelvesSection.style.display = 'none';
+    filtered = videos.filter(v =>
+      v.title.toLowerCase().includes(q) ||
+      v.description.toLowerCase().includes(q) ||
+      v.category.toLowerCase().includes(q) ||
+      v.tags.some(t => t.toLowerCase().includes(q))
+    );
     label.style.display = 'none';
     if (filtered.length > 0) {
       header.classList.add('visible');
-      headerText.innerHTML = `Showing <strong>${filtered.length}</strong> result${filtered.length !== 1 ? 's' : ''} for <strong>"${query}"</strong>`;
+      headerText.innerHTML = `Showing <strong>${filtered.length}</strong> result${filtered.length !== 1 ? 's' : ''} for <strong>"${escHtml(query)}"</strong>`;
     } else {
       header.classList.remove('visible');
     }
@@ -1120,38 +1261,59 @@ function handleSearch(query) {
     label.style.display = 'flex';
     header.classList.remove('visible');
     latestSection.classList.add('visible');
+    if (videos.length > 0) renderShelves();
   }
 
-  renderGrid(filtered);
+  applySortAndRender(filtered);
 }
 
-function renderGrid(list) {
-  const grid = document.getElementById('video-grid');
-  const none = document.getElementById('no-results');
+function applySortAndRender(list) {
+  const sortVal = document.getElementById('sort-select').value;
   const isSearching = document.getElementById('search-input').value.trim().length > 0;
+  let toRender = list !== undefined ? [...list] : [...videos];
 
-  // When not searching, exclude the latest video — it's already in the hero
-  const displayList = isSearching ? list : list.filter(v => v.id !== latestVideoId);
+  if (sortVal === 'oldest') {
+    toRender.reverse();
+  }
+  // When not searching, exclude the latest video (shown in hero)
+  const displayList = isSearching ? toRender : toRender.filter(v => v.id !== latestVideoId);
+  renderGrid(displayList, isSearching);
+}
 
-  if (displayList.length === 0) {
-    grid.innerHTML = '';
-    none.style.display = isSearching ? 'block' : 'none';
+function renderGrid(list, isSearching) {
+  const grid = document.getElementById('video-grid');
+
+  if (list.length === 0) {
+    const topTags = getAllTopics().slice(0, 5);
+    const suggestions = topTags.map(t =>
+      `<button class="no-results-suggestion" data-tag="${t.replace(/"/g,'&quot;')}">${t}</button>`
+    ).join('');
+
+    const q = document.getElementById('search-input').value.trim();
+    grid.innerHTML = isSearching ? `
+      <div class="no-results">
+        <div class="no-results-icon">✦</div>
+        <div class="no-results-title">We haven't covered that yet</div>
+        <p class="no-results-sub">No episodes found for "<strong>${escHtml(q)}</strong>".<br>Check back soon — new episodes are on the way. In the meantime, try one of these:</p>
+        <div class="no-results-suggestions">${suggestions}</div>
+      </div>
+    ` : '';
     return;
   }
-  none.style.display = 'none';
-  grid.innerHTML = displayList.map(v => `
+
+  grid.innerHTML = list.map(v => `
     <div class="video-card" data-id="${v.id}">
       <div class="video-thumb">
-        <img src="${v.thumb}" alt="${v.title} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/F4F2EE/5090CF?text=Episode'">
+        <img src="${v.thumb}" alt="${escAttr(v.title)} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/F4F2EE/5090CF?text=Episode'">
         <div class="play-overlay">
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
         <div class="video-duration">${v.duration}</div>
       </div>
-      <div class="video-meta">${v.category}</div>
-      <div class="video-title">${v.title}</div>
-      <div class="video-excerpt">${v.description.substring(0, 110)}…</div>
-      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${t.replace(/"/g, '&quot;')}">${t}</span>`).join('')}</div>
+      <div class="video-meta">${escHtml(v.category)}</div>
+      <div class="video-title">${escHtml(v.title)}</div>
+      <div class="video-excerpt">${escHtml(v.description.substring(0, 110))}…</div>
+      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${t.replace(/"/g,'&quot;')}">${escHtml(t)}</span>`).join('')}</div>
     </div>
   `).join('');
 }
@@ -1162,6 +1324,10 @@ function openVideo(id) {
   if (!v) return;
   currentVideoId = id;
 
+  // Update URL and meta tags
+  setWatchParam(v.ytId);
+  updateMeta(v);
+
   document.getElementById('player-embed').innerHTML =
     `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&color=white&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
   document.getElementById('player-category').textContent = v.category;
@@ -1169,13 +1335,13 @@ function openVideo(id) {
   document.getElementById('player-date').textContent = v.date;
   document.getElementById('player-desc').textContent = v.description;
   document.getElementById('player-tags').innerHTML = v.tags
-    .map(t => `<span class="player-tag" data-tag="${t.replace(/"/g, '&quot;')}">${t}</span>`).join('');
+    .map(t => `<span class="player-tag" data-tag="${t.replace(/"/g,'&quot;')}">${escHtml(t)}</span>`).join('');
 
-  // Show transcript toggle if transcript exists
+  // Transcript
   const transcriptSection = document.getElementById('transcript-section');
   const transcriptBox = document.getElementById('transcript-box');
   const transcriptToggle = document.getElementById('transcript-toggle');
-  if (v.transcript) {
+  if (v.transcript && v.transcript.trim()) {
     transcriptSection.style.display = 'block';
     transcriptBox.textContent = v.transcript;
     transcriptBox.classList.remove('open');
@@ -1185,7 +1351,17 @@ function openVideo(id) {
     transcriptSection.style.display = 'none';
   }
 
-  // Related videos — find by shared tags
+  // Reaction state
+  loadReaction(v.ytId);
+
+  // Reset prayer form
+  document.getElementById('prayer-form-wrap').classList.remove('open');
+  document.getElementById('prayer-toggle').classList.remove('open');
+  document.getElementById('prayer-name').value = '';
+  document.getElementById('prayer-message').value = '';
+  document.getElementById('prayer-sent').classList.remove('show');
+
+  // Related videos
   const related = videos
     .filter(x => x.id !== id)
     .map(x => ({ v: x, score: x.tags.filter(t => v.tags.includes(t)).length }))
@@ -1197,28 +1373,107 @@ function openVideo(id) {
   document.getElementById('related-list').innerHTML = related.map(r => `
     <div class="related-card" data-id="${r.id}">
       <div class="related-thumb">
-        <img src="${r.thumb}" alt="${r.title}" onerror="this.src='https://via.placeholder.com/160x90/F4F2EE/5090CF?text=Ep'">
+        <img src="${r.thumb}" alt="${escAttr(r.title)}" onerror="this.src='https://via.placeholder.com/160x90/F4F2EE/5090CF?text=Ep'">
       </div>
       <div class="related-info">
-        <div class="related-title">${r.title}</div>
-        <div class="related-cat">${r.category}</div>
+        <div class="related-title">${escHtml(r.title)}</div>
+        <div class="related-cat">${escHtml(r.category)}</div>
       </div>
     </div>
   `).join('') || '<p style="font-size:12px;color:var(--muted)">No related episodes yet.</p>';
 }
 
+// ── REACTION ──────────────────────────────────────────────────────────────────
+async function loadReaction(ytId) {
+  const btn = document.getElementById('reaction-btn');
+  const countEl = document.getElementById('reaction-count');
+  const hasReacted = reactedVideos.has(ytId);
+  if (hasReacted) btn.classList.add('reacted'); else btn.classList.remove('reacted');
+
+  try {
+    const { data } = await _supabase.from('reactions').select('count').eq('yt_id', ytId).single();
+    const count = data ? data.count : 0;
+    countEl.textContent = count > 0 ? `· ${count.toLocaleString()}` : '';
+  } catch (_) {
+    countEl.textContent = '';
+  }
+}
+
+async function handleReaction() {
+  const v = videos.find(x => x.id === currentVideoId);
+  if (!v) return;
+  const ytId = v.ytId;
+  const btn = document.getElementById('reaction-btn');
+  const countEl = document.getElementById('reaction-count');
+
+  if (reactedVideos.has(ytId)) return; // already reacted — no undo
+
+  reactedVideos.add(ytId);
+  localStorage.setItem('watw_reactions', JSON.stringify([...reactedVideos]));
+  btn.classList.add('reacted');
+
+  // Optimistic update
+  const current = parseInt((countEl.textContent.replace(/\D/g,'')) || '0');
+  const next = current + 1;
+  countEl.textContent = `· ${next.toLocaleString()}`;
+
+  // Upsert in Supabase
+  try {
+    const { data: existing } = await _supabase.from('reactions').select('count').eq('yt_id', ytId).single();
+    if (existing) {
+      await _supabase.from('reactions').update({ count: existing.count + 1 }).eq('yt_id', ytId);
+    } else {
+      await _supabase.from('reactions').insert({ yt_id: ytId, count: 1 });
+    }
+  } catch (err) {
+    console.error('Reaction error:', err);
+  }
+}
+
+// ── PRAYER ────────────────────────────────────────────────────────────────────
+function togglePrayerForm() {
+  const wrap = document.getElementById('prayer-form-wrap');
+  const toggle = document.getElementById('prayer-toggle');
+  const isOpen = wrap.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  if (isOpen) setTimeout(() => document.getElementById('prayer-name').focus(), 50);
+}
+
+async function submitPrayer() {
+  const v = videos.find(x => x.id === currentVideoId);
+  if (!v) return;
+  const name = document.getElementById('prayer-name').value.trim() || 'Anonymous';
+  const message = document.getElementById('prayer-message').value.trim();
+  if (!message) { showToast('Please write your prayer request before submitting.'); return; }
+
+  const btn = document.querySelector('.prayer-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  const { error } = await _supabase.from('prayers').insert({ yt_id: v.ytId, name, message });
+
+  if (error) {
+    showToast('Could not submit prayer. Please try again.');
+    btn.disabled = false; btn.textContent = 'Submit Prayer Request';
+    return;
+  }
+
+  document.querySelector('.prayer-submit').style.display = 'none';
+  document.getElementById('prayer-sent').classList.add('show');
+  document.getElementById('prayer-name').value = '';
+  document.getElementById('prayer-message').value = '';
+  showToast('Your prayer request has been received 🕊');
+}
+
+// ── SHARE ─────────────────────────────────────────────────────────────────────
 function shareEpisode() {
   const v = videos.find(x => x.id === currentVideoId);
   if (!v) return;
-  const url = `https://thewaterandtheword.com/#player-${v.id}`;
+  const url = `https://thewaterandtheword.com/?watch=${v.ytId}`;
   if (navigator.share) {
-    navigator.share({
-      title: v.title,
-      text: v.description.substring(0, 100) + '…',
-      url: `https://www.youtube.com/watch?v=${v.ytId}`
-    }).catch(() => {});
+    navigator.share({ title: v.title, text: v.description.substring(0, 100) + '…', url }).catch(() => {});
   } else {
-    copyToClipboard(`https://www.youtube.com/watch?v=${v.ytId}`);
+    copyToClipboard(url);
   }
 }
 
@@ -1229,31 +1484,62 @@ function copyYouTubeLink() {
 }
 
 function copyToClipboard(text) {
+  const confirm = document.getElementById('share-confirm');
   navigator.clipboard.writeText(text).then(() => {
-    const confirm = document.getElementById('share-confirm');
     confirm.classList.add('show');
     setTimeout(() => confirm.classList.remove('show'), 2500);
   }).catch(() => {
-    // Fallback for older browsers
     const el = document.createElement('textarea');
-    el.value = text; el.style.position = 'fixed'; el.style.opacity = '0';
+    el.value = text; el.style.cssText = 'position:fixed;opacity:0;';
     document.body.appendChild(el); el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    const confirm = document.getElementById('share-confirm');
+    document.execCommand('copy'); document.body.removeChild(el);
     confirm.classList.add('show');
     setTimeout(() => confirm.classList.remove('show'), 2500);
   });
 }
 
-function searchFromTag(tag) {
-  showPage('home');
-  setTimeout(() => {
-    document.getElementById('search-input').value = tag;
-    handleSearch(tag);
-    activeTag = tag;
-    renderTopicPills();
-  }, 50);
+// ── TRANSCRIPT ────────────────────────────────────────────────────────────────
+function toggleTranscript() {
+  const box = document.getElementById('transcript-box');
+  const btn = document.getElementById('transcript-toggle');
+  const isOpen = box.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.innerHTML = isOpen
+    ? '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Hide Transcript'
+    : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read Transcript';
+}
+
+// ── LATEST EPISODE ────────────────────────────────────────────────────────────
+function renderLatest() {
+  if (!videos.length) return;
+  const v = videos[0];
+  latestVideoId = v.id;
+  const section = document.getElementById('latest-section');
+  section.classList.add('visible');
+  document.getElementById('latest-thumb-img').src = v.thumb;
+  document.getElementById('latest-thumb-img').alt = v.title;
+  document.getElementById('latest-thumb').onclick = () => showPage('player', v.id);
+  document.getElementById('latest-title').innerHTML = v.title.replace(/—/, '<em>—</em>');
+  document.getElementById('latest-meta').textContent = `${v.category} · ${v.date} · ${v.duration}`;
+
+  const fullDesc = v.description;
+  const shortDesc = fullDesc.length > 160 ? fullDesc.substring(0, 160) + '…' : fullDesc;
+  document.getElementById('latest-desc').textContent = shortDesc;
+  document.getElementById('latest-desc-full').textContent = fullDesc;
+
+  const expandBtn = document.getElementById('latest-expand-btn');
+  if (fullDesc.length > 160) {
+    expandBtn.style.display = 'inline-flex';
+    document.getElementById('latest-desc-full').classList.remove('open');
+    expandBtn.classList.remove('open');
+    expandBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
+  } else {
+    expandBtn.style.display = 'none';
+  }
+
+  document.getElementById('latest-tags').innerHTML = v.tags.slice(0, 5)
+    .map(t => `<span class="latest-tag" data-tag="${t.replace(/"/g,'&quot;')}" style="cursor:pointer">${escHtml(t)}</span>`).join('');
+  document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
 }
 
 function toggleLatestDesc() {
@@ -1268,14 +1554,28 @@ function toggleLatestDesc() {
     : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
 }
 
-function toggleTranscript() {
-  const box = document.getElementById('transcript-box');
-  const btn = document.getElementById('transcript-toggle');
-  const isOpen = box.classList.toggle('open');
-  btn.classList.toggle('open', isOpen);
-  btn.innerHTML = isOpen
-    ? '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Hide Transcript'
-    : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read Transcript';
+// ── TAG FILTER ────────────────────────────────────────────────────────────────
+function filterByTag(tag) {
+  if (activeTag === tag) {
+    activeTag = null;
+    document.getElementById('search-input').value = '';
+    handleSearch('');
+  } else {
+    activeTag = tag;
+    document.getElementById('search-input').value = tag;
+    handleSearch(tag);
+  }
+  renderTopicPills();
+}
+
+function searchFromTag(tag) {
+  showPage('home');
+  setTimeout(() => {
+    document.getElementById('search-input').value = tag;
+    handleSearch(tag);
+    activeTag = tag;
+    renderTopicPills();
+  }, 50);
 }
 
 // ── ADMIN ─────────────────────────────────────────────────────────────────────
@@ -1284,7 +1584,6 @@ function extractYtId(input) {
   return match ? match[1] : input.trim();
 }
 
-// Simulated AI tag generation (in production, this calls Claude/OpenAI API)
 async function generateTags() {
   const desc = document.getElementById('admin-desc').value.trim();
   const transcript = document.getElementById('admin-transcript').value.trim();
@@ -1301,23 +1600,17 @@ async function generateTags() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, description: desc, transcript })
     });
-
     const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Unknown error');
-    }
-
+    if (!response.ok) throw new Error(data.error || 'Unknown error');
     const tags = data.tags;
     const output = document.getElementById('tag-output');
-    output.innerHTML = tags.map(t => `<span class="gen-tag">${t}</span>`).join('');
+    output.innerHTML = tags.map(t => `<span class="gen-tag">${escHtml(t)}</span>`).join('');
     document.getElementById('admin-tags-hidden').value = tags.join(',');
     btn.textContent = '✦ Regenerate Tags';
     showToast(`${tags.length} tags generated by Claude`);
-
   } catch (err) {
     showToast('Tag generation failed: ' + err.message);
-    btn.textContent = '✦ Generate AI Tags from Description';
+    btn.textContent = '✦ Generate AI Tags with Claude';
   } finally {
     btn.disabled = false;
   }
@@ -1330,50 +1623,38 @@ async function addVideo() {
   const dur = document.getElementById('admin-dur').value.trim() || '—';
   const desc = document.getElementById('admin-desc').value.trim();
   const tagsRaw = document.getElementById('admin-tags-hidden').value;
+  const transcript = document.getElementById('admin-transcript').value.trim();
 
   if (!ytRaw || !title) { showToast('YouTube URL and title are required.'); return; }
 
   const ytId = extractYtId(ytRaw);
   const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : ['Bible Study'];
 
-  const transcript = document.getElementById('admin-transcript').value.trim();
-
   const newVideo = {
-    yt_id: ytId,
-    title,
+    yt_id: ytId, title,
     category: cat || 'Uncategorized',
     date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-    duration: dur,
-    description: desc || title,
-    transcript: transcript || '',
-    tags,
+    duration: dur, description: desc || title, transcript: transcript || '', tags,
     thumb: `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`
   };
 
   const { data, error } = await _supabase.from('videos').insert([newVideo]).select();
+  if (error) { showToast('Error saving video: ' + error.message); return; }
 
-  if (error) {
-    showToast('Error saving video: ' + error.message);
-    return;
-  }
-
-  // Add to local cache using returned row (includes the database-generated id)
   const saved = dbRowToVideo(data[0]);
   videos.unshift(saved);
 
-  // Reset form
-  ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
   document.getElementById('tag-output').innerHTML = '<span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span>';
   document.querySelector('.ai-tag-btn').textContent = '✦ Generate AI Tags with Claude';
 
-  renderAdminList();
-  renderTopicPills();
-  renderLatest();
+  renderAdminList(); renderTopicPills(); renderLatest(); renderShelves();
   showToast('Episode published successfully');
 }
 
 function deleteVideo(id) {
-  // Find video title for the confirmation message
   const v = videos.find(x => x.id === id);
   const title = v ? v.title : 'this episode';
   pendingDeleteId = id;
@@ -1389,10 +1670,8 @@ async function confirmDelete() {
   const { error } = await _supabase.from('videos').delete().eq('id', id);
   if (error) { showToast('Error removing video: ' + error.message); return; }
   videos = videos.filter(v => v.id !== id);
-  renderAdminList();
-  renderTopicPills();
-  renderLatest();
-  renderGrid(videos);
+  renderAdminList(); renderTopicPills(); renderLatest(); renderShelves();
+  applySortAndRender();
   showToast('Episode removed');
 }
 
@@ -1404,29 +1683,19 @@ function closeDeleteModal() {
 function renderAdminList() {
   document.getElementById('admin-video-list').innerHTML = videos.map(v => `
     <div class="admin-video-row">
-      <img src="${v.thumb}" alt="${v.title}" onerror="this.src='https://via.placeholder.com/80x45/F4F2EE/5090CF?text=Ep'">
+      <img src="${v.thumb}" alt="${escAttr(v.title)}" onerror="this.src='https://via.placeholder.com/80x45/F4F2EE/5090CF?text=Ep'">
       <div class="admin-row-info">
-        <div class="admin-row-title">${v.title}</div>
-        <div class="admin-row-meta">${v.category} · ${v.date} · ${v.duration}</div>
+        <div class="admin-row-title">${escHtml(v.title)}</div>
+        <div class="admin-row-meta">${escHtml(v.category)} · ${v.date} · ${v.duration}</div>
       </div>
       <button class="admin-row-del" onclick="deleteVideo(${v.id})">Remove</button>
     </div>
   `).join('');
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
-}
-
 // ── ADMIN AUTH ────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'watw2026'; // Change this to your own password
 let isAdmin = false;
 let konamiBuffer = [];
-// Secret key combo: type "admin" anywhere on the page to open the login modal
 document.addEventListener('keydown', e => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
   konamiBuffer.push(e.key.toLowerCase());
@@ -1435,8 +1704,7 @@ document.addEventListener('keydown', e => {
 });
 
 function promptAdminLogin() {
-  const modal = document.getElementById('admin-modal');
-  modal.style.display = 'flex';
+  document.getElementById('admin-modal').style.display = 'flex';
   setTimeout(() => document.getElementById('admin-pw-input').focus(), 50);
 }
 
@@ -1447,11 +1715,9 @@ function closeAdminModal() {
 }
 
 function checkAdminPassword() {
-  const val = document.getElementById('admin-pw-input').value;
-  if (val === ADMIN_PASSWORD) {
+  if (document.getElementById('admin-pw-input').value === ADMIN_PASSWORD) {
     isAdmin = true;
     closeAdminModal();
-    // nav-admin button hidden — admin panel accessible via page only
     showPage('admin');
     showToast('Welcome back, admin');
   } else {
@@ -1461,159 +1727,106 @@ function checkAdminPassword() {
   }
 }
 
-// Close modals on backdrop click
-document.getElementById('admin-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeAdminModal();
-});
-document.getElementById('delete-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeDeleteModal();
-});
+document.getElementById('admin-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAdminModal(); });
+document.getElementById('delete-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
 
-// ── SUPABASE HELPERS ─────────────────────────────────────────────────────────
-// Maps a Supabase database row to the video object shape the site uses
+// ── SUPABASE ──────────────────────────────────────────────────────────────────
 function dbRowToVideo(row) {
   return {
-    id: row.id,
-    ytId: row.yt_id,
-    title: row.title,
+    id: row.id, ytId: row.yt_id, title: row.title,
     category: row.category || 'Uncategorized',
-    date: row.date || '',
-    duration: row.duration || '—',
-    description: row.description || '',
-    transcript: row.transcript || '',
+    date: row.date || '', duration: row.duration || '—',
+    description: row.description || '', transcript: row.transcript || '',
     tags: Array.isArray(row.tags) ? row.tags : [],
     thumb: row.thumb || `https://i.ytimg.com/vi/${row.yt_id}/hqdefault.jpg`
   };
 }
 
 async function loadVideos() {
-  // Show loading state
-  // Show skeleton cards while loading
-  const skeletonCard = `
-    <div class="skeleton-card">
-      <div class="skeleton skeleton-thumb"></div>
-      <div class="skeleton-body">
-        <div class="skeleton skeleton-line skeleton-short"></div>
-        <div class="skeleton skeleton-line skeleton-title"></div>
-        <div class="skeleton skeleton-line" style="width:90%"></div>
-        <div class="skeleton skeleton-line" style="width:75%"></div>
-        <div class="skeleton-tags">
-          <div class="skeleton skeleton-tag"></div>
-          <div class="skeleton skeleton-tag"></div>
-          <div class="skeleton skeleton-tag" style="width:80px"></div>
-        </div>
-      </div>
-    </div>`;
+  const skeletonCard = `<div class="skeleton-card"><div class="skeleton skeleton-thumb"></div><div class="skeleton-body"><div class="skeleton skeleton-line skeleton-short"></div><div class="skeleton skeleton-line skeleton-title"></div><div class="skeleton skeleton-line" style="width:90%"></div><div class="skeleton skeleton-line" style="width:75%"></div><div class="skeleton-tags"><div class="skeleton skeleton-tag"></div><div class="skeleton skeleton-tag"></div></div></div></div>`;
   document.getElementById('video-grid').innerHTML = skeletonCard.repeat(6);
 
-  const { data, error } = await _supabase
-    .from('videos')
-    .select('*')
-    .order('created_at', { ascending: false });
+  const { data, error } = await _supabase.from('videos').select('*').order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Supabase load error:', error);
-    document.getElementById('video-grid').innerHTML =
-      '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;">Could not load videos. Check your Supabase config.</div>';
+    document.getElementById('video-grid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;">Could not load videos. Check your Supabase config.</div>';
     return;
   }
 
   videos = (data || []).map(dbRowToVideo);
   renderLatest();
   renderTopicPills();
-  renderGrid(videos);
-}
+  renderShelves();
+  applySortAndRender();
 
-// ── LATEST EPISODE ───────────────────────────────────────────────────────────
-function renderLatest() {
-  if (!videos.length) return;
-  const v = videos[0];
-  latestVideoId = v.id; // keep track for grid exclusion
-  const section = document.getElementById('latest-section');
-  section.classList.add('visible');
-  document.getElementById('latest-thumb-img').src = v.thumb;
-  document.getElementById('latest-thumb-img').alt = v.title;
-  document.getElementById('latest-thumb').onclick = () => showPage('player', v.id);
-  document.getElementById('latest-title').innerHTML = v.title.replace(/—/, '<em>—</em>');
-  document.getElementById('latest-meta').textContent = v.category + ' · ' + v.date + ' · ' + v.duration;
-  const fullDesc = v.description;
-  const shortDesc = fullDesc.length > 160 ? fullDesc.substring(0, 160) + '…' : fullDesc;
-  document.getElementById('latest-desc').textContent = shortDesc;
-  document.getElementById('latest-desc-full').textContent = fullDesc;
-
-  const expandBtn = document.getElementById('latest-expand-btn');
-  const fullDescEl = document.getElementById('latest-desc-full');
-  if (fullDesc.length > 160) {
-    expandBtn.style.display = 'inline-flex';
-    fullDescEl.classList.remove('open');
-    expandBtn.classList.remove('open');
-    expandBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
-  } else {
-    expandBtn.style.display = 'none';
+  // Check URL for deep link
+  const ytId = getWatchParam();
+  if (ytId) {
+    const v = videos.find(x => x.ytId === ytId);
+    if (v) {
+      showPageDirect('player');
+      openVideo(v.id);
+    }
   }
-  document.getElementById('latest-tags').innerHTML = v.tags.slice(0, 5).map(t =>
-    `<span class="latest-tag" data-tag="${t.replace(/"/g, '&quot;')}" style="cursor:pointer">${t}</span>`).join('');
-  document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
 // ── DELEGATED CLICK HANDLER ───────────────────────────────────────────────────
-// Single listener handles all interactive elements reliably on both desktop
-// and mobile touch — avoids stopPropagation issues between nested elements
 document.addEventListener('click', function(e) {
-
-  // Video grid tag click
+  // Video tag → filter
   const videoTag = e.target.closest('.video-tag');
-  if (videoTag && videoTag.dataset.tag) {
-    searchFromTag(videoTag.dataset.tag);
-    return;
-  }
+  if (videoTag && videoTag.dataset.tag) { searchFromTag(videoTag.dataset.tag); return; }
 
-  // Video grid card click (but not if a tag was clicked)
+  // Video card → player
   const card = e.target.closest('.video-card');
-  if (card && card.dataset.id) {
-    showPage('player', parseInt(card.dataset.id));
-    return;
-  }
+  if (card && card.dataset.id) { showPage('player', parseInt(card.dataset.id)); return; }
 
-  // Player page tag click
+  // Player tag → filter
   const playerTag = e.target.closest('.player-tag');
-  if (playerTag && playerTag.dataset.tag) {
-    searchFromTag(playerTag.dataset.tag);
-    return;
-  }
+  if (playerTag && playerTag.dataset.tag) { searchFromTag(playerTag.dataset.tag); return; }
 
-  // Latest episode tag click
+  // Latest episode tag → filter
   const latestTag = e.target.closest('.latest-tag');
-  if (latestTag && latestTag.dataset.tag) {
-    searchFromTag(latestTag.dataset.tag);
-    return;
-  }
+  if (latestTag && latestTag.dataset.tag) { searchFromTag(latestTag.dataset.tag); return; }
 
-  // Topic pill click
+  // Topic pill → filter
   const pill = e.target.closest('.topic-pill');
-  if (pill && pill.dataset.tag) {
-    filterByTag(pill.dataset.tag);
-    return;
-  }
+  if (pill && pill.dataset.tag) { filterByTag(pill.dataset.tag); return; }
 
-  // Related video card click
+  // Related card → open video
   const related = e.target.closest('.related-card');
-  if (related && related.dataset.id) {
-    openVideo(parseInt(related.dataset.id));
-    return;
-  }
+  if (related && related.dataset.id) { openVideo(parseInt(related.dataset.id)); return; }
+
+  // Shelf card → open video
+  const shelfCard = e.target.closest('.shelf-card');
+  if (shelfCard && shelfCard.dataset.id) { showPage('player', parseInt(shelfCard.dataset.id)); return; }
+
+  // Shelf "See all" → filter by tag
+  const seeAll = e.target.closest('.shelf-label-see-all');
+  if (seeAll && seeAll.dataset.shelfTag) { filterByTag(seeAll.dataset.shelfTag); return; }
+
+  // No-results suggestion → filter
+  const suggestion = e.target.closest('.no-results-suggestion');
+  if (suggestion && suggestion.dataset.tag) { filterByTag(suggestion.dataset.tag); return; }
 });
 
+// ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  // Guard: show a clear message if keys haven't been filled in yet
-  if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
-    document.getElementById('video-grid').innerHTML =
-      '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;letter-spacing:0.06em;">⚙️ Supabase not yet connected.<br>Open index.html and replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY.</div>';
-    return;
-  }
-
-  // Safe to initialize now — CDN script is guaranteed to be loaded
   _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   loadVideos();
 });
