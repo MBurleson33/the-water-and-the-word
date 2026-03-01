@@ -166,7 +166,7 @@
     display: flex; justify-content: center; margin-bottom: 32px;
   }
   .hero-logo {
-    height: 80px; width: auto;
+    height: 140px; width: auto;
   }
   @media (prefers-color-scheme: dark) {
     .hero-logo { filter: brightness(0) invert(1); }
@@ -702,7 +702,6 @@
     <a href="#" onclick="showPage('about')" id="nav-about">About</a>
   </div>
   <div class="nav-right">
-    <a href="#" onclick="promptAdminLogin()" class="nav-admin-btn" id="nav-admin" style="display:none">+ Add Video</a>
   </div>
 </nav>
 </header>
@@ -1325,7 +1324,7 @@ function showToast(msg) {
 }
 
 // ── ADMIN AUTH ────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'watw2025'; // Change this to your own password
+const ADMIN_PASSWORD = 'watw2026'; // Change this to your own password
 let isAdmin = false;
 let konamiBuffer = [];
 // Secret key combo: type "admin" anywhere on the page to open the login modal
@@ -1353,7 +1352,7 @@ function checkAdminPassword() {
   if (val === ADMIN_PASSWORD) {
     isAdmin = true;
     closeAdminModal();
-    document.getElementById('nav-admin').style.display = 'inline-flex';
+    // nav-admin button hidden — admin panel accessible via page only
     showPage('admin');
     showToast('Welcome back, admin');
   } else {
