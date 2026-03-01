@@ -108,9 +108,9 @@
     .hero-logo { filter: brightness(0) invert(1); }
     .video-tag, .topic-pill, .player-tag { border-color: #5A6470; color: #9AA4B0; }
     .latest-tag { border-color: rgba(244,242,238,0.35); }
-    .shelf-section { background: #1E2530; }
-    .shelf-card { background: #2E3338; }
     .prayer-form-inner { background: #262D33; border-color: var(--border); }
+    .prayer-page-sent { background: #2E3338; }
+    .prayer-page-verse { background: rgba(80,144,207,0.06); }
     .reaction-btn { background: rgba(80,144,207,0.1); border-color: #5A6470; }
     .sort-select { background: var(--white); color: var(--ink); border-color: var(--border); }
   }
@@ -557,6 +557,29 @@
   .about-verse p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
   .about-verse cite { font-size: 14px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
 
+
+  /* ── PRAYER PAGE ── */
+  .prayer-page { max-width: 760px; margin: 0 auto; padding: 80px 56px 100px; }
+  .prayer-page-hero { text-align: center; margin-bottom: 56px; }
+  .prayer-page-eyebrow { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .prayer-page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 300; line-height: 1.15; color: var(--ink); margin-bottom: 28px; }
+  .prayer-page-title em { font-style: italic; color: var(--gold); }
+  .prayer-page-divider { width: 48px; height: 2px; background: linear-gradient(90deg, #5090CF, #3698FA); margin: 0 auto 28px; border-radius: 2px; }
+  .prayer-page-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto; }
+  .prayer-page-verse { padding: 28px 32px; border-left: 2px solid var(--gold); background: rgba(80,144,207,0.04); margin-bottom: 40px; }
+  .prayer-page-verse p { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.7; margin-bottom: 8px; }
+  .prayer-page-verse cite { font-size: 13px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+  .prayer-page-form { display: flex; flex-direction: column; gap: 12px; }
+  .ppf-label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .prayer-page-btn { align-self: flex-start; padding: 14px 36px; background: var(--ink); color: var(--cream); border: none; font-family: 'Josefin Sans', sans-serif; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+  .prayer-page-btn:hover { background: var(--gold); }
+  .prayer-page-sent { display: none; text-align: center; padding: 48px 32px; border: 1px solid var(--border); background: var(--white); }
+  .prayer-page-sent.show { display: block; animation: fadeUp 0.4s ease both; }
+  .prayer-page-sent-icon { font-size: 40px; margin-bottom: 16px; }
+  .prayer-page-sent-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); margin-bottom: 8px; }
+  .prayer-page-sent-sub { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+  .prayer-page-again { background: none; border: 1px solid var(--border); padding: 8px 20px; font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .prayer-page-again:hover { border-color: var(--gold); color: var(--gold); }
   /* ── ADMIN PAGE ── */
   .admin-page { max-width: 900px; margin: 0 auto; padding: 80px 56px; }
   .admin-page h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; margin-bottom: 8px; }
@@ -669,7 +692,7 @@
     .hero { padding: 48px 20px 40px; }
     .video-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
     .player-layout { grid-template-columns: 1fr; }
-    .player-page, .about-page, .admin-page { padding: 80px 20px 40px; }
+    .player-page, .about-page, .admin-page, .prayer-page { padding: 80px 20px 40px; }
     .section-label { padding: 40px 20px 0; }
     .results-header { padding: 24px 20px 0; flex-wrap: wrap; gap: 12px; }
     .form-row { grid-template-columns: 1fr; }
@@ -697,6 +720,7 @@
   <div class="nav-links">
     <a href="/" onclick="goHome(event)" class="active" id="nav-home">Home</a>
     <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+    <a href="#" onclick="showPage('prayer')" id="nav-prayer">Prayer</a>
   </div>
   <div class="nav-right">
     <span class="nav-tagline">Where the Spirit Leads, We Bear Witness.</span>
@@ -864,6 +888,36 @@
   </div>
 </div>
 
+
+<!-- ══ PRAYER PAGE ══ -->
+<div id="page-prayer" class="page">
+  <div class="prayer-page">
+    <div class="prayer-page-hero">
+      <div class="prayer-page-eyebrow">✦ Come As You Are</div>
+      <h1 class="prayer-page-title">Bring Your Prayer<br><em>Before the Lord</em></h1>
+      <div class="prayer-page-divider"></div>
+      <p class="prayer-page-sub">Whatever you are carrying — a burden, a hope, a question, a fear — bring it here. These requests are received with care and lifted in prayer. You are not alone in this.</p>
+    </div>
+    <div class="prayer-page-body">
+      <div class="prayer-page-verse">
+        <p>"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."</p>
+        <cite>— Philippians 4:6</cite>
+      </div>
+      <div class="prayer-page-form">
+        <div class="ppf-label">Your Prayer Request</div>
+        <input class="prayer-input" type="text" id="page-prayer-name" placeholder="Your name (optional — or leave blank to pray anonymously)">
+        <textarea class="prayer-input" id="page-prayer-message" placeholder="Write your prayer here. There are no wrong words…" style="min-height:160px;"></textarea>
+        <button class="prayer-page-btn" onclick="submitPagePrayer()">Send My Prayer ✦</button>
+        <div class="prayer-page-sent" id="prayer-page-sent">
+          <div class="prayer-page-sent-icon">🕊</div>
+          <p class="prayer-page-sent-title">Your prayer has been received.</p>
+          <p class="prayer-page-sent-sub">You are seen. You are heard. You are not alone.</p>
+          <button class="prayer-page-again" onclick="resetPagePrayerForm()">Submit Another Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ══ ADMIN PAGE ══ -->
 <div id="page-admin" class="page">
   <div class="admin-page">
@@ -925,6 +979,7 @@
       <ul class="footer-links">
         <li><a href="/" onclick="goHome(event)">Home</a></li>
         <li><a href="#" onclick="showPage('about')">About</a></li>
+        <li><a href="#" onclick="showPage('prayer')">Prayer</a></li>
         <li><a href="https://www.youtube.com/@thewaterandtheword" target="_blank" rel="noopener">YouTube Channel</a></li>
       </ul>
     </div>
@@ -1334,6 +1389,34 @@ async function submitPrayer() {
   showToast('Your prayer request has been received 🕊');
 }
 
+
+// ── PRAYER PAGE ──────────────────────────────────────────────────────────────
+async function submitPagePrayer() {
+  const name = document.getElementById('page-prayer-name').value.trim() || 'Anonymous';
+  const message = document.getElementById('page-prayer-message').value.trim();
+  if (!message) { showToast('Please write your prayer request before submitting.'); return; }
+  const btn = document.querySelector('.prayer-page-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  const { error } = await _supabase.from('prayers').insert({ yt_id: null, name, message });
+  if (error) {
+    showToast('Could not submit prayer. Please try again.');
+    btn.disabled = false; btn.textContent = 'Send My Prayer ✦'; return;
+  }
+  document.querySelector('.prayer-page-btn').style.display = 'none';
+  document.querySelectorAll('#page-prayer-name, #page-prayer-message').forEach(el => el.style.display = 'none');
+  document.querySelector('.ppf-label').style.display = 'none';
+  document.getElementById('prayer-page-sent').classList.add('show');
+}
+
+function resetPagePrayerForm() {
+  document.getElementById('page-prayer-name').value = '';
+  document.getElementById('page-prayer-message').value = '';
+  ['page-prayer-name', 'page-prayer-message'].forEach(id => document.getElementById(id).style.display = '');
+  document.querySelector('.ppf-label').style.display = '';
+  const btn = document.querySelector('.prayer-page-btn');
+  btn.style.display = ''; btn.disabled = false; btn.textContent = 'Send My Prayer ✦';
+  document.getElementById('prayer-page-sent').classList.remove('show');
+}
 // ── SHARE ─────────────────────────────────────────────────────────────────────
 function shareEpisode() {
   const v = videos.find(x => x.id === currentVideoId);
