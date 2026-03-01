@@ -220,12 +220,13 @@
   /* ── LATEST EPISODE FEATURE ── */
   .latest-section {
     background: #2C3038;
-    padding: 56px 48px;
+    padding: 56px 0;
     display: none;
   }
   .latest-section.visible { display: block; }
   .latest-inner {
     max-width: 1400px; margin: 0 auto;
+    padding: 0 48px;
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
   }
   .latest-thumb {
@@ -283,7 +284,8 @@
   .latest-watch-btn svg { width: 14px; height: 14px; fill: #FFFFFF; margin-left: 2px; }
   @media (max-width: 768px) {
     .latest-inner { grid-template-columns: 1fr; gap: 28px; }
-    .latest-section { padding: 40px 20px; }
+    .latest-section { padding: 40px 0; }
+    .latest-inner { padding: 0 20px; }
   }
 
   /* ── LATEST DESC EXPAND ── */
@@ -1239,7 +1241,7 @@ function showToast(msg) {
 }
 
 // ── ADMIN AUTH ────────────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'watw2025'; // Change this to your own password
+const ADMIN_PASSWORD = 'watw2026'; // Change this to your own password
 let isAdmin = false;
 let konamiBuffer = [];
 // Secret key combo: type "admin" anywhere on the page to open the login modal
