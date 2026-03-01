@@ -216,80 +216,9 @@
   .topic-pill:hover, .topic-pill.active {
     border-color: var(--gold); color: var(--white); background: var(--gold);
   }
-  .topic-pill .pill-count {
-    display: inline-block; margin-left: 6px;
-    font-size: 10px; opacity: 0.7;
-  }
 
-  /* ── START HERE SHELVES ── */
-  .shelves-section {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 48px 0 40px;
-  }
-  .shelves-header {
-    max-width: 1400px; margin: 0 auto 8px; padding: 0 48px;
-    display: flex; align-items: baseline; gap: 12px;
-  }
-  .shelves-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300; color: var(--ink);
-  }
-  .shelves-header p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-style: italic; color: var(--muted);
-    margin: 0;
-  }
-  .shelf {
-    margin-top: 32px;
-  }
-  .shelf-label {
-    max-width: 1400px; margin: 0 auto 14px; padding: 0 48px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .shelf-label-text {
-    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
-  }
-  .shelf-label-dot {
-    width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0;
-  }
-  .shelf-label-line { flex: 1; height: 1px; background: var(--border); }
-  .shelf-label-see-all {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); background: none; border: none; cursor: pointer;
-    font-family: 'Josefin Sans', sans-serif; transition: opacity 0.2s;
-  }
-  .shelf-label-see-all:hover { opacity: 0.7; }
-  .shelf-scroll {
-    padding: 0 48px;
-    overflow-x: auto; overflow-y: visible;
-    scrollbar-width: none; -ms-overflow-style: none;
-  }
-  .shelf-scroll::-webkit-scrollbar { display: none; }
-  .shelf-track {
-    display: flex; gap: 20px;
-    min-width: max-content; padding-bottom: 4px;
-  }
-  .shelf-card {
-    width: 220px; flex-shrink: 0; cursor: pointer;
-    background: var(--cream);
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s;
-    border: 1px solid transparent;
-  }
-  .shelf-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(71,75,80,0.14); border-color: var(--border); }
-  .shelf-card-thumb {
-    width: 100%; aspect-ratio: 16/9; overflow: hidden;
-    background: var(--border); position: relative;
-  }
-  .shelf-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-  .shelf-card:hover .shelf-card-thumb img { transform: scale(1.06); }
-  .shelf-card-body { padding: 10px 12px 12px; }
-  .shelf-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-weight: 400; line-height: 1.3; color: var(--ink);
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-  }
-  .shelf-card-cat { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+
+
 
   /* ── LATEST EPISODE FEATURE ── */
   .latest-section { background: #262D33; padding: 56px 0; display: none; }
@@ -795,15 +724,6 @@
     </div>
   </div>
 
-  <!-- START HERE SHELVES -->
-  <div id="shelves-section" class="shelves-section" style="display:none;">
-    <div class="shelves-header">
-      <h2>Start Here</h2>
-      <p>— curated by topic</p>
-    </div>
-    <div id="shelves-container"></div>
-  </div>
-
   <!-- LATEST EPISODE -->
   <div id="latest-section" class="latest-section">
     <div class="latest-inner">
@@ -1171,56 +1091,8 @@ function renderTopicPills() {
   const counts = getTagCounts();
   const topics = getAllTopics();
   container.innerHTML = topics.map(t =>
-    `<button class="topic-pill${activeTag === t ? ' active' : ''}" data-tag="${t.replace(/"/g,'&quot;')}">${t}<span class="pill-count">${counts[t]}</span></button>`
+    `<button class="topic-pill${activeTag === t ? ' active' : ''}" data-tag="${t.replace(/"/g,'&quot;')}">${t}</button>`
   ).join('');
-}
-
-// ── START HERE SHELVES ────────────────────────────────────────────────────────
-function renderShelves() {
-  const counts = getTagCounts();
-  // Pick top 4 tags with at least 2 videos each
-  const topTags = Object.entries(counts)
-    .filter(([,c]) => c >= 2)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4)
-    .map(([tag]) => tag);
-
-  if (topTags.length === 0) {
-    document.getElementById('shelves-section').style.display = 'none';
-    return;
-  }
-
-  document.getElementById('shelves-section').style.display = 'block';
-  const container = document.getElementById('shelves-container');
-
-  container.innerHTML = topTags.map(tag => {
-    const tagVideos = videos.filter(v => v.tags.includes(tag)).slice(0, 8);
-    const cards = tagVideos.map(v => `
-      <div class="shelf-card" data-id="${v.id}">
-        <div class="shelf-card-thumb">
-          <img src="${v.thumb}" alt="${v.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/220x124/F4F2EE/5090CF?text=Episode'">
-        </div>
-        <div class="shelf-card-body">
-          <div class="shelf-card-title">${v.title}</div>
-          <div class="shelf-card-cat">${v.category}</div>
-        </div>
-      </div>
-    `).join('');
-
-    return `
-      <div class="shelf">
-        <div class="shelf-label">
-          <div class="shelf-label-dot"></div>
-          <span class="shelf-label-text">${tag}</span>
-          <div class="shelf-label-line"></div>
-          <button class="shelf-label-see-all" data-shelf-tag="${tag.replace(/"/g,'&quot;')}">See all →</button>
-        </div>
-        <div class="shelf-scroll">
-          <div class="shelf-track">${cards}</div>
-        </div>
-      </div>
-    `;
-  }).join('');
 }
 
 // ── SEARCH & RENDER ───────────────────────────────────────────────────────────
@@ -1236,12 +1108,10 @@ function handleSearch(query) {
   const header = document.getElementById('results-header');
   const headerText = document.getElementById('results-header-text');
   const latestSection = document.getElementById('latest-section');
-  const shelvesSection = document.getElementById('shelves-section');
   let filtered = videos;
 
   if (q) {
     latestSection.classList.remove('visible');
-    shelvesSection.style.display = 'none';
     filtered = videos.filter(v =>
       v.title.toLowerCase().includes(q) ||
       v.description.toLowerCase().includes(q) ||
@@ -1261,7 +1131,6 @@ function handleSearch(query) {
     label.style.display = 'flex';
     header.classList.remove('visible');
     latestSection.classList.add('visible');
-    if (videos.length > 0) renderShelves();
   }
 
   applySortAndRender(filtered);
@@ -1650,7 +1519,7 @@ async function addVideo() {
   document.getElementById('tag-output').innerHTML = '<span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span>';
   document.querySelector('.ai-tag-btn').textContent = '✦ Generate AI Tags with Claude';
 
-  renderAdminList(); renderTopicPills(); renderLatest(); renderShelves();
+  renderAdminList(); renderTopicPills(); renderLatest();
   showToast('Episode published successfully');
 }
 
@@ -1670,7 +1539,7 @@ async function confirmDelete() {
   const { error } = await _supabase.from('videos').delete().eq('id', id);
   if (error) { showToast('Error removing video: ' + error.message); return; }
   videos = videos.filter(v => v.id !== id);
-  renderAdminList(); renderTopicPills(); renderLatest(); renderShelves();
+  renderAdminList(); renderTopicPills(); renderLatest();
   applySortAndRender();
   showToast('Episode removed');
 }
@@ -1756,7 +1625,6 @@ async function loadVideos() {
   videos = (data || []).map(dbRowToVideo);
   renderLatest();
   renderTopicPills();
-  renderShelves();
   applySortAndRender();
 
   // Check URL for deep link
@@ -1811,14 +1679,6 @@ document.addEventListener('click', function(e) {
   // Related card → open video
   const related = e.target.closest('.related-card');
   if (related && related.dataset.id) { openVideo(parseInt(related.dataset.id)); return; }
-
-  // Shelf card → open video
-  const shelfCard = e.target.closest('.shelf-card');
-  if (shelfCard && shelfCard.dataset.id) { showPage('player', parseInt(shelfCard.dataset.id)); return; }
-
-  // Shelf "See all" → filter by tag
-  const seeAll = e.target.closest('.shelf-label-see-all');
-  if (seeAll && seeAll.dataset.shelfTag) { filterByTag(seeAll.dataset.shelfTag); return; }
 
   // No-results suggestion → filter
   const suggestion = e.target.closest('.no-results-suggestion');
