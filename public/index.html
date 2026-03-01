@@ -125,18 +125,16 @@
     height: 72px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .nav-logo {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
 }
-
-.nav-logo-img {
-  height: 100px;
-  width: auto;
-  display: block;
-}
+.nav-logo span { color: var(--gold); }
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
@@ -673,10 +671,8 @@
 <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;padding:8px 16px;background:var(--gold);color:var(--ink);font-size:12px;" onfocus="this.style.left='0'">Skip to content</a>
 <header role="banner">
 <nav aria-label="Main navigation">
-  <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="The Water and the Word">
-  <img src="images/TheWaterandtheWordLogo.svg"
-       alt="The Water and the Word logo"
-       class="nav-logo-img">
+  <a class="nav-logo" href="#" onclick="showPage('home')">
+  The Water <span>&</span> the Word
 </a>
   <div class="nav-links">
     <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
