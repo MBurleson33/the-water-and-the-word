@@ -56,38 +56,49 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --cream: #FAF8F4;
-    --ink: #1A1814;
-    --gold: #B8965A;
-    --gold-light: #D4B483;
-    --muted: #7A7468;
-    --border: #E8E4DC;
+    --cream: #F4F2EE;
+    --ink: #474B50;
+    --gold: #5090CF;
+    --gold-light: #7AAEDD;
+    --muted: #7A8490;
+    --border: #E2DDD6;
     --white: #FFFFFF;
+    /* Latest episode hero text — light tints on dark background */
+    --hero-text: #F0EDE8;
+    --hero-text-60: rgba(240,237,232,0.7);
+    --hero-text-50: rgba(240,237,232,0.6);
+    --hero-text-40: rgba(240,237,232,0.5);
+    --hero-text-20: rgba(240,237,232,0.25);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --cream: #141210;
-      --ink: #F0EDE8;
-      --gold: #C8A86A;
-      --gold-light: #D4B483;
-      --muted: #8A8278;
-      --border: #2A2724;
-      --white: #1E1C18;
+      --cream: #2E3136;
+      --ink: #E8E4DE;
+      --gold: #6AA0DF;
+      --gold-light: #88B8E8;
+      --muted: #9298A0;
+      --border: #3A3E44;
+      --white: #383C42;
+      --hero-text: #F0EDE8;
+      --hero-text-60: rgba(240,237,232,0.7);
+      --hero-text-50: rgba(240,237,232,0.6);
+      --hero-text-40: rgba(240,237,232,0.5);
+      --hero-text-20: rgba(240,237,232,0.25);
     }
-    nav { background: rgba(20,18,16,0.95); }
-    .hero-section { background: #181510; }
-    .video-card { background: #1E1C18; }
-    .search-wrap input { background: #1E1C18; }
-    .latest-section { background: #0E0C0A; }
-    .transcript-box { background: #181510; }
-    .admin-modal-inner { background: #1E1C18; }
-    .form-group input, .form-group textarea { background: #181510; color: var(--ink); }
-    .tag-output { background: #181510; }
-    .admin-video-row { background: #181510; border-color: var(--border); }
-    footer { background: #0E0C0A; border-color: var(--border); }
+    nav { background: rgba(46,49,54,0.95); }
+    .hero-section { background: #23272C; }
+    .video-card { background: #383C42; }
+    .search-wrap input { background: #383C42; }
+    .latest-section { background: #1A1D21; }
+    .transcript-box { background: #23272C; }
+    .admin-modal-inner { background: #383C42; }
+    .form-group input, .form-group textarea { background: #23272C; color: var(--ink); }
+    .tag-output { background: #23272C; }
+    .admin-video-row { background: #23272C; border-color: var(--border); }
+    footer { background: #1A1D21; border-color: var(--border); }
     .toast { background: var(--ink); color: var(--cream); }
-    .skeleton { background: linear-gradient(90deg, #2a2724 25%, #332f2b 50%, #2a2724 75%); }
+    .skeleton { background: linear-gradient(90deg, #3A3E44 25%, #44484E 50%, #3A3E44 75%); }
   }
 
   html { scroll-behavior: smooth; }
@@ -105,7 +116,7 @@
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(250,248,244,0.95);
+    background: rgba(244,242,238,0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
     padding: 0 40px;
@@ -242,20 +253,20 @@
   .latest-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(26px, 3vw, 42px); font-weight: 300; line-height: 1.2;
-    color: #FAF8F4; margin-bottom: 16px;
+    color: var(--hero-text); margin-bottom: 16px;
   }
   .latest-title em { font-style: italic; color: var(--gold-light); }
   .latest-desc {
-    font-size: 13px; color: rgba(250,248,244,0.6); line-height: 1.8; margin-bottom: 24px;
+    font-size: 13px; color: var(--hero-text-60); line-height: 1.8; margin-bottom: 24px;
   }
   .latest-meta {
-    font-size: 12px; letter-spacing: 0.1em; color: rgba(250,248,244,0.4);
+    font-size: 12px; letter-spacing: 0.1em; color: var(--hero-text-40);
     margin-bottom: 28px;
   }
   .latest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
   .latest-tag {
     font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(250,248,244,0.5); border: 1px solid rgba(250,248,244,0.2);
+    color: var(--hero-text-50); border: 1px solid var(--hero-text-20);
     padding: 3px 10px; transition: all 0.2s;
   }
   .latest-tag:hover {
@@ -268,7 +279,7 @@
     letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;
     border: none; transition: all 0.2s;
   }
-  .latest-watch-btn:hover { background: #FAF8F4; }
+  .latest-watch-btn:hover { background: var(--hero-text); }
   .latest-watch-btn svg { width: 14px; height: 14px; fill: var(--ink); margin-left: 2px; }
   @media (max-width: 768px) {
     .latest-inner { grid-template-columns: 1fr; gap: 28px; }
@@ -282,7 +293,7 @@
     background: none; border: none; padding: 0;
     font-family: 'Josefin Sans', sans-serif; font-size: 12px;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(250,248,244,0.4); cursor: pointer;
+    color: var(--hero-text-40); cursor: pointer;
     display: inline-flex; align-items: center; gap: 6px;
     margin-bottom: 20px; margin-top: 4px;
     transition: color 0.2s;
@@ -986,7 +997,7 @@ function renderGrid(list) {
   grid.innerHTML = displayList.map(v => `
     <div class="video-card" data-id="${v.id}">
       <div class="video-thumb">
-        <img src="${v.thumb}" alt="${v.title} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/E8E4DC/B8965A?text=Episode'">
+        <img src="${v.thumb}" alt="${v.title} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/F4F2EE/5090CF?text=Episode'">
         <div class="play-overlay">
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
@@ -1041,7 +1052,7 @@ function openVideo(id) {
   document.getElementById('related-list').innerHTML = related.map(r => `
     <div class="related-card" data-id="${r.id}">
       <div class="related-thumb">
-        <img src="${r.thumb}" alt="${r.title}" onerror="this.src='https://via.placeholder.com/160x90/E8E4DC/B8965A?text=Ep'">
+        <img src="${r.thumb}" alt="${r.title}" onerror="this.src='https://via.placeholder.com/160x90/F4F2EE/5090CF?text=Ep'">
       </div>
       <div class="related-info">
         <div class="related-title">${r.title}</div>
@@ -1209,7 +1220,7 @@ function closeDeleteModal() {
 function renderAdminList() {
   document.getElementById('admin-video-list').innerHTML = videos.map(v => `
     <div class="admin-video-row">
-      <img src="${v.thumb}" alt="${v.title}" onerror="this.src='https://via.placeholder.com/80x45/E8E4DC/B8965A?text=Ep'">
+      <img src="${v.thumb}" alt="${v.title}" onerror="this.src='https://via.placeholder.com/80x45/F4F2EE/5090CF?text=Ep'">
       <div class="admin-row-info">
         <div class="admin-row-title">${v.title}</div>
         <div class="admin-row-meta">${v.category} · ${v.date} · ${v.duration}</div>
