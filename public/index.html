@@ -140,14 +140,14 @@
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
-    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
     transition: color 0.2s;
   }
   .nav-links a:hover, .nav-links a.active { color: var(--ink); }
   .nav-right { display: flex; align-items: center; }
   .nav-tagline {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-style: italic; font-weight: 300;
+    font-size: 18px; font-style: italic; font-weight: 300;
     color: var(--muted); letter-spacing: 0.02em;
   }
   .nav-admin-btn {
@@ -409,7 +409,7 @@
     background: rgba(26,24,20,0.75); color: white;
     font-size: 11px; letter-spacing: 0.06em; padding: 3px 8px;
   }
-  .video-meta { font-size: 11px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; padding: 16px 16px 0; }
+  .video-meta { font-size: 13px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; padding: 16px 16px 0; }
   .video-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 22px; font-weight: 400; line-height: 1.3;
@@ -418,8 +418,8 @@
   .video-excerpt { font-size: 18px; color: var(--muted); line-height: 1.75; margin-bottom: 12px; padding: 0 16px; }
   .video-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px; }
   .video-tag {
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted); border: 1px solid var(--border); padding: 2px 8px;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--border); padding: 3px 10px;
     position: relative; z-index: 2; cursor: pointer; transition: all 0.2s;
   }
   .video-tag:hover { color: var(--gold); border-color: var(--gold); }
@@ -440,13 +440,13 @@
     aspect-ratio: 16/9; width: 100%; background: #000; margin-bottom: 28px;
   }
   .player-embed iframe { width: 100%; height: 100%; border: none; }
-  .player-category { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .player-category { font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .player-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 36px; font-weight: 300; line-height: 1.2;
     margin-bottom: 16px;
   }
-  .player-date { font-size: 13px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 20px; }
+  .player-date { font-size: 15px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 20px; }
   .player-desc { font-size: 19px; color: var(--muted); line-height: 1.85; margin-bottom: 24px; }
   .player-tags { display: flex; flex-wrap: wrap; gap: 8px; }
   .player-tag {
@@ -501,7 +501,7 @@
     font-size: 16px; font-weight: 400; line-height: 1.3;
     color: var(--ink); margin-bottom: 4px;
   }
-  .related-cat { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .related-cat { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
 
   /* ── ABOUT PAGE ── */
   .about-page { max-width: 960px; margin: 0 auto; padding: 80px 56px; }
@@ -522,7 +522,7 @@
     font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300;
     font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px;
   }
-  .about-verse cite { font-size: 13px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+  .about-verse cite { font-size: 14px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
 
   /* ── ADMIN PAGE ── */
   .admin-page { max-width: 900px; margin: 0 auto; padding: 80px 56px; }
@@ -636,29 +636,31 @@
     filter: brightness(0) invert(1);
   }
   .footer-tagline {
-    font-size: 13px; color: rgba(244,242,238,0.5);
-    line-height: 1.7; letter-spacing: 0.03em;
-    max-width: 220px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-style: italic; font-weight: 300;
+    color: rgba(244,242,238,0.75);
+    line-height: 1.5; letter-spacing: 0.01em;
+    max-width: 260px; margin-top: 4px;
   }
   .footer-col-title {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(244,242,238,0.4); margin-bottom: 16px;
   }
   .footer-links { list-style: none; }
   .footer-links li { margin-bottom: 10px; }
   .footer-links a {
-    font-size: 14px; color: rgba(244,242,238,0.65);
+    font-size: 16px; color: rgba(244,242,238,0.65);
     text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em;
   }
   .footer-links a:hover { color: var(--gold); }
   .footer-verse {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 17px; font-style: italic; font-weight: 300;
+    font-size: 20px; font-style: italic; font-weight: 300;
     color: rgba(244,242,238,0.55); line-height: 1.7;
     margin-bottom: 8px;
   }
   .footer-verse-ref {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gold);
   }
   .footer-bottom {
@@ -666,9 +668,9 @@
     padding-top: 28px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .footer-copy { font-size: 11px; letter-spacing: 0.08em; color: rgba(244,242,238,0.3); }
+  .footer-copy { font-size: 13px; letter-spacing: 0.08em; color: rgba(244,242,238,0.3); }
   .footer-back-top {
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
     color: rgba(244,242,238,0.35); background: none; border: none;
     cursor: pointer; transition: color 0.2s; font-family: 'Josefin Sans', sans-serif;
     display: flex; align-items: center; gap: 6px;
@@ -955,7 +957,7 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <img src="images/The Water and the Word Logo.png" alt="The Water and the Word">
-      <p class="footer-tagline">Faith journey videos and testimonies of the Holy Spirit moving in our time.</p>
+      <p class="footer-tagline">Where the Spirit Leads,<br>We Bear Witness.</p>
     </div>
     <div>
       <div class="footer-col-title">Navigate</div>
