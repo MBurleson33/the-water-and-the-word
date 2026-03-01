@@ -414,8 +414,16 @@
   .player-back:hover { color: var(--ink); }
   .player-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
   .player-layout { display: grid; grid-template-columns: 1fr 400px; gap: 56px; }
-  .player-embed { aspect-ratio: 16/9; width: 100%; background: #000; margin-bottom: 28px; }
-  .player-embed iframe { width: 100%; height: 100%; border: none; }
+  .player-embed {
+    position: relative; width: 100%; background: #000; margin-bottom: 28px;
+    aspect-ratio: 16/9;
+  }
+  /* Fallback for older mobile browsers that don't support aspect-ratio */
+  @supports not (aspect-ratio: 16/9) {
+    .player-embed { padding-bottom: 56.25%; height: 0; }
+    .player-embed iframe { position: absolute; top: 0; left: 0; }
+  }
+  .player-embed iframe { width: 100%; height: 100%; border: none; display: block; }
   .player-category { font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .player-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.2; margin-bottom: 16px; }
   .player-date { font-size: 15px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 20px; }
@@ -1328,7 +1336,7 @@ function openVideo(id) {
   updateMeta(v);
 
   document.getElementById('player-embed').innerHTML =
-    `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&color=white&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&color=white&playsinline=1" allow="autoplay; fullscreen; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen playsinline></iframe>`;
   document.getElementById('player-category').textContent = v.category;
   document.getElementById('player-title').textContent = v.title;
   document.getElementById('player-date').textContent = v.date;
