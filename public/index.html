@@ -631,6 +631,35 @@
   .admin-row-del { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--border); padding: 4px 10px; cursor: pointer; transition: all 0.2s; }
   .admin-row-del:hover { border-color: #c0392b; color: #c0392b; }
 
+  /* ── ADMIN TABS ── */
+  .admin-tabs { display: flex; gap: 0; margin-bottom: 40px; border-bottom: 1px solid var(--border); }
+  .admin-tab {
+    padding: 12px 28px; background: none; border: none;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+  }
+  .admin-tab:hover { color: var(--ink); }
+  .admin-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .admin-tab-panel { display: none; }
+  .admin-tab-panel.active { display: block; }
+  /* ── PRAYER INBOX ── */
+  .prayer-inbox-empty { text-align: center; padding: 48px 0; color: var(--muted); font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; }
+  .prayer-card {
+    padding: 20px 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 6px 1fr; gap: 16px; align-items: start;
+  }
+  .prayer-card-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 7px; flex-shrink: 0; transition: background 0.3s; }
+  .prayer-card.read .prayer-card-dot { background: var(--border); }
+  .prayer-card-body {}
+  .prayer-card-name { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .prayer-card-message { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; line-height: 1.65; color: var(--ink); margin-bottom: 8px; }
+  .prayer-card-meta { font-size: 11px; letter-spacing: 0.08em; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
+  .prayer-card-source { color: var(--gold-light); }
+  .prayer-inbox-load { width: 100%; padding: 12px; margin-top: 24px; background: none; border: 1px solid var(--border); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .prayer-inbox-load:hover { border-color: var(--gold); color: var(--gold); }
+
   /* ── FOOTER ── */
   footer { background: var(--deep); padding: 64px 48px 40px; }
   .footer-inner {
@@ -922,46 +951,63 @@
 <div id="page-admin" class="page">
   <div class="admin-page">
     <h2>Video Library Admin</h2>
-    <p class="admin-sub">Add a new episode to The Water and the Word.</p>
-    <div class="form-group">
-      <label>YouTube Video URL or ID</label>
-      <input type="text" id="admin-yt" placeholder="https://www.youtube.com/watch?v=…">
+    <p class="admin-sub">Manage your episodes and read prayer requests.</p>
+
+    <!-- TABS -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('episodes', this)">Episodes</button>
+      <button class="admin-tab" onclick="switchAdminTab('prayers', this)">Prayer Inbox <span id="prayer-badge" style="display:none;margin-left:6px;background:var(--gold);color:white;font-size:9px;padding:2px 6px;border-radius:10px;letter-spacing:0.06em;"></span></button>
     </div>
-    <div class="form-group">
-      <label>Episode Title</label>
-      <input type="text" id="admin-title" placeholder="e.g. The Four Horsemen — A Modern Reading">
-    </div>
-    <div class="form-row">
+
+    <!-- EPISODES TAB -->
+    <div id="admin-tab-episodes" class="admin-tab-panel active">
       <div class="form-group">
-        <label>Category / Series</label>
-        <input type="text" id="admin-cat" placeholder="e.g. Revelation Series">
+        <label>YouTube Video URL or ID</label>
+        <input type="text" id="admin-yt" placeholder="https://www.youtube.com/watch?v=…">
       </div>
       <div class="form-group">
-        <label>Duration</label>
-        <input type="text" id="admin-dur" placeholder="e.g. 24:18">
+        <label>Episode Title</label>
+        <input type="text" id="admin-title" placeholder="e.g. The Four Horsemen — A Modern Reading">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category / Series</label>
+          <input type="text" id="admin-cat" placeholder="e.g. Revelation Series">
+        </div>
+        <div class="form-group">
+          <label>Duration</label>
+          <input type="text" id="admin-dur" placeholder="e.g. 24:18">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— shown publicly</span></label>
+        <textarea id="admin-desc" style="min-height:100px;" placeholder="Write a short description…"></textarea>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;margin:8px 0 24px;">
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+        <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">AI Tagging</span>
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+      </div>
+      <div class="form-group">
+        <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— paste from YouTube's "Show transcript" feature</span></label>
+        <textarea id="admin-transcript" style="min-height:160px;" placeholder="Paste full YouTube transcript here…"></textarea>
+        <button class="ai-tag-btn" onclick="generateTags()">✦ Generate AI Tags with Claude</button>
+        <div class="tag-output" id="tag-output"><span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span></div>
+        <input type="hidden" id="admin-tags-hidden">
+      </div>
+      <button class="submit-btn" onclick="addVideo()">Publish Episode</button>
+      <div class="admin-list">
+        <div class="admin-list-title">Published Episodes</div>
+        <div id="admin-video-list"></div>
       </div>
     </div>
-    <div class="form-group">
-      <label>Description <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— shown publicly</span></label>
-      <textarea id="admin-desc" style="min-height:100px;" placeholder="Write a short description…"></textarea>
+
+    <!-- PRAYER INBOX TAB -->
+    <div id="admin-tab-prayers" class="admin-tab-panel">
+      <div id="prayer-inbox-list"><p class="prayer-inbox-empty">Loading prayer requests…</p></div>
+      <button class="prayer-inbox-load" id="prayer-load-more" onclick="loadMorePrayers()" style="display:none;">Load More</button>
     </div>
-    <div style="display:flex;align-items:center;gap:16px;margin:8px 0 24px;">
-      <div style="flex:1;height:1px;background:var(--border);"></div>
-      <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">AI Tagging</span>
-      <div style="flex:1;height:1px;background:var(--border);"></div>
-    </div>
-    <div class="form-group">
-      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— paste from YouTube's "Show transcript" feature</span></label>
-      <textarea id="admin-transcript" style="min-height:160px;" placeholder="Paste full YouTube transcript here…"></textarea>
-      <button class="ai-tag-btn" onclick="generateTags()">✦ Generate AI Tags with Claude</button>
-      <div class="tag-output" id="tag-output"><span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span></div>
-      <input type="hidden" id="admin-tags-hidden">
-    </div>
-    <button class="submit-btn" onclick="addVideo()">Publish Episode</button>
-    <div class="admin-list">
-      <div class="admin-list-title">Published Episodes</div>
-      <div id="admin-video-list"></div>
-    </div>
+
   </div>
 </div>
 
@@ -1371,22 +1417,24 @@ async function submitPrayer() {
   if (!message) { showToast('Please write your prayer request before submitting.'); return; }
 
   const btn = document.querySelector('.prayer-submit');
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
+  btn.disabled = true; btn.textContent = 'Sending…';
 
-  const { error } = await _supabase.from('prayers').insert({ yt_id: v.ytId, name, message });
-
-  if (error) {
+  try {
+    const res = await fetch('/api/prayer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, message, yt_id: v.ytId, episode_title: v.title })
+    });
+    if (!res.ok) throw new Error('Server error');
+    document.querySelector('.prayer-submit').style.display = 'none';
+    document.getElementById('prayer-sent').classList.add('show');
+    document.getElementById('prayer-name').value = '';
+    document.getElementById('prayer-message').value = '';
+    showToast('Your prayer request has been received 🕊');
+  } catch (err) {
     showToast('Could not submit prayer. Please try again.');
     btn.disabled = false; btn.textContent = 'Submit Prayer Request';
-    return;
   }
-
-  document.querySelector('.prayer-submit').style.display = 'none';
-  document.getElementById('prayer-sent').classList.add('show');
-  document.getElementById('prayer-name').value = '';
-  document.getElementById('prayer-message').value = '';
-  showToast('Your prayer request has been received 🕊');
 }
 
 
@@ -1397,15 +1445,21 @@ async function submitPagePrayer() {
   if (!message) { showToast('Please write your prayer request before submitting.'); return; }
   const btn = document.querySelector('.prayer-page-btn');
   btn.disabled = true; btn.textContent = 'Sending…';
-  const { error } = await _supabase.from('prayers').insert({ yt_id: null, name, message });
-  if (error) {
+  try {
+    const res = await fetch('/api/prayer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, message, yt_id: null, episode_title: null })
+    });
+    if (!res.ok) throw new Error('Server error');
+    document.querySelector('.prayer-page-btn').style.display = 'none';
+    document.querySelectorAll('#page-prayer-name, #page-prayer-message').forEach(el => el.style.display = 'none');
+    document.querySelector('.ppf-label').style.display = 'none';
+    document.getElementById('prayer-page-sent').classList.add('show');
+  } catch (err) {
     showToast('Could not submit prayer. Please try again.');
-    btn.disabled = false; btn.textContent = 'Send My Prayer ✦'; return;
+    btn.disabled = false; btn.textContent = 'Send My Prayer ✦';
   }
-  document.querySelector('.prayer-page-btn').style.display = 'none';
-  document.querySelectorAll('#page-prayer-name, #page-prayer-message').forEach(el => el.style.display = 'none');
-  document.querySelector('.ppf-label').style.display = 'none';
-  document.getElementById('prayer-page-sent').classList.add('show');
 }
 
 function resetPagePrayerForm() {
@@ -1630,6 +1684,94 @@ async function confirmDelete() {
 function closeDeleteModal() {
   document.getElementById('delete-modal').style.display = 'none';
   pendingDeleteId = null;
+}
+
+// ── ADMIN TABS ───────────────────────────────────────────────────────────────
+function switchAdminTab(tab, btn) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('admin-tab-' + tab).classList.add('active');
+  if (tab === 'prayers') loadPrayerInbox();
+}
+
+// ── PRAYER INBOX ──────────────────────────────────────────────────────────────
+let prayerPage = 0;
+const PRAYERS_PER_PAGE = 20;
+let allPrayers = [];
+
+async function loadPrayerInbox(append = false) {
+  const list = document.getElementById('prayer-inbox-list');
+  if (!append) {
+    prayerPage = 0;
+    list.innerHTML = '<p class="prayer-inbox-empty">Loading\u2026</p>';
+  }
+  const from = prayerPage * PRAYERS_PER_PAGE;
+  const to = from + PRAYERS_PER_PAGE - 1;
+  const { data, error, count } = await _supabase
+    .from('prayers')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to);
+  if (error) {
+    list.innerHTML = '<p class="prayer-inbox-empty">Could not load prayers.</p>';
+    return;
+  }
+  if (!append) allPrayers = data || [];
+  else allPrayers = [...allPrayers, ...(data || [])];
+
+  const unreadCount = allPrayers.filter(p => !p.read_at).length;
+  const badge = document.getElementById('prayer-badge');
+  badge.textContent = unreadCount;
+  badge.style.display = unreadCount > 0 ? 'inline' : 'none';
+
+  if (allPrayers.length === 0) {
+    list.innerHTML = '<p class="prayer-inbox-empty">No prayer requests yet \u2014 they will appear here.</p>';
+    document.getElementById('prayer-load-more').style.display = 'none';
+    return;
+  }
+
+  list.innerHTML = allPrayers.map(p => {
+    const date = new Date(p.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const time = new Date(p.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    const source = p.episode_title ? p.episode_title : 'General Prayer Page';
+    const isRead = !!p.read_at;
+    const markBtn = isRead ? '' : '<button onclick="markPrayerRead(' + p.id + ')" style="background:none;border:none;font-family:\'Josefin Sans\',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color=\'var(--gold)\'" onmouseout="this.style.color=\'var(--muted)\'">Mark as read</button>';
+    return '<div class="prayer-card' + (isRead ? ' read' : '') + '" data-prayer-id="' + p.id + '">'
+      + '<div class="prayer-card-dot"></div>'
+      + '<div class="prayer-card-body">'
+      + '<div class="prayer-card-name">' + escHtml(p.name || 'Anonymous') + '</div>'
+      + '<div class="prayer-card-message">' + escHtml(p.message) + '</div>'
+      + '<div class="prayer-card-meta">'
+      + '<span>' + date + ' at ' + time + '</span>'
+      + '<span class="prayer-card-source">\u2756 ' + escHtml(source) + '</span>'
+      + markBtn
+      + '</div></div></div>';
+  }).join('');
+
+  document.getElementById('prayer-load-more').style.display = (count > allPrayers.length) ? 'block' : 'none';
+}
+
+async function loadMorePrayers() {
+  prayerPage++;
+  await loadPrayerInbox(true);
+}
+
+async function markPrayerRead(id) {
+  await _supabase.from('prayers').update({ read_at: new Date().toISOString() }).eq('id', id);
+  const card = document.querySelector('.prayer-card[data-prayer-id="' + id + '"]');
+  if (card) {
+    card.classList.add('read');
+    const btn = card.querySelector('button');
+    if (btn) btn.remove();
+    card.querySelector('.prayer-card-dot').style.background = 'var(--border)';
+    const p = allPrayers.find(x => x.id === id);
+    if (p) p.read_at = new Date().toISOString();
+    const unread = allPrayers.filter(x => !x.read_at).length;
+    const badge = document.getElementById('prayer-badge');
+    badge.textContent = unread;
+    badge.style.display = unread > 0 ? 'inline' : 'none';
+  }
 }
 
 function renderAdminList() {
