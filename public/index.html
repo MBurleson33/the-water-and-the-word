@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── PRIMARY SEO ── -->
+<title>The Water and the Word — Christian Prophecy Video Journal</title>
+<meta name="description" content="The Water and the Word is a prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Watch, search, and discover episodes on Revelation, Daniel, Israel, and more.">
+<meta name="keywords" content="Christian prophecy, biblical prophecy, end times, Revelation, Daniel, Israel, Holy Spirit, rapture, tribulation, second coming, Bible study, prophetic word, eschatology">
+<meta name="author" content="The Water and the Word">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://thewaterandtheword.com/">
+
+<!-- ── OPEN GRAPH (Facebook, LinkedIn, iMessage previews) ── -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Water and the Word">
+<meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal">
+<meta property="og:description" content="A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Episodes on Revelation, Daniel, Israel, and more.">
+<meta property="og:url" content="https://thewaterandtheword.com/">
+<meta property="og:locale" content="en_US">
+
+<!-- ── TWITTER / X CARD ── -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Water and the Word — Christian Prophecy Video Journal">
+<meta name="twitter:description" content="A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit.">
+<meta name="twitter:site" content="@thewaterandtheword">
+
+<!-- ── STRUCTURED DATA (Google Rich Results) ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Water and the Word",
+  "url": "https://thewaterandtheword.com/",
+  "description": "A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://thewaterandtheword.com/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- ── PERFORMANCE ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="dns-prefetch" href="https://www.youtube.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F4F2EE;
+    --ink: #474B50;
+    --gold: #5090CF;
+    --gold-light: #5B80A5;
+    --muted: #58697A;
+    --border: #DDD9D2;
+    --white: #FFFFFF;
+    --deep: #262D33;
+    /* Latest episode hero text — light tints on dark background */
+    --hero-text: #F4F2EE;
+    --hero-text-60: rgba(244,242,238,0.72);
+    --hero-text-50: rgba(244,242,238,0.62);
+    --hero-text-40: rgba(244,242,238,0.50);
+    --hero-text-20: rgba(244,242,238,0.25);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cream: #2E3338;
+      --ink: #E8E6E2;
+      --gold: #5090CF;
+      --gold-light: #7AAEDD;
+      --muted: #8A94A0;
+      --border: #3A4048;
+      --white: #363D44;
+      --deep: #1A2028;
+      --hero-text: #F4F2EE;
+      --hero-text-60: rgba(244,242,238,0.72);
+      --hero-text-50: rgba(244,242,238,0.62);
+      --hero-text-40: rgba(244,242,238,0.50);
+      --hero-text-20: rgba(244,242,238,0.25);
+    }
+    nav { background: rgba(38,45,51,0.96); }
+    .hero-section { background: #262D33; }
+    .video-card { background: #363D44; }
+    .search-wrap input { background: #363D44; }
+    .latest-section { background: #1A2028; }
+    .transcript-box { background: #262D33; }
+    .admin-modal-inner { background: #363D44; }
+    .form-group input, .form-group textarea { background: #262D33; color: var(--ink); }
+    .tag-output { background: #262D33; }
+    .admin-video-row { background: #262D33; border-color: var(--border); }
+    footer { background: #1A2028; border-color: var(--border); }
+    .toast { background: var(--ink); color: var(--cream); }
+    .skeleton { background: linear-gradient(90deg, #3A4048 25%, #444C54 50%, #3A4048 75%); }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(244,242,238,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400; letter-spacing: 0.02em; line-height: 1;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-admin-btn {
+    background: var(--ink); color: var(--cream) !important;
+    padding: 8px 20px; font-size: 12px !important; letter-spacing: 0.14em;
+    border-radius: 2px; transition: background 0.2s !important;
+  }
+  .nav-admin-btn:hover { background: var(--gold) !important; color: var(--ink) !important; }
+
+  /* ── PAGES ── */
+  .page { display: none; padding-top: 64px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── HOME HERO ── */
+  .hero-section {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(26,24,20,0.06);
+  }
+  .hero {
+    padding: 80px 40px 60px;
+    max-width: 1200px; margin: 0 auto;
+    text-align: center;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; white-space: nowrap;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 7vw, 80px); font-weight: 300; line-height: 1.1;
+    margin-bottom: 20px; color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p {
+    font-size: 19px; color: var(--muted); max-width: 680px; margin: 0 auto 36px;
+    letter-spacing: 0.03em; white-space: nowrap;
+  }
+  .divider {
+    width: 48px; height: 1px; background: var(--gold);
+    margin: 0 auto 48px;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    max-width: 720px; margin: 0 auto 60px;
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%; padding: 14px 50px 14px 20px;
+    background: var(--white); border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 15px; font-weight: 300;
+    color: var(--ink); outline: none; letter-spacing: 0.05em;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--gold); }
+  .search-wrap input::placeholder { color: var(--muted); }
+  .search-wrap button {
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 48px; background: var(--gold); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .search-wrap button:hover { background: var(--ink); }
+  .search-wrap button svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2; }
+
+  /* ── TOPIC PILLS ── */
+  .topics {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    max-width: 1200px; margin: 0 auto 56px; justify-content: center;
+  }
+  .topic-pill {
+    padding: 5px 14px;
+    border: 1px solid var(--border); background: transparent;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .topic-pill:hover, .topic-pill.active {
+    border-color: var(--gold); color: var(--gold); background: rgba(184,150,90,0.06);
+  }
+
+  /* ── LATEST EPISODE FEATURE ── */
+  .latest-section {
+    background: #262D33;
+    padding: 56px 0;
+    display: none;
+  }
+  .latest-section.visible { display: block; }
+  .latest-inner {
+    max-width: 1400px; margin: 0 auto;
+    padding: 0 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+  }
+  .latest-thumb {
+    position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer;
+  }
+  .latest-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .latest-thumb:hover img { transform: scale(1.04); }
+  .latest-play {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(26,24,20,0.2); transition: background 0.3s;
+  }
+  .latest-thumb:hover .latest-play { background: rgba(26,24,20,0.4); }
+  .latest-play-btn {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.6);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .latest-thumb:hover .latest-play-btn { background: #5090CF; border-color: #5090CF; transform: scale(1.08); }
+  .latest-play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
+  .latest-label {
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #7AAEDD; margin-bottom: 16px;
+  }
+  .latest-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3vw, 42px); font-weight: 300; line-height: 1.2;
+    color: #F0EDF8; margin-bottom: 16px;
+  }
+  .latest-title em { font-style: italic; color: var(--gold-light); }
+  .latest-desc {
+    font-size: 18px; color: rgba(235,232,228,0.75); line-height: 1.85; margin-bottom: 24px;
+  }
+  .latest-meta {
+    font-size: 12px; letter-spacing: 0.1em; color: rgba(235,232,228,0.5);
+    margin-bottom: 28px;
+  }
+  .latest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .latest-tag {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--hero-text-50); border: 1px solid var(--hero-text-20);
+    padding: 3px 10px; transition: all 0.2s;
+  }
+  .latest-tag:hover {
+    color: #7AAEDD; border-color: #5090CF; background: rgba(80,144,207,0.1);
+  }
+  .latest-watch-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 28px; background: #5090CF; color: #FFFFFF;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer;
+    border: none; transition: all 0.2s;
+  }
+  .latest-watch-btn:hover { background: #3A78B8; }
+  .latest-watch-btn svg { width: 14px; height: 14px; fill: #FFFFFF; margin-left: 2px; }
+  @media (max-width: 768px) {
+    .latest-inner { grid-template-columns: 1fr; gap: 28px; }
+    .latest-section { padding: 40px 0; }
+    .latest-inner { padding: 0 20px; }
+  }
+
+  /* ── LATEST DESC EXPAND ── */
+  .latest-desc-full { display: none; }
+  .latest-desc-full.open { display: block; }
+  .latest-expand-btn {
+    background: none; border: none; padding: 0;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--hero-text-40); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-bottom: 20px; margin-top: 4px;
+    transition: color 0.2s;
+  }
+  .latest-expand-btn:hover { color: var(--gold-light); }
+  .latest-expand-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
+  .latest-expand-btn.open svg { transform: rotate(180deg); }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    max-width: 1400px; margin: 0 auto 28px; padding: 48px 48px 0;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label span {
+    font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── TRANSCRIPT TOGGLE ── */
+  .transcript-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 20px; padding: 8px 16px;
+    background: transparent; border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .transcript-toggle:hover { border-color: var(--gold); color: var(--gold); }
+  .transcript-toggle svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s; }
+  .transcript-toggle.open svg { transform: rotate(180deg); }
+  .transcript-box {
+    margin-top: 12px; padding: 20px 24px;
+    background: var(--cream); border: 1px solid var(--border);
+    font-size: 19px; color: var(--muted); line-height: 1.9;
+    max-height: 320px; overflow-y: auto;
+    display: none;
+  }
+  .transcript-box.open { display: block; animation: fadeUp 0.3s ease both; }
+
+  /* ── VIDEO GRID ── */
+  .video-grid {
+    max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 40px; padding: 0 48px 80px;
+  }
+  .video-card {
+    cursor: pointer; animation: fadeUp 0.5s ease both;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--white);
+    box-shadow: 0 1px 6px rgba(26,24,20,0.08);
+    padding-bottom: 20px;
+  }
+  .video-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(26,24,20,0.12); }
+  .video-thumb {
+    position: relative; aspect-ratio: 16/9;
+    background: var(--border); overflow: hidden; margin-bottom: 16px;
+  }
+  .video-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .video-card:hover .video-thumb img { transform: scale(1.04); }
+  .play-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(26,24,20,0); transition: background 0.3s;
+  }
+  .video-card:hover .play-overlay { background: rgba(26,24,20,0.25); }
+  .play-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0.8); transition: all 0.3s;
+  }
+  .video-card:hover .play-btn { opacity: 1; transform: scale(1); }
+  .play-btn svg { width: 16px; height: 16px; fill: var(--ink); margin-left: 2px; }
+  .video-duration {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(26,24,20,0.75); color: white;
+    font-size: 11px; letter-spacing: 0.06em; padding: 3px 8px;
+  }
+  .video-meta { font-size: 11px; color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; padding: 16px 16px 0; }
+  .video-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; line-height: 1.3;
+    color: var(--ink); margin-bottom: 8px; padding: 0 16px;
+  }
+  .video-excerpt { font-size: 18px; color: var(--muted); line-height: 1.75; margin-bottom: 12px; padding: 0 16px; }
+  .video-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px; }
+  .video-tag {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--border); padding: 2px 8px;
+    position: relative; z-index: 2; cursor: pointer; transition: all 0.2s;
+  }
+  .video-tag:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ── VIDEO PLAYER PAGE ── */
+  .player-page { padding: 80px 56px 60px; max-width: 1400px; margin: 0 auto; }
+  .player-back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); cursor: pointer; margin-bottom: 32px;
+    transition: color 0.2s; background: none; border: none;
+  }
+  .player-back:hover { color: var(--ink); }
+  .player-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .player-layout { display: grid; grid-template-columns: 1fr 400px; gap: 56px; }
+  .player-main {}
+  .player-embed {
+    aspect-ratio: 16/9; width: 100%; background: #000; margin-bottom: 28px;
+  }
+  .player-embed iframe { width: 100%; height: 100%; border: none; }
+  .player-category { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .player-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300; line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .player-date { font-size: 13px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 20px; }
+  .player-desc { font-size: 19px; color: var(--muted); line-height: 1.85; margin-bottom: 24px; }
+  .player-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .player-tag {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); border: 1px solid var(--border); padding: 4px 12px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .player-tag:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── RELATED SIDEBAR ── */
+  .related-sidebar {}
+  .sidebar-title {
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 24px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .related-card {
+    display: flex; gap: 12px; margin-bottom: 20px; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .related-card:hover { opacity: 0.75; }
+  .related-thumb {
+    width: 100px; flex-shrink: 0; aspect-ratio: 16/9;
+    background: var(--border); overflow: hidden;
+  }
+  .related-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .related-info {}
+  .related-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 400; line-height: 1.3;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .related-cat { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+
+  /* ── ABOUT PAGE ── */
+  .about-page { max-width: 960px; margin: 0 auto; padding: 80px 56px; }
+  .about-page .hero-eyebrow { text-align: left; margin-bottom: 12px; }
+  .about-page h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300; line-height: 1.1; margin-bottom: 32px;
+  }
+  .about-page h1 em { font-style: italic; color: var(--gold); }
+  .about-body { font-size: 20px; color: var(--muted); line-height: 2; }
+  .about-body p { margin-bottom: 20px; }
+  .about-body strong { color: var(--ink); font-weight: 400; }
+  .about-verse {
+    margin: 40px 0; padding: 28px 32px;
+    border-left: 2px solid var(--gold); background: rgba(184,150,90,0.04);
+  }
+  .about-verse p {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300;
+    font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px;
+  }
+  .about-verse cite { font-size: 13px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+
+  /* ── ADMIN PAGE ── */
+  .admin-page { max-width: 900px; margin: 0 auto; padding: 80px 56px; }
+  .admin-page h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 300; margin-bottom: 8px;
+  }
+  .admin-sub { font-size: 14px; color: var(--muted); margin-bottom: 40px; letter-spacing: 0.04em; }
+  .form-group { margin-bottom: 24px; }
+  .form-group label {
+    display: block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 12px 16px;
+    background: var(--white); border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 300;
+    color: var(--ink); outline: none; letter-spacing: 0.04em;
+    transition: border-color 0.2s; resize: vertical;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .ai-tag-btn {
+    width: 100%; padding: 12px; margin-top: 8px;
+    background: rgba(184,150,90,0.08); border: 1px dashed var(--gold-light);
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .ai-tag-btn:hover { background: rgba(184,150,90,0.15); }
+  .tag-output {
+    margin-top: 12px; padding: 14px 16px;
+    background: var(--white); border: 1px solid var(--border);
+    min-height: 48px;
+  }
+  .tag-output .gen-tag {
+    display: inline-block; margin: 3px;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(184,150,90,0.12); color: var(--gold);
+    padding: 3px 10px; border: 1px solid rgba(184,150,90,0.3);
+  }
+  .submit-btn {
+    width: 100%; padding: 16px;
+    background: var(--ink); color: var(--cream);
+    border: none; font-family: 'Josefin Sans', sans-serif;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--gold); color: var(--ink); }
+  .admin-list { margin-top: 48px; }
+  .admin-list-title {
+    font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .admin-video-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .admin-video-row img { width: 80px; aspect-ratio: 16/9; object-fit: cover; }
+  .admin-row-info { flex: 1; }
+  .admin-row-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; margin-bottom: 2px; }
+  .admin-row-meta { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+  .admin-row-del {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); background: none; border: 1px solid var(--border);
+    padding: 4px 10px; cursor: pointer; transition: all 0.2s;
+  }
+  .admin-row-del:hover { border-color: #c0392b; color: #c0392b; }
+
+  /* ── SEARCH RESULTS HEADER ── */
+  .results-header {
+    max-width: 1400px; margin: 0 auto; padding: 32px 48px 0;
+    font-size: 18px; color: var(--muted);
+    display: none; align-items: center; justify-content: space-between;
+  }
+  .results-header.visible { display: flex; }
+  .results-header strong { color: var(--ink); font-weight: 400; }
+  .results-close {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid var(--border); padding: 5px 12px;
+    font-family: 'Josefin Sans', sans-serif; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .results-close:hover { border-color: var(--ink); color: var(--ink); }
+  .results-close svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+  /* ── NO RESULTS ── */
+  .no-results {
+    text-align: center; padding: 80px 40px; color: var(--muted);
+  }
+  .no-results p { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border); padding: 36px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--muted); }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy { font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  .video-card:nth-child(1) { animation-delay: 0.05s; }
+  .video-card:nth-child(2) { animation-delay: 0.1s; }
+  .video-card:nth-child(3) { animation-delay: 0.15s; }
+  .video-card:nth-child(4) { animation-delay: 0.2s; }
+  .video-card:nth-child(5) { animation-delay: 0.25s; }
+  .video-card:nth-child(6) { animation-delay: 0.3s; }
+
+  /* Respect user's OS motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ── SKELETON LOADING ── */
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px; padding: 0 48px 80px;
+    max-width: 1400px; margin: 0 auto;
+  }
+  .skeleton-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--border) 25%, var(--cream) 50%, var(--border) 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+  }
+  .skeleton-thumb { width: 100%; aspect-ratio: 16/9; }
+  .skeleton-body { padding: 16px; }
+  .skeleton-line {
+    height: 12px; margin-bottom: 10px; border-radius: 2px;
+  }
+  .skeleton-title { width: 85%; height: 18px; margin-bottom: 14px; }
+  .skeleton-short { width: 55%; }
+  .skeleton-tags { display: flex; gap: 8px; margin-top: 14px; }
+  .skeleton-tag { width: 60px; height: 22px; border-radius: 2px; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 999;
+    background: var(--ink); color: var(--cream);
+    padding: 12px 24px; font-size: 11px; letter-spacing: 0.12em;
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-admin-btn) { display: none; }
+    .hero { padding: 48px 20px 40px; }
+    .video-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
+    .player-layout { grid-template-columns: 1fr; }
+    .player-page, .about-page, .admin-page { padding: 80px 20px 40px; }
+    .section-label { padding: 40px 20px 0; }
+    .results-header { padding: 24px 20px 0; flex-wrap: wrap; gap: 12px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .search-wrap { margin: 0 auto 40px; }
+    .topics { padding: 0 16px; }
+    .hero-section { padding-bottom: 8px; }
+    .no-results { padding: 48px 20px; }
+  }
+</style>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;padding:8px 16px;background:var(--gold);color:var(--ink);font-size:12px;" onfocus="this.style.left='0'">Skip to content</a>
+<header role="banner">
+<nav aria-label="Main navigation">
+  <a class="nav-logo" href="#" onclick="showPage('home')">The Water <span>&</span> the Word</a>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+    <a href="#" onclick="promptAdminLogin()" class="nav-admin-btn" id="nav-admin" style="display:none">+ Add Video</a>
+  </div>
+</nav>
+</header>
+
+<!-- HOME PAGE -->
+<main id="main-content">
+<div id="page-home" class="page active">
+<div class="hero-section">
+  <div class="hero">
+    <div class="hero-eyebrow">A Prophetic Video Journal</div>
+    <h1>Water. <em>Word.</em> Spirit.</h1>
+    <p>Exploring Scripture, prophetic signs, and the movement of the Spirit in our time.</p>
+    <div class="divider"></div>
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
+      <button>
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+    <div class="topics" id="topic-pills"></div>
+  </div>
+</div>
+
+  <div id="latest-section" class="latest-section">
+    <div class="latest-inner">
+      <div class="latest-thumb" id="latest-thumb" onclick="">
+        <img id="latest-thumb-img" src="" alt="">
+        <div class="latest-play">
+          <div class="latest-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        </div>
+      </div>
+      <div class="latest-info">
+        <div class="latest-label">&#10022; Latest Episode</div>
+        <h2 class="latest-title" id="latest-title"></h2>
+        <div class="latest-meta" id="latest-meta"></div>
+        <p class="latest-desc" id="latest-desc"></p>
+        <p class="latest-desc latest-desc-full" id="latest-desc-full"></p>
+        <button class="latest-expand-btn" id="latest-expand-btn" onclick="toggleLatestDesc()" style="display:none;">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          Read More
+        </button>
+        <div class="latest-tags" id="latest-tags"></div>
+        <button class="latest-watch-btn" id="latest-watch-btn">
+          Watch Now <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results-header" class="results-header">
+    <span id="results-header-text"></span>
+    <button class="results-close" onclick="clearSearch()">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Clear Search
+    </button>
+  </div>
+  <div class="section-label" id="section-label"><span>All Episodes</span></div>
+  <div class="video-grid" id="video-grid"></div>
+  <div class="no-results" id="no-results" style="display:none">
+    <p>No videos found for that search.</p>
+  </div>
+</div>
+
+<!-- VIDEO PLAYER PAGE -->
+<div id="page-player" class="page">
+  <div class="player-page">
+    <button class="player-back" onclick="showPage('home')">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to all videos
+    </button>
+    <div class="player-layout">
+      <div class="player-main">
+        <div class="player-embed" id="player-embed"></div>
+        <div class="player-category" id="player-category"></div>
+        <h1 class="player-title" id="player-title"></h1>
+        <div class="player-date" id="player-date"></div>
+        <p class="player-desc" id="player-desc"></p>
+        <div class="player-tags" id="player-tags"></div>
+        <div id="transcript-section" style="display:none;">
+          <button class="transcript-toggle" id="transcript-toggle" onclick="toggleTranscript()">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            Read Transcript
+          </button>
+          <div class="transcript-box" id="transcript-box"></div>
+        </div>
+      </div>
+      <div class="related-sidebar">
+        <div class="sidebar-title">Related Episodes</div>
+        <div id="related-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="page-about" class="page">
+  <div class="about-page">
+    <div class="hero-eyebrow">The Voice Behind The Channel</div>
+    <h1>About <em>The Water<br>and the Word</em></h1>
+    <div class="about-body">
+      <p>Welcome. This is a place set apart for those who sense that something is stirring — in Scripture, in the world, and in the Spirit. <strong>The Water and the Word</strong> is a prophetic video journal exploring the intersection of biblical prophecy, current events, and the faithful life.</p>
+      <p>The name comes from a simple conviction: that the water of the Spirit and the Word of God are inseparable. You cannot have one without the other. This channel is committed to both — Spirit-led, Scripture-grounded.</p>
+      <div class="about-verse">
+        <p>"That he might sanctify and cleanse it with the washing of water by the word."</p>
+        <cite>— Ephesians 5:26</cite>
+      </div>
+      <p>Each episode is a prayer, a study, and a conversation. Whether you have been walking with the Lord for decades or are just beginning to ask questions about prophecy and the end times, this channel is for you. Every video is tagged and fully searchable so you can find exactly what you are looking for — or discover something new entirely.</p>
+      <p><strong>New episodes drop regularly.</strong> Subscribe on YouTube and explore the full library right here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PAGE -->
+<div id="page-admin" class="page">
+  <div class="admin-page">
+    <h2>Video Library Admin</h2>
+    <p class="admin-sub">Add a new episode to The Water and the Word. Paste your YouTube URL and use AI tagging to auto-generate searchable keywords.</p>
+
+    <div class="form-group">
+      <label>YouTube Video URL or ID</label>
+      <input type="text" id="admin-yt" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+    </div>
+    <div class="form-group">
+      <label>Episode Title</label>
+      <input type="text" id="admin-title" placeholder="e.g. The Four Horsemen — A Modern Reading">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Category / Series</label>
+        <input type="text" id="admin-cat" placeholder="e.g. Revelation Series">
+      </div>
+      <div class="form-group">
+        <label>Duration</label>
+        <input type="text" id="admin-dur" placeholder="e.g. 24:18">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— shown publicly on the site</span></label>
+      <textarea id="admin-desc" placeholder="Write a short description of the episode. This appears on the video card and player page…" style="min-height:100px;"></textarea>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;margin:8px 0 24px;">
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+      <span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);">AI Tagging</span>
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+    </div>
+    <div class="form-group">
+      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">— used for tag generation &amp; shown to viewers on request. Copy from YouTube's "Show transcript" feature.</span></label>
+      <textarea id="admin-transcript" placeholder="Paste the full YouTube transcript here…" style="min-height:160px;"></textarea>
+      <button class="ai-tag-btn" onclick="generateTags()">✦ Generate AI Tags with Claude</button>
+      <div class="tag-output" id="tag-output"><span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span></div>
+      <input type="hidden" id="admin-tags-hidden">
+    </div>
+    <button class="submit-btn" onclick="addVideo()">Publish Episode</button>
+
+    <div class="admin-list">
+      <div class="admin-list-title">Published Episodes</div>
+      <div id="admin-video-list"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-logo">The Water <span>&</span> the Word</div>
+  <div class="footer-copy">© 2026 The Water and the Word — All Rights Reserved</div>
+</footer>
+
+<!-- ADMIN LOGIN MODAL -->
+<div id="admin-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(26,24,20,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:var(--cream);padding:48px 40px;max-width:380px;width:90%;text-align:center;animation:fadeUp 0.3s ease both;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Admin Access</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;margin-bottom:28px;">Enter Password</p>
+    <input type="password" id="admin-pw-input" placeholder="Password"
+      style="width:100%;padding:12px 16px;background:var(--white);border:1px solid var(--border);font-family:'Josefin Sans',sans-serif;font-size:13px;font-weight:300;color:var(--ink);outline:none;letter-spacing:0.04em;margin-bottom:8px;text-align:center;"
+      onkeydown="if(event.key==='Enter')checkAdminPassword()"
+      oninput="document.getElementById('pw-error').style.display='none'">
+    <div id="pw-error" style="display:none;font-size:11px;color:#c0392b;letter-spacing:0.08em;margin-bottom:8px;">Incorrect password.</div>
+    <button onclick="checkAdminPassword()"
+      style="width:100%;padding:14px;background:var(--ink);color:var(--cream);border:none;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;margin-bottom:12px;"
+      onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'"
+      onmouseout="this.style.background='var(--ink)';this.style.color='var(--cream)'">
+      Enter
+    </button>
+    <button onclick="closeAdminModal()"
+      style="background:none;border:none;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;">
+      Cancel
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- DELETE CONFIRMATION MODAL -->
+<div id="delete-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(26,24,20,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:var(--white);border:1px solid var(--border);padding:40px;max-width:440px;width:90%;text-align:center;">
+    <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Confirm Delete</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:8px;line-height:1.3;">Remove this episode?</p>
+    <p id="delete-confirm-title" style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.5;"></p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:28px;">This will permanently delete it from your database and cannot be undone.</p>
+    <div style="display:flex;gap:12px;justify-content:center;">
+      <button onclick="closeDeleteModal()" style="flex:1;max-width:160px;padding:12px;background:none;border:1px solid var(--border);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--ink)';this.style.color='var(--ink)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Cancel</button>
+      <button onclick="confirmDelete()" style="flex:1;max-width:160px;padding:12px;background:#c0392b;border:1px solid #c0392b;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:white;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#a93226'" onmouseout="this.style.background='#c0392b'">Yes, Remove</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
+// Replace these two values with your own from the Supabase setup guide
+const SUPABASE_URL      = 'https://zcdhoxqsbpujpiwbbrgw.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjZGhveHFzYnB1anBpd2Jicmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTk2NTksImV4cCI6MjA4Nzc3NTY1OX0.EemlKMnlL4LjSxS3M_nGKmsYO8Xp-YsawWcyNpgbCc4';
+
+// Client is initialized after DOM loads to ensure the CDN script is ready
+let _supabase = null;
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+// Videos are loaded from Supabase on page load. This is the live in-memory cache.
+let videos = [];
+let currentVideoId = null;
+let activeTag = null;
+let latestVideoId = null; // tracks which video is shown in the hero
+let pendingDeleteId = null; // tracks which video is pending delete confirmation
+
+// ── ROUTING ───────────────────────────────────────────────────────────────────
+function showPage(page, id) {
+  // Stop video playing when navigating away from player
+  if (page !== 'player') {
+    document.getElementById('player-embed').innerHTML = '';
+  }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  if (document.getElementById('nav-' + page)) document.getElementById('nav-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+  if (page === 'player' && id) openVideo(id);
+  if (page === 'admin') renderAdminList();
+}
+
+// ── TOPIC PILLS ───────────────────────────────────────────────────────────────
+function getAllTopics() {
+  const all = {};
+  videos.forEach(v => v.tags.forEach(t => { all[t] = (all[t] || 0) + 1; }));
+  return Object.entries(all).sort((a, b) => b[1] - a[1]).slice(0, 14).map(e => e[0]);
+}
+
+function renderTopicPills() {
+  const container = document.getElementById('topic-pills');
+  const topics = getAllTopics();
+  container.innerHTML = topics.map(t =>
+    `<button class="topic-pill${activeTag === t ? ' active' : ''}" data-tag="${t.replace(/"/g, '&quot;')}">${t}</button>`
+  ).join('');
+}
+
+function filterByTag(tag) {
+  if (activeTag === tag) {
+    activeTag = null;
+    document.getElementById('search-input').value = '';
+    handleSearch('');
+  } else {
+    activeTag = tag;
+    document.getElementById('search-input').value = tag;
+    handleSearch(tag);
+  }
+  renderTopicPills();
+}
+
+// ── SEARCH & RENDER ───────────────────────────────────────────────────────────
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  handleSearch('');
+  document.getElementById('search-input').focus();
+}
+
+function handleSearch(query) {
+  const q = query.toLowerCase().trim();
+  const label = document.getElementById('section-label');
+  const header = document.getElementById('results-header');
+  let filtered = videos;
+
+  // Show/hide clear button and adjust input padding
+  const latestSection = document.getElementById('latest-section');
+  const headerText = document.getElementById('results-header-text');
+  if (q) {
+    latestSection.classList.remove('visible');
+    filtered = videos.filter(v => {
+      return (
+        v.title.toLowerCase().includes(q) ||
+        v.description.toLowerCase().includes(q) ||
+        v.category.toLowerCase().includes(q) ||
+        v.tags.some(t => t.toLowerCase().includes(q))
+      );
+    });
+    label.style.display = 'none';
+    if (filtered.length > 0) {
+      header.classList.add('visible');
+      headerText.innerHTML = `Showing <strong>${filtered.length}</strong> result${filtered.length !== 1 ? 's' : ''} for <strong>"${query}"</strong>`;
+    } else {
+      header.classList.remove('visible');
+    }
+  } else {
+    activeTag = null;
+    renderTopicPills();
+    label.style.display = 'flex';
+    header.classList.remove('visible');
+    latestSection.classList.add('visible');
+  }
+
+  renderGrid(filtered);
+}
+
+function renderGrid(list) {
+  const grid = document.getElementById('video-grid');
+  const none = document.getElementById('no-results');
+  const isSearching = document.getElementById('search-input').value.trim().length > 0;
+
+  // When not searching, exclude the latest video — it's already in the hero
+  const displayList = isSearching ? list : list.filter(v => v.id !== latestVideoId);
+
+  if (displayList.length === 0) {
+    grid.innerHTML = '';
+    none.style.display = isSearching ? 'block' : 'none';
+    return;
+  }
+  none.style.display = 'none';
+  grid.innerHTML = displayList.map(v => `
+    <div class="video-card" data-id="${v.id}">
+      <div class="video-thumb">
+        <img src="${v.thumb}" alt="${v.title} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/F4F2EE/5090CF?text=Episode'">
+        <div class="play-overlay">
+          <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+        </div>
+        <div class="video-duration">${v.duration}</div>
+      </div>
+      <div class="video-meta">${v.category}</div>
+      <div class="video-title">${v.title}</div>
+      <div class="video-excerpt">${v.description.substring(0, 110)}…</div>
+      <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${t.replace(/"/g, '&quot;')}">${t}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+// ── VIDEO PLAYER ──────────────────────────────────────────────────────────────
+function openVideo(id) {
+  const v = videos.find(x => x.id === id);
+  if (!v) return;
+  currentVideoId = id;
+
+  document.getElementById('player-embed').innerHTML =
+    `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  document.getElementById('player-category').textContent = v.category;
+  document.getElementById('player-title').textContent = v.title;
+  document.getElementById('player-date').textContent = v.date;
+  document.getElementById('player-desc').textContent = v.description;
+  document.getElementById('player-tags').innerHTML = v.tags
+    .map(t => `<span class="player-tag" data-tag="${t.replace(/"/g, '&quot;')}">${t}</span>`).join('');
+
+  // Show transcript toggle if transcript exists
+  const transcriptSection = document.getElementById('transcript-section');
+  const transcriptBox = document.getElementById('transcript-box');
+  const transcriptToggle = document.getElementById('transcript-toggle');
+  if (v.transcript) {
+    transcriptSection.style.display = 'block';
+    transcriptBox.textContent = v.transcript;
+    transcriptBox.classList.remove('open');
+    transcriptToggle.classList.remove('open');
+    transcriptToggle.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read Transcript';
+  } else {
+    transcriptSection.style.display = 'none';
+  }
+
+  // Related videos — find by shared tags
+  const related = videos
+    .filter(x => x.id !== id)
+    .map(x => ({ v: x, score: x.tags.filter(t => v.tags.includes(t)).length }))
+    .filter(x => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 4)
+    .map(x => x.v);
+
+  document.getElementById('related-list').innerHTML = related.map(r => `
+    <div class="related-card" data-id="${r.id}">
+      <div class="related-thumb">
+        <img src="${r.thumb}" alt="${r.title}" onerror="this.src='https://via.placeholder.com/160x90/F4F2EE/5090CF?text=Ep'">
+      </div>
+      <div class="related-info">
+        <div class="related-title">${r.title}</div>
+        <div class="related-cat">${r.category}</div>
+      </div>
+    </div>
+  `).join('') || '<p style="font-size:12px;color:var(--muted)">No related episodes yet.</p>';
+}
+
+function searchFromTag(tag) {
+  showPage('home');
+  setTimeout(() => {
+    document.getElementById('search-input').value = tag;
+    handleSearch(tag);
+    activeTag = tag;
+    renderTopicPills();
+  }, 50);
+}
+
+function toggleLatestDesc() {
+  const full = document.getElementById('latest-desc-full');
+  const short = document.getElementById('latest-desc');
+  const btn = document.getElementById('latest-expand-btn');
+  const isOpen = full.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  short.style.display = isOpen ? 'none' : 'block';
+  btn.innerHTML = isOpen
+    ? '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Show Less'
+    : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
+}
+
+function toggleTranscript() {
+  const box = document.getElementById('transcript-box');
+  const btn = document.getElementById('transcript-toggle');
+  const isOpen = box.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.innerHTML = isOpen
+    ? '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Hide Transcript'
+    : '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read Transcript';
+}
+
+// ── ADMIN ─────────────────────────────────────────────────────────────────────
+function extractYtId(input) {
+  const match = input.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
+  return match ? match[1] : input.trim();
+}
+
+// Simulated AI tag generation (in production, this calls Claude/OpenAI API)
+async function generateTags() {
+  const desc = document.getElementById('admin-desc').value.trim();
+  const transcript = document.getElementById('admin-transcript').value.trim();
+  const title = document.getElementById('admin-title').value.trim();
+  if (!desc && !title && !transcript) { showToast('Please enter a title, description, or transcript first.'); return; }
+
+  const btn = document.querySelector('.ai-tag-btn');
+  btn.textContent = transcript ? '✦ Reading transcript…' : '✦ Asking Claude…';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('/api/tag', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description: desc, transcript })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Unknown error');
+    }
+
+    const tags = data.tags;
+    const output = document.getElementById('tag-output');
+    output.innerHTML = tags.map(t => `<span class="gen-tag">${t}</span>`).join('');
+    document.getElementById('admin-tags-hidden').value = tags.join(',');
+    btn.textContent = '✦ Regenerate Tags';
+    showToast(`${tags.length} tags generated by Claude`);
+
+  } catch (err) {
+    showToast('Tag generation failed: ' + err.message);
+    btn.textContent = '✦ Generate AI Tags from Description';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function addVideo() {
+  const ytRaw = document.getElementById('admin-yt').value.trim();
+  const title = document.getElementById('admin-title').value.trim();
+  const cat = document.getElementById('admin-cat').value.trim();
+  const dur = document.getElementById('admin-dur').value.trim() || '—';
+  const desc = document.getElementById('admin-desc').value.trim();
+  const tagsRaw = document.getElementById('admin-tags-hidden').value;
+
+  if (!ytRaw || !title) { showToast('YouTube URL and title are required.'); return; }
+
+  const ytId = extractYtId(ytRaw);
+  const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : ['Bible Study'];
+
+  const transcript = document.getElementById('admin-transcript').value.trim();
+
+  const newVideo = {
+    yt_id: ytId,
+    title,
+    category: cat || 'Uncategorized',
+    date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+    duration: dur,
+    description: desc || title,
+    transcript: transcript || '',
+    tags,
+    thumb: `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`
+  };
+
+  const { data, error } = await _supabase.from('videos').insert([newVideo]).select();
+
+  if (error) {
+    showToast('Error saving video: ' + error.message);
+    return;
+  }
+
+  // Add to local cache using returned row (includes the database-generated id)
+  const saved = dbRowToVideo(data[0]);
+  videos.unshift(saved);
+
+  // Reset form
+  ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById('tag-output').innerHTML = '<span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span>';
+  document.querySelector('.ai-tag-btn').textContent = '✦ Generate AI Tags with Claude';
+
+  renderAdminList();
+  renderTopicPills();
+  renderLatest();
+  showToast('Episode published successfully');
+}
+
+function deleteVideo(id) {
+  // Find video title for the confirmation message
+  const v = videos.find(x => x.id === id);
+  const title = v ? v.title : 'this episode';
+  pendingDeleteId = id;
+  document.getElementById('delete-confirm-title').textContent = `"${title.substring(0, 60)}${title.length > 60 ? '…' : ''}"`;
+  document.getElementById('delete-modal').style.display = 'flex';
+}
+
+async function confirmDelete() {
+  if (!pendingDeleteId) return;
+  const id = pendingDeleteId;
+  pendingDeleteId = null;
+  closeDeleteModal();
+  const { error } = await _supabase.from('videos').delete().eq('id', id);
+  if (error) { showToast('Error removing video: ' + error.message); return; }
+  videos = videos.filter(v => v.id !== id);
+  renderAdminList();
+  renderTopicPills();
+  renderLatest();
+  renderGrid(videos);
+  showToast('Episode removed');
+}
+
+function closeDeleteModal() {
+  document.getElementById('delete-modal').style.display = 'none';
+  pendingDeleteId = null;
+}
+
+function renderAdminList() {
+  document.getElementById('admin-video-list').innerHTML = videos.map(v => `
+    <div class="admin-video-row">
+      <img src="${v.thumb}" alt="${v.title}" onerror="this.src='https://via.placeholder.com/80x45/F4F2EE/5090CF?text=Ep'">
+      <div class="admin-row-info">
+        <div class="admin-row-title">${v.title}</div>
+        <div class="admin-row-meta">${v.category} · ${v.date} · ${v.duration}</div>
+      </div>
+      <button class="admin-row-del" onclick="deleteVideo(${v.id})">Remove</button>
+    </div>
+  `).join('');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── ADMIN AUTH ────────────────────────────────────────────────────────────────
+const ADMIN_PASSWORD = 'watw2025'; // Change this to your own password
+let isAdmin = false;
+let konamiBuffer = [];
+// Secret key combo: type "admin" anywhere on the page to open the login modal
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  konamiBuffer.push(e.key.toLowerCase());
+  konamiBuffer = konamiBuffer.slice(-5);
+  if (konamiBuffer.join('') === 'admin') promptAdminLogin();
+});
+
+function promptAdminLogin() {
+  const modal = document.getElementById('admin-modal');
+  modal.style.display = 'flex';
+  setTimeout(() => document.getElementById('admin-pw-input').focus(), 50);
+}
+
+function closeAdminModal() {
+  document.getElementById('admin-modal').style.display = 'none';
+  document.getElementById('admin-pw-input').value = '';
+  document.getElementById('pw-error').style.display = 'none';
+}
+
+function checkAdminPassword() {
+  const val = document.getElementById('admin-pw-input').value;
+  if (val === ADMIN_PASSWORD) {
+    isAdmin = true;
+    closeAdminModal();
+    document.getElementById('nav-admin').style.display = 'inline-flex';
+    showPage('admin');
+    showToast('Welcome back, admin');
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+    document.getElementById('admin-pw-input').value = '';
+    document.getElementById('admin-pw-input').focus();
+  }
+}
+
+// Close modals on backdrop click
+document.getElementById('admin-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeAdminModal();
+});
+document.getElementById('delete-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeDeleteModal();
+});
+
+// ── SUPABASE HELPERS ─────────────────────────────────────────────────────────
+// Maps a Supabase database row to the video object shape the site uses
+function dbRowToVideo(row) {
+  return {
+    id: row.id,
+    ytId: row.yt_id,
+    title: row.title,
+    category: row.category || 'Uncategorized',
+    date: row.date || '',
+    duration: row.duration || '—',
+    description: row.description || '',
+    transcript: row.transcript || '',
+    tags: Array.isArray(row.tags) ? row.tags : [],
+    thumb: row.thumb || `https://i.ytimg.com/vi/${row.yt_id}/hqdefault.jpg`
+  };
+}
+
+async function loadVideos() {
+  // Show loading state
+  // Show skeleton cards while loading
+  const skeletonCard = `
+    <div class="skeleton-card">
+      <div class="skeleton skeleton-thumb"></div>
+      <div class="skeleton-body">
+        <div class="skeleton skeleton-line skeleton-short"></div>
+        <div class="skeleton skeleton-line skeleton-title"></div>
+        <div class="skeleton skeleton-line" style="width:90%"></div>
+        <div class="skeleton skeleton-line" style="width:75%"></div>
+        <div class="skeleton-tags">
+          <div class="skeleton skeleton-tag"></div>
+          <div class="skeleton skeleton-tag"></div>
+          <div class="skeleton skeleton-tag" style="width:80px"></div>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('video-grid').innerHTML = skeletonCard.repeat(6);
+
+  const { data, error } = await _supabase
+    .from('videos')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Supabase load error:', error);
+    document.getElementById('video-grid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;">Could not load videos. Check your Supabase config.</div>';
+    return;
+  }
+
+  videos = (data || []).map(dbRowToVideo);
+  renderLatest();
+  renderTopicPills();
+  renderGrid(videos);
+}
+
+// ── LATEST EPISODE ───────────────────────────────────────────────────────────
+function renderLatest() {
+  if (!videos.length) return;
+  const v = videos[0];
+  latestVideoId = v.id; // keep track for grid exclusion
+  const section = document.getElementById('latest-section');
+  section.classList.add('visible');
+  document.getElementById('latest-thumb-img').src = v.thumb;
+  document.getElementById('latest-thumb-img').alt = v.title;
+  document.getElementById('latest-thumb').onclick = () => showPage('player', v.id);
+  document.getElementById('latest-title').innerHTML = v.title.replace(/—/, '<em>—</em>');
+  document.getElementById('latest-meta').textContent = v.category + ' · ' + v.date + ' · ' + v.duration;
+  const fullDesc = v.description;
+  const shortDesc = fullDesc.length > 160 ? fullDesc.substring(0, 160) + '…' : fullDesc;
+  document.getElementById('latest-desc').textContent = shortDesc;
+  document.getElementById('latest-desc-full').textContent = fullDesc;
+
+  const expandBtn = document.getElementById('latest-expand-btn');
+  const fullDescEl = document.getElementById('latest-desc-full');
+  if (fullDesc.length > 160) {
+    expandBtn.style.display = 'inline-flex';
+    fullDescEl.classList.remove('open');
+    expandBtn.classList.remove('open');
+    expandBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Read More';
+  } else {
+    expandBtn.style.display = 'none';
+  }
+  document.getElementById('latest-tags').innerHTML = v.tags.slice(0, 5).map(t =>
+    `<span class="latest-tag" data-tag="${t.replace(/"/g, '&quot;')}" style="cursor:pointer">${t}</span>`).join('');
+  document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+// ── DELEGATED CLICK HANDLER ───────────────────────────────────────────────────
+// Single listener handles all interactive elements reliably on both desktop
+// and mobile touch — avoids stopPropagation issues between nested elements
+document.addEventListener('click', function(e) {
+
+  // Video grid tag click
+  const videoTag = e.target.closest('.video-tag');
+  if (videoTag && videoTag.dataset.tag) {
+    searchFromTag(videoTag.dataset.tag);
+    return;
+  }
+
+  // Video grid card click (but not if a tag was clicked)
+  const card = e.target.closest('.video-card');
+  if (card && card.dataset.id) {
+    showPage('player', parseInt(card.dataset.id));
+    return;
+  }
+
+  // Player page tag click
+  const playerTag = e.target.closest('.player-tag');
+  if (playerTag && playerTag.dataset.tag) {
+    searchFromTag(playerTag.dataset.tag);
+    return;
+  }
+
+  // Latest episode tag click
+  const latestTag = e.target.closest('.latest-tag');
+  if (latestTag && latestTag.dataset.tag) {
+    searchFromTag(latestTag.dataset.tag);
+    return;
+  }
+
+  // Topic pill click
+  const pill = e.target.closest('.topic-pill');
+  if (pill && pill.dataset.tag) {
+    filterByTag(pill.dataset.tag);
+    return;
+  }
+
+  // Related video card click
+  const related = e.target.closest('.related-card');
+  if (related && related.dataset.id) {
+    openVideo(parseInt(related.dataset.id));
+    return;
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Guard: show a clear message if keys haven't been filled in yet
+  if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
+    document.getElementById('video-grid').innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:13px;letter-spacing:0.06em;">⚙️ Supabase not yet connected.<br>Open index.html and replace YOUR_SUPABASE_URL and YOUR_SUPABASE_ANON_KEY.</div>';
+    return;
+  }
+
+  // Safe to initialize now — CDN script is guaranteed to be loaded
+  _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  loadVideos();
+});
+</script>
+</body>
+</html>
