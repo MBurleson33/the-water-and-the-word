@@ -103,6 +103,7 @@
     footer { background: #1A2028; border-color: var(--border); }
     .toast { background: var(--ink); color: var(--cream); }
     .skeleton { background: linear-gradient(90deg, #3A4048 25%, #444C54 50%, #3A4048 75%); }
+    .hero-logo { filter: brightness(0) invert(1); }
     .video-tag { border-color: #5A6470; color: #9AA4B0; }
     .topic-pill { border-color: #5A6470; color: #9AA4B0; }
     .latest-tag { border-color: rgba(244,242,238,0.35); }
@@ -163,13 +164,10 @@
     animation: fadeUp 0.7s ease both;
   }
   .hero-logo-wrap {
-    display: flex; justify-content: center; margin-bottom: 32px;
+    display: flex; justify-content: center; margin-bottom: 48px;
   }
   .hero-logo {
     height: 140px; width: auto;
-  }
-  @media (prefers-color-scheme: dark) {
-    .hero-logo { filter: brightness(0) invert(1); }
   }
   .hero-eyebrow {
     font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
