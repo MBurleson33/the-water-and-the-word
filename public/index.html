@@ -6,7 +6,7 @@
 
 <!-- ── PRIMARY SEO ── -->
 <title>The Water and the Word — Christian Prophecy Video Journal</title>
-<meta name="description" content="The Water and the Word is a prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Watch, search, and discover episodes on Revelation, Daniel, Israel, and more.">
+<meta name="description" content="The Water and the Word — Where the Spirit Leads, We Bear Witness. Faith journey videos, testimonies, and Scripture-grounded stories of the Holy Spirit moving in our time.">
 <meta name="keywords" content="Christian prophecy, biblical prophecy, end times, Revelation, Daniel, Israel, Holy Spirit, rapture, tribulation, second coming, Bible study, prophetic word, eschatology">
 <meta name="author" content="The Water and the Word">
 <meta name="robots" content="index, follow">
@@ -16,14 +16,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Water and the Word">
 <meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal">
-<meta property="og:description" content="A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Episodes on Revelation, Daniel, Israel, and more.">
+<meta property="og:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit moving in our time.">
 <meta property="og:url" content="https://thewaterandtheword.com/">
 <meta property="og:locale" content="en_US">
 
 <!-- ── TWITTER / X CARD ── -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Water and the Word — Christian Prophecy Video Journal">
-<meta name="twitter:description" content="A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit.">
+<meta name="twitter:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit.">
 <meta name="twitter:site" content="@thewaterandtheword">
 
 <!-- ── STRUCTURED DATA (Google Rich Results) ── -->
@@ -33,7 +33,7 @@
   "@type": "WebSite",
   "name": "The Water and the Word",
   "url": "https://thewaterandtheword.com/",
-  "description": "A prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit.",
+  "description": "Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit.",
   "potentialAction": {
     "@type": "SearchAction",
     "target": {
@@ -594,12 +594,61 @@
 
   /* ── FOOTER ── */
   footer {
-    border-top: 1px solid var(--border); padding: 36px 40px;
+    background: var(--deep);
+    border-top: none;
+    padding: 64px 48px 40px;
+  }
+  .footer-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(244,242,238,0.1);
+  }
+  .footer-brand {}
+  .footer-brand img {
+    height: 64px; width: auto; margin-bottom: 16px;
+    filter: brightness(0) invert(1);
+  }
+  .footer-tagline {
+    font-size: 13px; color: rgba(244,242,238,0.5);
+    line-height: 1.7; letter-spacing: 0.03em;
+    max-width: 220px;
+  }
+  .footer-col-title {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(244,242,238,0.4); margin-bottom: 16px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a {
+    font-size: 14px; color: rgba(244,242,238,0.65);
+    text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-style: italic; font-weight: 300;
+    color: rgba(244,242,238,0.55); line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .footer-verse-ref {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .footer-bottom {
+    max-width: 1400px; margin: 0 auto;
+    padding-top: 28px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--muted); }
-  .footer-logo span { color: var(--gold); }
-  .footer-copy { font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+  .footer-copy { font-size: 11px; letter-spacing: 0.08em; color: rgba(244,242,238,0.3); }
+  .footer-back-top {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(244,242,238,0.35); background: none; border: none;
+    cursor: pointer; transition: color 0.2s; font-family: 'Josefin Sans', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .footer-back-top:hover { color: var(--gold); }
+  .footer-back-top svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -679,7 +728,10 @@
     .section-label { padding: 40px 20px 0; }
     .results-header { padding: 24px 20px 0; flex-wrap: wrap; gap: 12px; }
     .form-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
+    footer { padding: 48px 20px 32px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .footer-tagline { max-width: 100%; }
     .search-wrap { margin: 0 auto 40px; }
     .topics { padding: 0 16px; }
     .hero-section { padding-bottom: 8px; }
@@ -712,7 +764,7 @@
     <div class="hero-logo-wrap">
       <img src="images/The Water and the Word Logo.png" alt="The Water and the Word" class="hero-logo">
     </div>
-    <p>Exploring Scripture, prophetic signs, and the movement of the Spirit in our time.</p>
+    <p>Where the Spirit Leads, We Bear Witness.</p>
     <div class="divider"></div>
     <div class="search-wrap">
       <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
@@ -812,7 +864,7 @@
     <div class="hero-eyebrow">The Voice Behind The Channel</div>
     <h1>About <em>The Water<br>and the Word</em></h1>
     <div class="about-body">
-      <p>Welcome. This is a place set apart for those who sense that something is stirring — in Scripture, in the world, and in the Spirit. <strong>The Water and the Word</strong> is a prophetic video journal exploring the intersection of biblical prophecy, current events, and the faithful life.</p>
+      <p>Welcome. This is a place set apart for those who sense that something is stirring — in Scripture, in the world, and in the Spirit. <strong>The Water and the Word</strong> is a faith journey video journal bearing witness to the Holy Spirit — how He leads, moves, and transforms lives.</p>
       <p>The name comes from a simple conviction: that the water of the Spirit and the Word of God are inseparable. You cannot have one without the other. This channel is committed to both — Spirit-led, Scripture-grounded.</p>
       <div class="about-verse">
         <p>"That he might sanctify and cleanse it with the washing of water by the word."</p>
@@ -877,8 +929,32 @@
 
 <!-- FOOTER -->
 <footer role="contentinfo">
-  <div class="footer-logo">The Water <span>&</span> the Word</div>
-  <div class="footer-copy">© 2026 The Water and the Word — All Rights Reserved</div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/The Water and the Word Logo.png" alt="The Water and the Word">
+      <p class="footer-tagline">Faith journey videos and testimonies of the Holy Spirit moving in our time.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('about')">About</a></li>
+        <li><a href="https://www.youtube.com/@thewaterandtheword" target="_blank" rel="noopener">YouTube Channel</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Scripture</div>
+      <p class="footer-verse">"That he might sanctify and cleanse it with the washing of water by the word."</p>
+      <p class="footer-verse-ref">— Ephesians 5:26</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 The Water and the Word — All Rights Reserved</div>
+    <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      Back to top
+    </button>
+  </div>
 </footer>
 
 <!-- ADMIN LOGIN MODAL -->
@@ -924,7 +1000,7 @@
 // ── SUPABASE CONFIG ──────────────────────────────────────────────────────────
 // Replace these two values with your own from the Supabase setup guide
 const SUPABASE_URL      = 'https://zcdhoxqsbpujpiwbbrgw.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjZGhveHFzYnB1anBpd2Jicmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTk2NTksImV4cCI6MjA4Nzc3NTY1OX0.EemlKMnlL4LjSxS3M_nGKmsYO8Xp-YsawWcyNpgbCc4';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjZGhveHFzYnB1anBpd2Jicmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTk2NTksImV4cCI6MjA4Nzc3NTY1OX0.EemlKMnlL4LjSxS3M_nGKmsYO8Xp-YsawWcyNpgbCc4';;
 
 // Client is initialized after DOM loads to ensure the CDN script is ready
 let _supabase = null;
