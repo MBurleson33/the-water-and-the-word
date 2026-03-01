@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ── PRIMARY SEO ── -->
-<title>The Water and the Word — Christian Prophecy Video Journal</title>
+<title>The Water and the Word</title>
 <meta name="description" content="The Water and the Word is a prophetic video journal exploring biblical prophecy, end times scripture, and the movement of the Holy Spirit. Watch, search, and discover episodes on Revelation, Daniel, Israel, and more.">
 <meta name="keywords" content="Christian prophecy, biblical prophecy, end times, Revelation, Daniel, Israel, Holy Spirit, rapture, tribulation, second coming, Bible study, prophetic word, eschatology">
 <meta name="author" content="The Water and the Word">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://thewaterandtheword.com/">
+<link rel="canonical" href="https://thewaterandtheword.org/">
 
 <!-- ── OPEN GRAPH (Facebook, LinkedIn, iMessage previews) ── -->
 <meta property="og:type" content="website">
@@ -126,11 +126,17 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px; font-weight: 400; letter-spacing: 0.02em; line-height: 1;
-    color: var(--ink); text-decoration: none;
-  }
-  .nav-logo span { color: var(--gold); }
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
   .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
@@ -667,7 +673,11 @@
 <a href="#main-content" style="position:absolute;left:-9999px;top:0;z-index:999;padding:8px 16px;background:var(--gold);color:var(--ink);font-size:12px;" onfocus="this.style.left='0'">Skip to content</a>
 <header role="banner">
 <nav aria-label="Main navigation">
-  <a class="nav-logo" href="#" onclick="showPage('home')">The Water <span>&</span> the Word</a>
+  <a class="nav-logo" href="#" onclick="showPage('home')" aria-label="The Water and the Word">
+  <img src="images/TheWaterandtheWordLogo.svg"
+       alt="The Water and the Word logo"
+       class="nav-logo-img">
+</a>
   <div class="nav-links">
     <a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a>
     <a href="#" onclick="showPage('about')" id="nav-about">About</a>
