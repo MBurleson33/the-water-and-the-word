@@ -508,15 +508,15 @@
   }
   .prayer-form-sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
   .prayer-input {
-    width: 100%; padding: 10px 14px; margin-bottom: 12px;
-    background: var(--cream); border: 1px solid var(--border);
-    font-family: 'Josefin Sans', sans-serif; font-size: 14px; font-weight: 300;
-    color: var(--ink); outline: none; letter-spacing: 0.03em;
+    width: 100%; padding: 12px 16px; margin-bottom: 0;
+    background: var(--white); border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 18px; font-weight: 300;
+    color: var(--ink); outline: none; letter-spacing: 0.04em;
     transition: border-color 0.2s;
   }
   .prayer-input:focus { border-color: var(--gold); }
   .prayer-input::placeholder { color: var(--muted); }
-  textarea.prayer-input { min-height: 100px; resize: vertical; }
+  textarea.prayer-input { min-height: 160px; resize: vertical; }
   .prayer-submit {
     padding: 10px 28px; background: var(--ink); color: var(--cream);
     border: none; font-family: 'Josefin Sans', sans-serif; font-size: 11px;
@@ -559,26 +559,26 @@
 
 
   /* ── PRAYER PAGE ── */
-  .prayer-page { max-width: 760px; margin: 0 auto; padding: 80px 56px 100px; }
-  .prayer-page-hero { text-align: center; margin-bottom: 56px; }
+  .prayer-page { max-width: 960px; margin: 0 auto; padding: 80px 56px 100px; }
+  .prayer-page-hero { text-align: center; margin-bottom: 64px; }
   .prayer-page-eyebrow { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
   .prayer-page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 300; line-height: 1.15; color: var(--ink); margin-bottom: 28px; }
   .prayer-page-title em { font-style: italic; color: var(--gold); }
-  .prayer-page-divider { width: 48px; height: 2px; background: linear-gradient(90deg, #2E6FB5, #3698FA); margin: 0 auto 28px; border-radius: 2px; }
-  .prayer-page-sub { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.8; max-width: 560px; margin: 0 auto; }
-  .prayer-page-verse { padding: 28px 32px; border-left: 2px solid var(--gold); background: rgba(80,144,207,0.04); margin-bottom: 40px; }
-  .prayer-page-verse p { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.7; margin-bottom: 8px; }
-  .prayer-page-verse cite { font-size: 13px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
-  .prayer-page-form { display: flex; flex-direction: column; gap: 12px; }
+  .prayer-page-divider { width: 48px; height: 2px; background: linear-gradient(90deg, #2E6FB5, #3698FA); margin: 0 auto 32px; border-radius: 2px; }
+  .prayer-page-sub { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--muted); line-height: 1.8; max-width: 680px; margin: 0 auto; }
+  .prayer-page-verse { padding: 28px 32px; border-left: 2px solid var(--gold); background: rgba(80,144,207,0.04); margin-bottom: 48px; }
+  .prayer-page-verse p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.75; margin-bottom: 10px; }
+  .prayer-page-verse cite { font-size: 14px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+  .prayer-page-form { display: flex; flex-direction: column; gap: 16px; }
   .ppf-label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-  .prayer-page-btn { align-self: flex-start; padding: 14px 36px; background: var(--ink); color: var(--cream); border: none; font-family: 'Josefin Sans', sans-serif; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+  .prayer-page-btn { align-self: flex-start; padding: 16px 40px; background: var(--ink); color: var(--cream); border: none; font-family: 'Josefin Sans', sans-serif; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
   .prayer-page-btn:hover { background: var(--gold); }
-  .prayer-page-sent { display: none; text-align: center; padding: 48px 32px; border: 1px solid var(--border); background: var(--white); }
+  .prayer-page-sent { display: none; text-align: center; padding: 64px 40px; border: 1px solid var(--border); background: var(--white); }
   .prayer-page-sent.show { display: block; animation: fadeUp 0.4s ease both; }
-  .prayer-page-sent-icon { font-size: 40px; margin-bottom: 16px; }
-  .prayer-page-sent-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--ink); margin-bottom: 8px; }
-  .prayer-page-sent-sub { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
-  .prayer-page-again { background: none; border: 1px solid var(--border); padding: 8px 20px; font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .prayer-page-sent-icon { font-size: 48px; margin-bottom: 20px; }
+  .prayer-page-sent-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--ink); margin-bottom: 12px; }
+  .prayer-page-sent-sub { font-size: 20px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+  .prayer-page-again { background: none; border: 1px solid var(--border); padding: 10px 24px; font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
   .prayer-page-again:hover { border-color: var(--gold); color: var(--gold); }
   /* ── ADMIN PAGE ── */
   .admin-page { max-width: 900px; margin: 0 auto; padding: 80px 56px; }
@@ -721,7 +721,7 @@
     .hero { padding: 48px 20px 40px; }
     .video-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
     .player-layout { grid-template-columns: 1fr; }
-    .player-page, .about-page, .admin-page, .prayer-page { padding: 80px 20px 40px; }
+    .player-page, .about-page, .admin-page, .prayer-page { padding: 80px 20px 60px; }
     .section-label { padding: 40px 20px 0; }
     .results-header { padding: 24px 20px 0; flex-wrap: wrap; gap: 12px; }
     .form-row { grid-template-columns: 1fr; }
@@ -1094,24 +1094,41 @@ let pendingDeleteId = null;
 let reactedVideos = new Set(JSON.parse(localStorage.getItem('watw_reactions') || '[]'));
 
 // ── URL / DEEP LINK ROUTING ────────────────────────────────────────────────────
+// ── URL ROUTING ───────────────────────────────────────────────────────────────
+// Videos:       ?watch=YT_ID
+// About/Prayer: #about  #prayer
+// Home:         (no hash, no watch param)
+
 function getWatchParam() {
   return new URLSearchParams(window.location.search).get('watch');
 }
 
-function setWatchParam(ytId) {
+function getHashPage() {
+  const hash = window.location.hash.replace('#', '').toLowerCase();
+  return ['about', 'prayer'].includes(hash) ? hash : null;
+}
+
+function setPageUrl(page, ytId) {
   const url = new URL(window.location.href);
-  if (ytId) {
+  if (page === 'player' && ytId) {
     url.searchParams.set('watch', ytId);
-  } else {
+    url.hash = '';
+  } else if (page === 'about' || page === 'prayer') {
     url.searchParams.delete('watch');
+    url.hash = page;
+  } else {
+    // home
+    url.searchParams.delete('watch');
+    url.hash = '';
   }
-  history.pushState({}, '', url.toString());
+  history.pushState({ page }, '', url.toString());
 }
 
 function goHome(e) {
   if (e) e.preventDefault();
-  setWatchParam(null);
-  showPage('home');
+  setPageUrl('home', null);
+  showPageDirect('home');
+  updateMeta(null);
 }
 
 // Update <meta> tags dynamically for OG/Twitter previews per episode
@@ -1150,9 +1167,13 @@ function updateMeta(v) {
 // Handle browser back/forward
 window.addEventListener('popstate', () => {
   const ytId = getWatchParam();
+  const hashPage = getHashPage();
   if (ytId) {
     const v = videos.find(x => x.ytId === ytId);
     if (v) { showPageDirect('player'); openVideo(v.id); }
+  } else if (hashPage) {
+    showPageDirect(hashPage);
+    updateMeta(null);
   } else {
     showPageDirect('home');
     updateMeta(null);
@@ -1171,8 +1192,15 @@ function showPageDirect(page) {
 
 function showPage(page, id) {
   showPageDirect(page);
-  if (page === 'player' && id) openVideo(id);
-  if (page === 'admin') renderAdminList();
+  if (page === 'player' && id) {
+    openVideo(id);
+  } else if (page === 'admin') {
+    // admin is secret — don't put it in the URL
+    renderAdminList();
+  } else {
+    setPageUrl(page, null);
+    updateMeta(null);
+  }
 }
 
 // ── TOPIC PILLS ───────────────────────────────────────────────────────────────
@@ -1915,6 +1943,16 @@ window.addEventListener('DOMContentLoaded', () => {
   _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   loadVideos();
 });
+
+// Restore page from URL on load/refresh
+// Videos are handled inside loadVideos() after data loads.
+// Hash pages (about, prayer) can be restored immediately.
+(function restorePageFromUrl() {
+  const hashPage = getHashPage();
+  if (hashPage) {
+    showPageDirect(hashPage);
+  }
+})();
 </script>
 </body>
 </html>
