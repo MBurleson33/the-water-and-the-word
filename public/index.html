@@ -629,6 +629,14 @@
     background: rgba(184,150,90,0.12); color: var(--gold);
     padding: 3px 10px; border: 1px solid rgba(184,150,90,0.3);
   }
+  .show-more-btn {
+    padding: 14px 48px; background: none; border: 1px solid var(--border);
+    font-family: 'Josefin Sans', sans-serif; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .show-more-btn:hover { border-color: var(--gold); color: var(--gold); }
+
   .submit-btn {
     width: 100%; padding: 16px; background: var(--ink); color: var(--cream);
     border: none; font-family: 'Josefin Sans', sans-serif;
@@ -839,6 +847,9 @@
   </div>
 
   <div class="video-grid" id="video-grid"></div>
+  <div id="show-more-wrap" style="display:none;text-align:center;padding:40px 0 60px;">
+    <button class="show-more-btn" id="show-more-btn" onclick="showMoreVideos()">Show More Episodes</button>
+  </div>
 </div>
 
 <!-- ══ VIDEO PLAYER PAGE ══ -->
@@ -1108,6 +1119,9 @@ let currentVideoId = null;
 let activeTag = null;
 let latestVideoId = null;
 let pendingDeleteId = null;
+const GRID_PAGE_SIZE = 8;
+let gridPage = 1;
+let currentGridList = [];
 let reactedVideos = new Set(JSON.parse(localStorage.getItem('watw_reactions') || '[]'));
 
 // ── URL / DEEP LINK ROUTING ────────────────────────────────────────────────────
@@ -1331,7 +1345,14 @@ function applySortAndRender(list) {
   }
   // When not searching, exclude the latest video (shown in hero)
   const displayList = isSearching ? toRender : toRender.filter(v => v.id !== latestVideoId);
+  gridPage = 1;
+  currentGridList = displayList;
   renderGrid(displayList, isSearching);
+}
+
+function showMoreVideos() {
+  gridPage++;
+  renderGrid(currentGridList, document.getElementById('search-input').value.trim().length > 0);
 }
 
 function renderGrid(list, isSearching) {
@@ -1355,7 +1376,15 @@ function renderGrid(list, isSearching) {
     return;
   }
 
-  grid.innerHTML = list.map(v => `
+  const showMoreWrap = document.getElementById('show-more-wrap');
+  const showMoreBtn = document.getElementById('show-more-btn');
+
+  // When searching or tagging, show all results — pagination only for default browse
+  const paginate = !isSearching;
+  const visibleList = paginate ? list.slice(0, gridPage * GRID_PAGE_SIZE) : list;
+  const remaining = paginate ? list.length - visibleList.length : 0;
+
+  grid.innerHTML = visibleList.map(v => `
     <div class="video-card" data-id="${v.id}">
       <div class="video-thumb">
         <img src="${v.thumb}" alt="${escAttr(v.title)} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/F4F2EE/5090CF?text=Episode'">
@@ -1370,6 +1399,13 @@ function renderGrid(list, isSearching) {
       <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${tagString(t).replace(/"/g,'&quot;')}">${escHtml(tagString(t))}</span>`).join('')}</div>
     </div>
   `).join('');
+
+  if (remaining > 0) {
+    showMoreWrap.style.display = 'block';
+    showMoreBtn.textContent = `Show More Episodes (${remaining} remaining)`;
+  } else {
+    showMoreWrap.style.display = 'none';
+  }
 }
 
 // ── VIDEO PLAYER ──────────────────────────────────────────────────────────────
