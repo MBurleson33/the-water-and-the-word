@@ -1706,13 +1706,13 @@ async function addVideo() {
   const saved = dbRowToVideo(data[0]);
   videos.unshift(saved);
 
-  ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => {
+    ['admin-yt','admin-title','admin-cat','admin-dur','admin-desc','admin-transcript','admin-tags-hidden'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
   document.getElementById('tag-output').innerHTML = '<span style="font-size:11px;color:var(--muted)">Tags will appear here after generation…</span>';
   document.querySelector('.ai-tag-btn').textContent = '✦ Generate AI Tags with Claude';
-
   renderAdminList(); renderTopicPills(); renderLatest();
+  applySortAndRender();
   showToast('Episode published successfully');
 }
 
