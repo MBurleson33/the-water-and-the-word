@@ -1660,7 +1660,7 @@ async function generateTags() {
     const response = await fetch('/api/tag', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, description: desc, transcript })
+      body: JSON.stringify({ title, description: desc, transcript, category: document.getElementById('admin-cat').value.trim() })
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Unknown error');
