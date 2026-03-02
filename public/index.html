@@ -228,6 +228,12 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
   }
   .latest-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
+  .latest-thumb.playing { cursor: default; }
+  .latest-thumb.playing img,
+  .latest-thumb.playing .latest-play { display: none; }
+  .latest-inline-player { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .latest-thumb.playing .latest-inline-player { display: block; }
+  .latest-inline-player iframe { width: 100%; height: 100%; border: none; display: block; }
   .latest-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
   .latest-thumb:hover img { transform: scale(1.04); }
   .latest-play {
@@ -792,6 +798,7 @@
         <div class="latest-play">
           <div class="latest-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
+        <div class="latest-inline-player" id="latest-inline-player"></div>
       </div>
       <div class="latest-info">
         <div class="latest-label">✦ Latest Episode</div>
@@ -1108,6 +1115,10 @@ let reactedVideos = new Set(JSON.parse(localStorage.getItem('watw_reactions') ||
 
 function getWatchParam() {
   return new URLSearchParams(window.location.search).get('watch');
+}
+
+function setWatchParam(ytId) {
+  setPageUrl('player', ytId);
 }
 
 function getHashPage() {
@@ -1551,6 +1562,16 @@ function toggleTranscript() {
 }
 
 // ── LATEST EPISODE ────────────────────────────────────────────────────────────
+function playLatestInline(v) {
+  const thumb = document.getElementById('latest-thumb');
+  const player = document.getElementById('latest-inline-player');
+  player.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&playsinline=1" allow="autoplay; fullscreen; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen playsinline></iframe>`;
+  thumb.classList.add('playing');
+  // Update Watch Now button to go to full player page instead
+  document.getElementById('latest-watch-btn').textContent = 'Open Full Player';
+  document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
+}
+
 function renderLatest() {
   if (!videos.length) return;
   const v = videos[0];
@@ -1559,7 +1580,7 @@ function renderLatest() {
   section.classList.add('visible');
   document.getElementById('latest-thumb-img').src = v.thumb;
   document.getElementById('latest-thumb-img').alt = v.title;
-  document.getElementById('latest-thumb').onclick = () => showPage('player', v.id);
+  document.getElementById('latest-thumb').onclick = () => playLatestInline(v);
   document.getElementById('latest-title').innerHTML = v.title.replace(/—/, '<em>—</em>');
   document.getElementById('latest-meta').textContent = `${v.category} · ${v.date} · ${v.duration}`;
 
@@ -1580,7 +1601,7 @@ function renderLatest() {
 
   document.getElementById('latest-tags').innerHTML = v.tags.slice(0, 5)
     .map(t => `<span class="latest-tag" data-tag="${t.replace(/"/g,'&quot;')}" style="cursor:pointer">${escHtml(t)}</span>`).join('');
-  document.getElementById('latest-watch-btn').onclick = () => showPage('player', v.id);
+  document.getElementById('latest-watch-btn').onclick = () => playLatestInline(v);
 }
 
 function toggleLatestDesc() {
