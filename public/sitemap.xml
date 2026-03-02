@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
+  <url>
+    <loc>https://thewaterandtheword.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://thewaterandtheword.com/#about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Prayer -->
+  <url>
+    <loc>https://thewaterandtheword.com/#prayer</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!--
+    VIDEO EPISODES
+    Add one <url> block per episode below, using the ?watch=YT_ID format.
+    Example:
+
+  <url>
+    <loc>https://thewaterandtheword.com/?watch=YOUR_YOUTUBE_ID</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+    You can get all your YouTube IDs from Supabase:
+    Dashboard → Table Editor → videos → copy each yt_id value
+  -->
+
+</urlset>
