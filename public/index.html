@@ -57,7 +57,6 @@
 <link rel="preconnect" href="https://i.ytimg.com">
 <link rel="dns-prefetch" href="https://www.youtube.com">
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-<script src="https://www.youtube.com/iframe_api"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -93,7 +92,8 @@
     nav { background: rgba(38,45,51,0.96); }
     .nav-links a { color: #8A94A0 !important; }
     .nav-tagline { color: rgba(244,242,238,0.45) !important; }
-    .nav-links a:hover, .nav-links a.active { color: #E8E6E2 !important; }
+    .nav-links a:hover { color: #E8E6E2 !important; }
+    .nav-links a.active { color: var(--gold) !important; }
     .hero-section { background: radial-gradient(ellipse at 50% 0%, #363D44 0%, #262D33 65%); }
     .video-card { background: #363D44; }
     .search-wrap input { background: #363D44; }
@@ -142,7 +142,8 @@
     font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
     transition: color 0.2s;
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--gold); }
   .nav-right { display: flex; align-items: center; }
   .nav-tagline {
     font-family: 'Cormorant Garamond', serif;
@@ -425,11 +426,9 @@
     position: relative; width: 100%; padding-bottom: 56.25%;
     height: 0; background: #000; margin-bottom: 28px;
   }
-  .player-embed iframe,
-  .player-embed > div,
-  .player-embed #yt-player-div {
+  .player-embed iframe {
     position: absolute; top: 0; left: 0;
-    width: 100% !important; height: 100% !important; border: none; display: block;
+    width: 100%; height: 100%; border: none; display: block;
   }
   .player-category { font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
   .player-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; line-height: 1.2; margin-bottom: 16px; }
@@ -439,21 +438,9 @@
   .player-tag {
     font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--muted); border: 1px solid var(--border); padding: 4px 12px;
-    cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px;
+    cursor: pointer; transition: all 0.2s;
   }
   .player-tag:hover { border-color: var(--gold); color: var(--gold); }
-  .player-tag.has-timestamp { border-color: rgba(46,111,181,0.35); }
-  .player-tag.has-timestamp:hover { background: rgba(46,111,181,0.06); }
-  .tag-clock { width: 10px; height: 10px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; opacity: 0.5; }
-  .tag-ts-label { font-size: 10px; opacity: 0.55; letter-spacing: 0.05em; }
-  .seek-toast {
-    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(8px);
-    background: var(--deep); color: var(--cream); padding: 8px 20px;
-    font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.14em;
-    text-transform: uppercase; opacity: 0; transition: opacity 0.2s, transform 0.2s;
-    pointer-events: none; z-index: 999; white-space: nowrap;
-  }
-  .seek-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* ── SHARE ROW ── */
   .player-share-row {
@@ -642,7 +629,6 @@
     background: rgba(184,150,90,0.12); color: var(--gold);
     padding: 3px 10px; border: 1px solid rgba(184,150,90,0.3);
   }
-  .tag-output .gen-tag.gen-tag-ts { border-color: rgba(46,111,181,0.5); background: rgba(46,111,181,0.1); }
   .submit-btn {
     width: 100%; padding: 16px; background: var(--ink); color: var(--cream);
     border: none; font-family: 'Josefin Sans', sans-serif;
@@ -778,6 +764,7 @@
   <div class="nav-links">
     <a href="/" onclick="goHome(event)" class="active" id="nav-home">Home</a>
     <a href="javascript:void(0)" onclick="showPage('about')" id="nav-about">About</a>
+    <a href="javascript:void(0)" onclick="scrollToVideos()" id="nav-videos">All Videos</a>
     <a href="javascript:void(0)" onclick="showPage('prayer')" id="nav-prayer">Prayer</a>
   </div>
   <div class="nav-right">
@@ -1042,7 +1029,6 @@
 </div>
 
 </main>
-<div class="seek-toast" id="seek-toast"></div>
 
 <!-- FOOTER -->
 <footer role="contentinfo">
@@ -1166,6 +1152,18 @@ function goHome(e) {
   updateMeta(null);
 }
 
+function scrollToVideos() {
+  const isHome = document.getElementById('page-home').classList.contains('active');
+  if (!isHome) {
+    setPageUrl('home', null);
+    showPageDirect('home');
+    updateMeta(null);
+    setTimeout(() => document.getElementById('section-label').scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  } else {
+    document.getElementById('section-label').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 // Update <meta> tags dynamically for OG/Twitter previews per episode
 function updateMeta(v) {
   if (!v) {
@@ -1228,10 +1226,7 @@ function showPageDirect(page) {
     watchBtn.innerHTML = 'Watch Now <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#FFFFFF;margin-left:2px;vertical-align:middle;"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
   }
 
-  if (page !== 'player') {
-    if (ytPlayer && typeof ytPlayer.destroy === 'function') { try { ytPlayer.destroy(); } catch(e) {} ytPlayer = null; ytPlayerReady = false; }
-    document.getElementById('player-embed').innerHTML = '';
-  }
+  if (page !== 'player') document.getElementById('player-embed').innerHTML = '';
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
@@ -1378,23 +1373,6 @@ function renderGrid(list, isSearching) {
 }
 
 // ── VIDEO PLAYER ──────────────────────────────────────────────────────────────
-let ytPlayer = null;
-let ytPlayerReady = false;
-
-function onYouTubeIframeAPIReady() { /* API loaded — player created on demand */ }
-
-function seekToTag(start, labelOrEl) {
-  if (ytPlayer && ytPlayerReady && typeof ytPlayer.seekTo === 'function') {
-    ytPlayer.seekTo(start, true);
-    ytPlayer.playVideo();
-    const label = typeof labelOrEl === 'string' ? labelOrEl : (labelOrEl && labelOrEl.dataset ? labelOrEl.dataset.tag : '');
-    const toast = document.getElementById('seek-toast');
-    toast.textContent = 'Jumping to ' + formatTime(start) + (label ? ' \u2014 ' + label : '');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
-  }
-}
-
 function openVideo(id) {
   const v = videos.find(x => x.id === id);
   if (!v) return;
@@ -1404,34 +1382,16 @@ function openVideo(id) {
   setWatchParam(v.ytId);
   updateMeta(v);
 
-  // Build player via YT IFrame API so we can seekTo on tag clicks
-  const embedDiv = document.getElementById('player-embed');
-  embedDiv.innerHTML = '<div id="yt-player-div"></div>';
-  ytPlayerReady = false;
-  if (ytPlayer && typeof ytPlayer.destroy === 'function') { try { ytPlayer.destroy(); } catch(e) {} }
-  ytPlayer = new YT.Player('yt-player-div', {
-    videoId: v.ytId,
-    playerVars: { autoplay: 1, rel: 0, modestbranding: 1, showinfo: 0, iv_load_policy: 3, color: 'white', playsinline: 1 },
-    events: { onReady: function(e) { ytPlayerReady = true; e.target.playVideo(); } }
-  });
+  document.getElementById('player-embed').innerHTML =
+    `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&color=white&playsinline=1" allow="autoplay; fullscreen; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen playsinline></iframe>`;
 
   document.getElementById('player-category').textContent = v.category;
   document.getElementById('player-title').textContent = v.title;
   document.getElementById('player-date').textContent = v.date;
   document.getElementById('player-desc').textContent = v.description;
 
-  // Render tags — timestamped ones show a clock icon and seek on click
-  const clockSvg = '<svg class="tag-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>';
-  document.getElementById('player-tags').innerHTML = v.tags.map(t => {
-    const label = tagString(t);
-    const start = (typeof t === 'object' && t.start !== null && t.start !== undefined) ? t.start : null;
-    const dataTag = label.replace(/"/g, '&quot;');
-    if (start !== null) {
-      return '<span class="player-tag has-timestamp" data-tag="' + dataTag + '" onclick="seekToTag(' + start + ',this.dataset.tag)" title="Jump to ' + formatTime(start) + '">'
-        + clockSvg + escHtml(label) + '<span class="tag-ts-label">' + formatTime(start) + '</span></span>';
-    }
-    return '<span class="player-tag" data-tag="' + dataTag + '">' + escHtml(label) + '</span>';
-  }).join('');
+  document.getElementById('player-tags').innerHTML = v.tags
+    .map(t => `<span class="player-tag" data-tag="${tagString(t).replace(/"/g,'&quot;')}">${escHtml(tagString(t))}</span>`).join('');
 
   // Transcript
   const transcriptSection = document.getElementById('transcript-section');
@@ -1742,8 +1702,7 @@ async function generateTags() {
   if (!desc && !title && !transcript) { showToast('Please enter a title, description, or transcript first.'); return; }
 
   const btn = document.querySelector('.ai-tag-btn');
-  const hasTC = transcript && /(?:\[)?\d{1,2}:\d{2}(?::\d{2})?(?:\])?/.test(transcript);
-  btn.textContent = hasTC ? '✦ Mapping timestamps…' : transcript ? '✦ Reading transcript…' : '✦ Asking Claude…';
+  btn.textContent = transcript ? '✦ Reading transcript…' : '✦ Asking Claude…';
   btn.disabled = true;
 
   try {
@@ -1754,21 +1713,16 @@ async function generateTags() {
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Unknown error');
-    // Normalize response — API always returns [{tag,start}] now
-    const richTags = (data.tags || []).map(t =>
-      typeof t === 'string' ? { tag: normalizeTagLabel(t) || t, start: null } : { tag: normalizeTagLabel(t.tag) || t.tag, start: t.start ?? null }
+    const rawTags = (data.tags || []).map(t =>
+      typeof t === 'string' ? normalizeTagLabel(t) || t : normalizeTagLabel(t.tag) || t.tag
     );
     const seen = new Set();
-    const dedupedTags = richTags.filter(t => { const k = (t.tag||'').toLowerCase(); if (!k||seen.has(k)) return false; seen.add(k); return true; });
+    const tags = rawTags.filter(t => { const k = t.toLowerCase(); if (!k||seen.has(k)) return false; seen.add(k); return true; });
     const output = document.getElementById('tag-output');
-    const hasTimecodes = data.hasTimecodes;
-    output.innerHTML = dedupedTags.map(t => {
-      const tsHtml = (t.start !== null && t.start !== undefined) ? ' <span style="font-size:9px;opacity:0.6;">@' + formatTime(t.start) + '</span>' : '';
-      return '<span class="gen-tag' + (t.start !== null && t.start !== undefined ? ' gen-tag-ts' : '') + '">' + escHtml(t.tag) + tsHtml + '</span>';
-    }).join('');
-    document.getElementById('admin-tags-hidden').value = JSON.stringify(dedupedTags);
-    btn.textContent = hasTimecodes ? '✦ Regenerate Tags (with timestamps)' : '✦ Regenerate Tags';
-    showToast(`${dedupedTags.length} tags generated by Claude`);
+    output.innerHTML = tags.map(t => '<span class="gen-tag">' + escHtml(t) + '</span>').join('');
+    document.getElementById('admin-tags-hidden').value = tags.join(',');
+    btn.textContent = '✦ Regenerate Tags';
+    showToast(`${tags.length} tags generated by Claude`);
   } catch (err) {
     showToast('Tag generation failed: ' + err.message);
     btn.textContent = '✦ Generate AI Tags with Claude';
@@ -1789,13 +1743,7 @@ async function addVideo() {
   if (!ytRaw || !title) { showToast('YouTube URL and title are required.'); return; }
 
   const ytId = extractYtId(ytRaw);
-  let tags;
-  if (tagsRaw) {
-    try {
-      const p = JSON.parse(tagsRaw);
-      tags = Array.isArray(p) ? p : tagsRaw.split(',').map(t => ({ tag: t.trim(), start: null })).filter(t => t.tag);
-    } catch(e) { tags = tagsRaw.split(',').map(t => ({ tag: t.trim(), start: null })).filter(t => t.tag); }
-  } else { tags = [{ tag: 'Bible Study', start: null }]; }
+  const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim()).filter(Boolean) : ['Bible Study'];
 
   const newVideo = {
     yt_id: ytId, title,
@@ -1898,6 +1846,7 @@ async function loadPrayerInbox(append = false) {
     const source = p.episode_title ? p.episode_title : 'General Prayer Page';
     const isRead = !!p.read_at;
     const markBtn = isRead ? '' : '<button onclick="markPrayerRead(' + p.id + ')" style="background:none;border:none;font-family:\'Josefin Sans\',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color=\'var(--gold)\'" onmouseout="this.style.color=\'var(--muted)\'">Mark as read</button>';
+    const dismissBtn = '<button onclick="dismissPrayer(' + p.id + ')" style="background:none;border:none;font-family:\'Josefin Sans\',sans-serif;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:0;margin-left:12px;transition:color 0.2s;" onmouseover="this.style.color=\'var(--ink)\'" onmouseout="this.style.color=\'var(--muted)\'">Dismiss</button>';
     return '<div class="prayer-card' + (isRead ? ' read' : '') + '" data-prayer-id="' + p.id + '">'
       + '<div class="prayer-card-dot"></div>'
       + '<div class="prayer-card-body">'
@@ -1907,6 +1856,7 @@ async function loadPrayerInbox(append = false) {
       + '<span>' + date + ' at ' + time + '</span>'
       + '<span class="prayer-card-source">\u2756 ' + escHtml(source) + '</span>'
       + markBtn
+      + dismissBtn
       + '</div></div></div>';
   }).join('');
 
@@ -1919,19 +1869,35 @@ async function loadMorePrayers() {
 }
 
 async function markPrayerRead(id) {
-  await _supabase.from('prayers').update({ read_at: new Date().toISOString() }).eq('id', id);
+  const { error } = await _supabase.from('prayers').update({ read_at: new Date().toISOString() }).eq('id', id);
+  if (error) { showToast('Could not mark as read: ' + error.message); return; }
   const card = document.querySelector('.prayer-card[data-prayer-id="' + id + '"]');
   if (card) {
     card.classList.add('read');
-    const btn = card.querySelector('button');
+    const btn = card.querySelector('button[onclick*="markPrayerRead"]');
     if (btn) btn.remove();
-    card.querySelector('.prayer-card-dot').style.background = 'var(--border)';
+    const dot = card.querySelector('.prayer-card-dot');
+    if (dot) dot.style.background = 'var(--border)';
     const p = allPrayers.find(x => x.id === id);
     if (p) p.read_at = new Date().toISOString();
     const unread = allPrayers.filter(x => !x.read_at).length;
     const badge = document.getElementById('prayer-badge');
     badge.textContent = unread;
     badge.style.display = unread > 0 ? 'inline' : 'none';
+  }
+}
+
+function dismissPrayer(id) {
+  // Remove from inbox view only — stays in database
+  allPrayers = allPrayers.filter(x => x.id !== id);
+  const card = document.querySelector('.prayer-card[data-prayer-id="' + id + '"]');
+  if (card) card.remove();
+  const unread = allPrayers.filter(x => !x.read_at).length;
+  const badge = document.getElementById('prayer-badge');
+  badge.textContent = unread;
+  badge.style.display = unread > 0 ? 'inline' : 'none';
+  if (allPrayers.length === 0) {
+    document.getElementById('prayer-inbox-list').innerHTML = '<p class="prayer-inbox-empty">No prayer requests yet — they will appear here.</p>';
   }
 }
 
@@ -1986,19 +1952,9 @@ document.getElementById('admin-modal').addEventListener('click', e => { if (e.ta
 document.getElementById('delete-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
 
 // ── TAG HELPERS ───────────────────────────────────────────────────────────────
-// Tags are stored as [{tag: string, start: number|null}]
-// tagString() extracts just the label — safe to call on both old strings and new objects
 function tagString(t) {
   if (!t) return '';
   return typeof t === 'string' ? t : (t.tag || '');
-}
-
-function formatTime(s) {
-  if (s === null || s === undefined) return '';
-  s = Math.floor(s);
-  const m = Math.floor(s / 60), h = Math.floor(m / 60);
-  if (h > 0) return h + ':' + String(m % 60).padStart(2,'0') + ':' + String(s % 60).padStart(2,'0');
-  return m + ':' + String(s % 60).padStart(2,'0');
 }
 
 // Canonical forms — add more as your library grows
@@ -2030,17 +1986,14 @@ function normalizeTagLabel(raw) {
 // ── SUPABASE ──────────────────────────────────────────────────────────────────
 function dbRowToVideo(row) {
   const rawTags = Array.isArray(row.tags) ? row.tags : [];
-  // Handle both old text[] and new jsonb [{tag,start}] format
-  const richTags = rawTags.map(t => {
-    if (typeof t === 'string') return { tag: normalizeTagLabel(t) || t, start: null };
-    if (t && typeof t === 'object') return { tag: normalizeTagLabel(t.tag) || t.tag || '', start: t.start ?? null };
-    return null;
-  }).filter(t => t && t.tag);
-
-  // Deduplicate by normalized label
+  // Handle both text[] strings and jsonb {tag,start} objects gracefully
   const seen = new Set();
-  const tags = richTags.filter(t => {
-    const k = t.tag.toLowerCase();
+  const tags = rawTags.map(t => {
+    const label = typeof t === 'string' ? t : (t && t.tag ? t.tag : '');
+    return normalizeTagLabel(label) || label;
+  }).filter(t => {
+    if (!t) return false;
+    const k = t.toLowerCase();
     if (seen.has(k)) return false;
     seen.add(k); return true;
   });
