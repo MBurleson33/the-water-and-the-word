@@ -651,8 +651,9 @@
   .admin-row-info { flex: 1; }
   .admin-row-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; margin-bottom: 2px; }
   .admin-row-meta { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
-  .admin-row-del { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--border); padding: 4px 10px; cursor: pointer; transition: all 0.2s; }
+  .admin-row-del, .admin-row-edit { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--border); padding: 4px 10px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
   .admin-row-del:hover { border-color: #c0392b; color: #c0392b; }
+  .admin-row-edit:hover { border-color: var(--gold); color: var(--gold); }
 
   /* ── ADMIN TABS ── */
   .admin-tabs { display: flex; gap: 0; margin-bottom: 40px; border-bottom: 1px solid var(--border); }
@@ -1092,6 +1093,43 @@
 </div>
 
 <!-- DELETE CONFIRMATION MODAL -->
+<div id="edit-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(26,24,20,0.7);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 20px;">
+  <div style="background:var(--white);border:1px solid var(--border);padding:40px;max-width:640px;width:100%;margin:auto;">
+    <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Edit Episode</div>
+    <input type="hidden" id="edit-video-id">
+    <div class="form-group">
+      <label>Episode Title</label>
+      <input type="text" id="edit-title">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Category / Series</label>
+        <input type="text" id="edit-cat">
+      </div>
+      <div class="form-group">
+        <label>Duration</label>
+        <input type="text" id="edit-dur">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="edit-desc" style="min-height:120px;"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Tags <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">comma separated</span></label>
+      <input type="text" id="edit-tags" placeholder="End Times, Revelation 13, The Antichrist...">
+    </div>
+    <div class="form-group">
+      <label>Transcript <span style="font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:none;font-family:'Josefin Sans',sans-serif;">optional</span></label>
+      <textarea id="edit-transcript" style="min-height:120px;"></textarea>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:8px;">
+      <button onclick="closeEditModal()" style="flex:1;padding:14px;background:none;border:1px solid var(--border);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.2s;">Cancel</button>
+      <button onclick="saveVideoEdit()" id="edit-save-btn" style="flex:2;padding:14px;background:var(--ink);border:1px solid var(--ink);font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--cream);cursor:pointer;transition:background 0.2s;">Save Changes</button>
+    </div>
+  </div>
+</div>
+
 <div id="delete-modal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(26,24,20,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
   <div style="background:var(--white);border:1px solid var(--border);padding:40px;max-width:440px;width:90%;text-align:center;">
     <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Confirm Delete</div>
@@ -1840,6 +1878,66 @@ function switchAdminTab(tab, btn) {
   if (tab === 'prayers') loadPrayerInbox();
 }
 
+
+// ── EDIT VIDEO ────────────────────────────────────────────────────────────────
+function openEditModal(id) {
+  const v = videos.find(x => x.id === id);
+  if (!v) return;
+  document.getElementById('edit-video-id').value = id;
+  document.getElementById('edit-title').value = v.title;
+  document.getElementById('edit-cat').value = v.category;
+  document.getElementById('edit-dur').value = v.duration === '—' ? '' : v.duration;
+  document.getElementById('edit-desc').value = v.description;
+  document.getElementById('edit-tags').value = v.tags.map(tagString).join(', ');
+  document.getElementById('edit-transcript').value = v.transcript || '';
+  document.getElementById('edit-modal').style.display = 'flex';
+  setTimeout(() => document.getElementById('edit-title').focus(), 50);
+}
+
+function closeEditModal() {
+  document.getElementById('edit-modal').style.display = 'none';
+}
+
+async function saveVideoEdit() {
+  const id = parseInt(document.getElementById('edit-video-id').value);
+  const title = document.getElementById('edit-title').value.trim();
+  const cat = document.getElementById('edit-cat').value.trim();
+  const dur = document.getElementById('edit-dur').value.trim() || '—';
+  const desc = document.getElementById('edit-desc').value.trim();
+  const tagsRaw = document.getElementById('edit-tags').value.trim();
+  const transcript = document.getElementById('edit-transcript').value.trim();
+
+  if (!title) { showToast('Title is required.'); return; }
+
+  const tags = tagsRaw
+    ? tagsRaw.split(',').map(t => normalizeTagLabel(t.trim())).filter(Boolean)
+    : [];
+
+  const btn = document.getElementById('edit-save-btn');
+  btn.textContent = 'Saving…'; btn.disabled = true;
+
+  const { error } = await _supabase.from('videos').update({
+    title, category: cat || 'Uncategorized',
+    duration: dur, description: desc, tags, transcript
+  }).eq('id', id);
+
+  btn.textContent = 'Save Changes'; btn.disabled = false;
+
+  if (error) { showToast('Error saving: ' + error.message); return; }
+
+  // Update in-memory video
+  const v = videos.find(x => x.id === id);
+  if (v) {
+    v.title = title; v.category = cat || 'Uncategorized';
+    v.duration = dur; v.description = desc;
+    v.transcript = transcript; v.tags = tags;
+  }
+
+  closeEditModal();
+  renderAdminList(); renderTopicPills(); renderLatest(); applySortAndRender();
+  showToast('Episode updated');
+}
+
 // ── PRAYER INBOX ──────────────────────────────────────────────────────────────
 let prayerPage = 0;
 const PRAYERS_PER_PAGE = 20;
@@ -1945,7 +2043,10 @@ function renderAdminList() {
         <div class="admin-row-title">${escHtml(v.title)}</div>
         <div class="admin-row-meta">${escHtml(v.category)} · ${v.date} · ${v.duration}</div>
       </div>
-      <button class="admin-row-del" onclick="deleteVideo(${v.id})">Remove</button>
+      <div style="display:flex;gap:8px;">
+        <button class="admin-row-edit" onclick="openEditModal(${v.id})">Edit</button>
+        <button class="admin-row-del" onclick="deleteVideo(${v.id})">Remove</button>
+      </div>
     </div>
   `).join('');
 }
@@ -1985,6 +2086,7 @@ function checkAdminPassword() {
 }
 
 document.getElementById('admin-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAdminModal(); });
+document.getElementById('edit-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditModal(); });
 document.getElementById('delete-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
 
 // ── TAG HELPERS ───────────────────────────────────────────────────────────────
