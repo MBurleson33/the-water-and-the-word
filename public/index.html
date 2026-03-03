@@ -15,7 +15,7 @@
 <!-- ── OPEN GRAPH ── -->
 <meta property="og:type" content="website" id="og-type">
 <meta property="og:site_name" content="The Water and the Word">
-<meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal" id="og-title">
+<meta property="og:title" content="The Water and the Word" id="og-title">
 <meta property="og:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit moving in our time." id="og-desc">
 <meta property="og:url" content="https://thewaterandtheword.com/" id="og-url">
 <meta property="og:image" content="" id="og-image">
@@ -1425,7 +1425,7 @@ function renderGrid(list, isSearching) {
   grid.innerHTML = visibleList.map(v => `
     <div class="video-card" data-id="${v.id}">
       <div class="video-thumb">
-        <img src="${v.thumb}" alt="${escAttr(v.title)} — The Water and the Word" loading="lazy" onerror="this.src='https://via.placeholder.com/480x270/F4F2EE/5090CF?text=Episode'">
+        <img src="${v.thumb}" alt="${escAttr(v.title)} — The Water and the Word" loading="lazy" onerror="thumbFallback(this)">
         <div class="play-overlay">
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
@@ -1512,7 +1512,7 @@ function openVideo(id) {
   document.getElementById('related-list').innerHTML = related.map(r => `
     <div class="related-card" data-id="${r.id}">
       <div class="related-thumb">
-        <img src="${r.thumb}" alt="${escAttr(r.title)}" onerror="this.src='https://via.placeholder.com/160x90/F4F2EE/5090CF?text=Ep'">
+        <img src="${r.thumb}" alt="${escAttr(r.title)}" onerror="thumbFallback(this)">
       </div>
       <div class="related-info">
         <div class="related-title">${escHtml(r.title)}</div>
@@ -1824,7 +1824,7 @@ async function addVideo() {
     category: cat || 'Uncategorized',
     date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
     duration: dur, description: desc || title, transcript: transcript || '', tags,
-    thumb: `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`
+    thumb: bestThumb(ytId)
   };
 
   const { data, error } = await _supabase.from('videos').insert([newVideo]).select();
@@ -2089,6 +2089,21 @@ document.getElementById('admin-modal').addEventListener('click', e => { if (e.ta
 document.getElementById('edit-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditModal(); });
 document.getElementById('delete-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
 
+// ── THUMBNAIL HELPERS ─────────────────────────────────────────────────────────
+// Quality ladder: maxresdefault 1280px → sddefault 640px → hqdefault 480px
+function thumbFallback(img) {
+  const src = img.src;
+  if (src.includes('maxresdefault')) {
+    img.src = src.replace('maxresdefault', 'sddefault');
+  } else if (src.includes('sddefault')) {
+    img.src = src.replace('sddefault', 'hqdefault');
+  }
+  // hqdefault failing = video unavailable, stop silently
+}
+function bestThumb(ytId) {
+  return 'https://i.ytimg.com/vi/' + ytId + '/maxresdefault.jpg';
+}
+
 // ── TAG HELPERS ───────────────────────────────────────────────────────────────
 function tagString(t) {
   if (!t) return '';
@@ -2142,7 +2157,7 @@ function dbRowToVideo(row) {
     date: row.date || '', duration: row.duration || '—',
     description: row.description || '', transcript: row.transcript || '',
     tags,
-    thumb: row.thumb || `https://i.ytimg.com/vi/${row.yt_id}/hqdefault.jpg`
+    thumb: (row.thumb ? row.thumb.replace('hqdefault', 'maxresdefault').replace('sddefault', 'maxresdefault') : bestThumb(row.yt_id))
   };
 }
 
