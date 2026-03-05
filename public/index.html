@@ -168,6 +168,11 @@
   }
   .hero-logo-wrap { display: flex; justify-content: center; margin-bottom: 64px; }
   .hero-logo { height: 140px; width: auto; }
+  .hero-logo-dark { display: none; }
+  @media (prefers-color-scheme: dark) {
+    .hero-logo-light { display: none; }
+    .hero-logo-dark { display: block; }
+  }
   .hero p {
     font-size: 19px; color: var(--muted); max-width: 680px; margin: 0 auto 36px;
     letter-spacing: 0.03em;
@@ -832,10 +837,8 @@
   <div class="hero-section">
     <div class="hero">
       <div class="hero-logo-wrap">
-        <picture>
-          <source srcset="images/TheWaterandtheWordLogo - White.svg" media="(prefers-color-scheme: dark)">
-          <img src="images/TheWaterandtheWordLogo.svg" alt="The Water and the Word" class="hero-logo">
-        </picture>
+        <img src="images/TheWaterandtheWordLogo.svg" alt="The Water and the Word" class="hero-logo hero-logo-light">
+        <img src="images/TheWaterandtheWordLogo - White.svg" alt="The Water and the Word" class="hero-logo hero-logo-dark">
       </div>
       <div class="search-wrap">
         <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
@@ -1123,7 +1126,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 The Water and the Word — All Rights Reserved</div>
+    <div class="footer-copy">© <span id="footer-year"></span> The Water and the Word — All Rights Reserved</div>
     <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
       <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
       Back to top
@@ -2239,6 +2242,7 @@ function getAdminToken() {
   return sessionStorage.getItem('watw_admin_token');
 }
 
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 document.getElementById('admin-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAdminModal(); });
 document.getElementById('edit-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditModal(); });
 document.getElementById('delete-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
