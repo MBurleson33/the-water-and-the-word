@@ -15,7 +15,7 @@
 <!-- ── OPEN GRAPH ── -->
 <meta property="og:type" content="website" id="og-type">
 <meta property="og:site_name" content="The Water and the Word">
-<meta property="og:title" content="The Water and the Word" id="og-title">
+<meta property="og:title" content="The Water and the Word — Christian Prophecy Video Journal" id="og-title">
 <meta property="og:description" content="Where the Spirit Leads, We Bear Witness. Faith journey videos and testimonies of the Holy Spirit moving in our time." id="og-desc">
 <meta property="og:url" content="https://thewaterandtheword.com/" id="og-url">
 <meta property="og:image" content="" id="og-image">
@@ -106,7 +106,6 @@
     footer { background: #1A2028; border-color: var(--border); }
     .toast { background: var(--ink); color: var(--cream); }
     .skeleton { background: linear-gradient(90deg, #3A4048 25%, #444C54 50%, #3A4048 75%); }
-    .hero-logo { filter: brightness(0) invert(1); }
     .video-tag, .topic-pill, .player-tag { border-color: #5A6470; color: #9AA4B0; }
     .latest-tag { border-color: rgba(244,242,238,0.35); }
     .prayer-form-inner { background: #262D33; border-color: var(--border); }
@@ -691,7 +690,7 @@
     display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px;
     padding-bottom: 48px; border-bottom: 1px solid rgba(244,242,238,0.1);
   }
-  .footer-brand img { height: 64px; width: auto; margin-bottom: 16px; filter: brightness(0) invert(1); }
+  .footer-brand img { height: 64px; width: auto; margin-bottom: 16px; }
   .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(244,242,238,0.75); line-height: 1.5; letter-spacing: 0.01em; max-width: 260px; margin-top: 4px; }
   .footer-col-title { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,242,238,0.6); margin-bottom: 16px; }
   .footer-links { list-style: none; }
@@ -789,7 +788,10 @@
   <div class="hero-section">
     <div class="hero">
       <div class="hero-logo-wrap">
-        <img src="images/The Water and the Word Logo.png" alt="The Water and the Word" class="hero-logo">
+        <picture>
+          <source srcset="images/TheWaterandtheWordLogo - White.svg" media="(prefers-color-scheme: dark)">
+          <img src="images/TheWaterandtheWordLogo.svg" alt="The Water and the Word" class="hero-logo">
+        </picture>
       </div>
       <div class="search-wrap">
         <input type="text" id="search-input" placeholder="Search by topic, scripture, or keyword…" oninput="handleSearch(this.value)" aria-label="Search episodes" autocomplete="off" spellcheck="false">
@@ -1046,7 +1048,7 @@
 <footer role="contentinfo">
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="images/The Water and the Word Logo.png" alt="The Water and the Word">
+      <img src="images/TheWaterandtheWordLogo - White.svg" alt="The Water and the Word">
       <p class="footer-tagline">Where the Spirit Leads,<br>We Bear Witness.</p>
     </div>
     <div>
