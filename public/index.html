@@ -229,6 +229,8 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
   }
   .latest-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; cursor: pointer; }
+  .latest-thumb .watched-badge { top: 12px; left: 12px; width: 30px; height: 30px; }
+  .latest-thumb .watched-badge svg { width: 16px; height: 16px; }
   .latest-thumb.playing { cursor: default; }
   .latest-thumb.playing img,
   .latest-thumb.playing .latest-play { display: none; }
@@ -256,6 +258,8 @@
     color: #F0EDF8; margin-bottom: 16px;
   }
   .latest-title em { font-style: italic; color: var(--gold-light); }
+  .latest-title[style*="cursor"] { transition: color 0.2s; }
+  .latest-title[style*="cursor"]:hover { color: var(--gold); }
   .latest-desc { font-size: 18px; color: rgba(235,232,228,0.75); line-height: 1.85; margin-bottom: 24px; }
   .latest-meta { font-size: 12px; letter-spacing: 0.1em; color: rgba(235,232,228,0.5); margin-bottom: 28px; }
   .latest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
@@ -351,6 +355,8 @@
   }
   .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .video-card:hover .video-thumb img { transform: scale(1.06); }
+  .video-card.watched .video-thumb img { opacity: 0.72; }
+  .video-card.watched .video-thumb { filter: saturate(0.7); }
   .play-overlay {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     background: rgba(26,24,20,0); transition: background 0.3s;
@@ -1432,7 +1438,7 @@ function renderGrid(list, isSearching) {
   const remaining = paginate ? list.length - visibleList.length : 0;
 
   grid.innerHTML = visibleList.map(v => `
-    <div class="video-card" data-id="${v.id}">
+    <div class="video-card${watchedVideos.has(v.ytId) ? ' watched' : ''}" data-id="${v.id}">
       <div class="video-thumb">
         <img src="${v.thumb}" alt="${escAttr(v.title)} — The Water and the Word" loading="lazy" onerror="thumbFallback(this)">
         <div class="play-overlay">
@@ -1731,7 +1737,26 @@ function renderLatest() {
   document.getElementById('latest-thumb-img').src = v.thumb;
   document.getElementById('latest-thumb-img').alt = v.title;
   document.getElementById('latest-thumb').onclick = () => playLatestInline(v);
-  document.getElementById('latest-title').innerHTML = v.title.replace(/—/, '<em>—</em>');
+
+  // Watched badge on hero
+  const heroThumb = document.getElementById('latest-thumb');
+  const existingBadge = heroThumb.querySelector('.watched-badge');
+  if (watchedVideos.has(v.ytId)) {
+    if (!existingBadge) {
+      const badge = document.createElement('div');
+      badge.className = 'watched-badge';
+      badge.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+      heroThumb.appendChild(badge);
+    }
+  } else if (existingBadge) {
+    existingBadge.remove();
+  }
+
+  // Title click opens player page
+  const titleEl = document.getElementById('latest-title');
+  titleEl.innerHTML = v.title.replace(/—/, '<em>—</em>');
+  titleEl.style.cursor = 'pointer';
+  titleEl.onclick = () => { showPage('player', v.id); };
   document.getElementById('latest-meta').textContent = `${v.category} · ${v.date} · ${v.duration}`;
 
   const fullDesc = v.description;
