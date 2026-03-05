@@ -1207,7 +1207,6 @@
 // ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL      = 'https://zcdhoxqsbpujpiwbbrgw.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjZGhveHFzYnB1anBpd2Jicmd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxOTk2NTksImV4cCI6MjA4Nzc3NTY1OX0.EemlKMnlL4LjSxS3M_nGKmsYO8Xp-YsawWcyNpgbCc4';
-const ADMIN_PASSWORD    = 'watw2026';
 
 let _supabase = null;
 let videos = [];
@@ -2170,6 +2169,22 @@ function renderAdminList() {
 
 // ── ADMIN AUTH ────────────────────────────────────────────────────────────────
 let isAdmin = false;
+
+// Restore admin session instantly from sessionStorage — no server round-trip needed
+// Token format: base64(expiry).base64(secret+expiry) — expiry is readable client-side
+(function restoreAdminSession() {
+  const token = sessionStorage.getItem('watw_admin_token');
+  if (!token) return;
+  try {
+    const [payloadB64] = token.split('.');
+    const expiry = parseInt(atob(payloadB64));
+    if (!isNaN(expiry) && Date.now() < expiry) {
+      isAdmin = true;
+    } else {
+      sessionStorage.removeItem('watw_admin_token'); // expired — clean up
+    }
+  } catch { sessionStorage.removeItem('watw_admin_token'); }
+})();
 let konamiBuffer = [];
 document.addEventListener('keydown', e => {
   if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
@@ -2189,17 +2204,39 @@ function closeAdminModal() {
   document.getElementById('pw-error').style.display = 'none';
 }
 
-function checkAdminPassword() {
-  if (document.getElementById('admin-pw-input').value === ADMIN_PASSWORD) {
-    isAdmin = true;
-    closeAdminModal();
-    showPage('admin');
-    showToast('Welcome back, admin');
-  } else {
-    document.getElementById('pw-error').style.display = 'block';
-    document.getElementById('admin-pw-input').value = '';
-    document.getElementById('admin-pw-input').focus();
+async function checkAdminPassword() {
+  const pw = document.getElementById('admin-pw-input').value;
+  const btn = document.querySelector('#admin-modal button[onclick*="checkAdminPassword"]');
+  if (btn) { btn.textContent = 'Verifying…'; btn.disabled = true; }
+
+  try {
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    const data = await res.json();
+
+    if (res.ok && data.token) {
+      sessionStorage.setItem('watw_admin_token', data.token);
+      isAdmin = true;
+      closeAdminModal();
+      showPage('admin');
+      showToast('Welcome back, admin');
+    } else {
+      document.getElementById('pw-error').style.display = 'block';
+      document.getElementById('admin-pw-input').value = '';
+      document.getElementById('admin-pw-input').focus();
+    }
+  } catch (err) {
+    showToast('Auth error — check your connection');
+  } finally {
+    if (btn) { btn.textContent = 'Enter'; btn.disabled = false; }
   }
+}
+
+function getAdminToken() {
+  return sessionStorage.getItem('watw_admin_token');
 }
 
 document.getElementById('admin-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeAdminModal(); });
