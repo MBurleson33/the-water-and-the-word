@@ -870,7 +870,7 @@
 <!-- ══ VIDEO PLAYER PAGE ══ -->
 <div id="page-player" class="page">
   <div class="player-page">
-    <button class="player-back" onclick="goHome(null)">
+    <button class="player-back" onclick="scrollToVideos()">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to all videos
     </button>
@@ -1225,7 +1225,7 @@ function scrollToVideos() {
     setPageUrl('home', null);
     showPageDirect('home');
     updateMeta(null);
-    setTimeout(() => document.getElementById('section-label').scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    setTimeout(() => document.getElementById('section-label').scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
   } else {
     document.getElementById('section-label').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
