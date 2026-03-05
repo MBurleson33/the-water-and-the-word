@@ -221,6 +221,36 @@
 
 
 
+
+  /* ── DESCRIPTION MODAL ── */
+  .desc-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 400;
+    background: rgba(26,24,20,0.65); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 24px;
+  }
+  .desc-modal-overlay.show { display: flex; animation: descFadeIn 0.2s ease both; }
+  @keyframes descFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .desc-modal {
+    background: var(--white); border: 1px solid var(--border);
+    max-width: 560px; width: 100%; padding: 40px;
+    animation: descSlideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes descSlideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  .desc-modal-cat { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .desc-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; line-height: 1.25; color: var(--ink); margin-bottom: 16px; }
+  .desc-modal-body { font-size: 17px; color: var(--muted); line-height: 1.85; margin-bottom: 28px; }
+  .desc-modal-actions { display: flex; gap: 12px; }
+  .desc-modal-watch { flex: 2; padding: 13px; background: var(--ink); border: none; font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream); cursor: pointer; transition: background 0.2s; }
+  .desc-modal-watch:hover { background: var(--gold); }
+  .desc-modal-close { flex: 1; padding: 13px; background: none; border: 1px solid var(--border); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+  .desc-modal-close:hover { border-color: var(--ink); color: var(--ink); }
+
   /* ── LATEST EPISODE FEATURE ── */
   .latest-section { background: #262D33; padding: 56px 0; display: none; }
   .latest-section.visible { display: block; }
@@ -388,15 +418,10 @@
     font-size: 22px; font-weight: 400; line-height: 1.3;
     color: var(--ink); margin-bottom: 8px; padding: 0 16px;
   }
-  .video-excerpt {
-    font-size: 18px; color: var(--muted); line-height: 1.75; margin-bottom: 12px; padding: 0 16px;
-    max-height: 3.5em; overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .video-card:hover .video-excerpt {
-    max-height: 20em;
-  }
+  .video-excerpt { font-size: 18px; color: var(--muted); line-height: 1.75; margin-bottom: 12px; padding: 0 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .video-tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px; }
+  .read-more-btn { background: none; border: none; font-family: 'Josefin Sans', sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); cursor: pointer; padding: 0; transition: opacity 0.2s; }
+  .read-more-btn:hover { opacity: 0.7; }
   .video-tag {
     font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--muted); border: 1px solid var(--border); padding: 3px 10px;
@@ -1061,6 +1086,18 @@
   </div>
 </div>
 
+
+<div class="desc-modal-overlay" id="desc-modal-overlay" onclick="if(event.target===this)closeDescModal()">
+  <div class="desc-modal" id="desc-modal">
+    <div class="desc-modal-cat" id="desc-modal-cat"></div>
+    <div class="desc-modal-title" id="desc-modal-title"></div>
+    <div class="desc-modal-body" id="desc-modal-body"></div>
+    <div class="desc-modal-actions">
+      <button class="desc-modal-watch" id="desc-modal-watch">Watch Episode</button>
+      <button class="desc-modal-close" onclick="closeDescModal()">Close</button>
+    </div>
+  </div>
+</div>
 </main>
 
 <!-- FOOTER -->
@@ -1457,6 +1494,7 @@ function renderGrid(list, isSearching) {
       <div class="video-meta">${escHtml(v.category)}</div>
       <div class="video-title">${escHtml(v.title)}</div>
       <div class="video-excerpt">${escHtml(v.description)}</div>
+      ${v.description.length > 120 ? `<div style="padding:0 16px 4px;"><button class="read-more-btn" onclick="event.stopPropagation();openDescModal(${v.id})">Read more ›</button></div>` : ""}
       <div class="video-tags">${v.tags.slice(0, 4).map(t => `<span class="video-tag" data-tag="${tagString(t).replace(/"/g,'&quot;')}">${escHtml(tagString(t))}</span>`).join('')}</div>
     </div>
   `).join('');
@@ -1996,6 +2034,26 @@ async function saveVideoEdit() {
   renderAdminList(); renderTopicPills(); renderLatest(); applySortAndRender();
   showToast('Episode updated');
 }
+
+
+// ── DESCRIPTION MODAL ─────────────────────────────────────────────────────────
+function openDescModal(id) {
+  const v = videos.find(x => x.id === id);
+  if (!v) return;
+  document.getElementById('desc-modal-cat').textContent = v.category;
+  document.getElementById('desc-modal-title').textContent = v.title;
+  document.getElementById('desc-modal-body').textContent = v.description;
+  document.getElementById('desc-modal-watch').onclick = () => { closeDescModal(); showPage('player', v.id); };
+  document.getElementById('desc-modal-overlay').classList.add('show');
+  document.addEventListener('keydown', descModalKeyClose);
+}
+
+function closeDescModal() {
+  document.getElementById('desc-modal-overlay').classList.remove('show');
+  document.removeEventListener('keydown', descModalKeyClose);
+}
+
+function descModalKeyClose(e) { if (e.key === 'Escape') closeDescModal(); }
 
 // ── PRAYER INBOX ──────────────────────────────────────────────────────────────
 let prayerPage = 0;
