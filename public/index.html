@@ -252,7 +252,8 @@
     animation: fadeUp 0.7s ease both;
   }
   .hero-logo-wrap { display: flex; justify-content: center; margin-bottom: 64px; }
-  .hero-logo { height: 140px; width: auto; }
+  .hero-logo { height: 140px; width: auto; display: block; }
+  .hero-logo-light, .hero-logo-dark { height: 140px; width: auto; }
   .hero-logo-dark { display: none; }
   @media (prefers-color-scheme: dark) {
     .hero-logo-light { display: none; }
@@ -293,7 +294,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 19px; font-style: italic; font-weight: 300;
     color: var(--muted); max-width: 600px;
-    margin: 0 auto 48px; text-align: center; line-height: 1.75;
+    margin: 0 auto 72px; text-align: center; line-height: 1.75;
   }
 
   /* ── TOPIC PILLS ── */
