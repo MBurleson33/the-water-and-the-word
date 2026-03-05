@@ -365,6 +365,12 @@
   }
   .video-card:hover .play-btn { opacity: 1; transform: scale(1) translateY(0); }
   .play-btn svg { width: 18px; height: 18px; fill: white; margin-left: 3px; }
+  .watched-badge {
+    position: absolute; top: 8px; left: 8px; z-index: 2;
+    background: rgba(26,24,20,0.72); border-radius: 50%;
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+  }
+  .watched-badge svg { width: 13px; height: 13px; stroke: #7AAEDD; fill: none; stroke-width: 2.5; }
   .video-duration {
     position: absolute; bottom: 8px; right: 8px;
     background: rgba(26,24,20,0.75); color: white;
@@ -1163,6 +1169,7 @@ const GRID_PAGE_SIZE = 8;
 let gridPage = 1;
 let currentGridList = [];
 let reactedVideos = new Set(JSON.parse(localStorage.getItem('watw_reactions') || '[]'));
+let watchedVideos = new Set(JSON.parse(localStorage.getItem('watw_watched') || '[]'));
 
 // ── URL / DEEP LINK ROUTING ────────────────────────────────────────────────────
 // ── URL ROUTING ───────────────────────────────────────────────────────────────
@@ -1237,7 +1244,7 @@ function updateMeta(v) {
   const title = `${v.title} — The Water and the Word`;
   const desc = v.description.substring(0, 160);
   const url = `https://thewaterandtheword.com/?watch=${v.ytId}`;
-  const img = `https://i.ytimg.com/vi/${v.ytId}/maxresdefault.jpg`;
+  const img = `https://thewaterandtheword.com/api/og?title=${encodeURIComponent(v.title)}&cat=${encodeURIComponent(v.category)}&ytid=${v.ytId}`;
   document.getElementById('meta-title').textContent = title;
   document.getElementById('meta-desc').content = desc;
   document.getElementById('og-title').content = title;
@@ -1432,6 +1439,7 @@ function renderGrid(list, isSearching) {
           <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
         </div>
         <div class="video-duration">${v.duration}</div>
+        ${watchedVideos.has(v.ytId) ? '<div class="watched-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' : ''}
       </div>
       <div class="video-meta">${escHtml(v.category)}</div>
       <div class="video-title">${escHtml(v.title)}</div>
@@ -1457,6 +1465,23 @@ function openVideo(id) {
   // Update URL and meta tags
   setWatchParam(v.ytId);
   updateMeta(v);
+
+  // Mark as watched
+  if (!watchedVideos.has(v.ytId)) {
+    watchedVideos.add(v.ytId);
+    localStorage.setItem('watw_watched', JSON.stringify([...watchedVideos]));
+    // Update card badge if visible
+    const card = document.querySelector('.video-card[data-id="' + v.id + '"]');
+    if (card) {
+      const thumb = card.querySelector('.video-thumb');
+      if (thumb && !thumb.querySelector('.watched-badge')) {
+        const badge = document.createElement('div');
+        badge.className = 'watched-badge';
+        badge.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        thumb.appendChild(badge);
+      }
+    }
+  }
 
   document.getElementById('player-embed').innerHTML =
     `<iframe src="https://www.youtube.com/embed/${v.ytId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&color=white&playsinline=1" allow="autoplay; fullscreen; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen playsinline></iframe>`;
