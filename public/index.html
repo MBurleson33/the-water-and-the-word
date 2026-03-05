@@ -51,6 +51,14 @@
 <link rel="icon" type="image/png" href="images/The Water and the Word Logo.png">
 <link rel="apple-touch-icon" href="images/The Water and the Word Logo.png">
 
+<!-- ── THEME INIT (runs before paint to prevent flash) ── -->
+<script>
+  (function() {
+    const saved = localStorage.getItem('watw_theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  })();
+</script>
+
 <!-- ── FONTS & PERFORMANCE ── -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +123,68 @@
     .sort-select { background: var(--white); color: var(--ink); border-color: var(--border); }
   }
 
+  /* Manual dark mode override via toggle */
+  [data-theme="dark"] {
+    --cream: #2E3338;
+    --ink: #E8E6E2;
+    --gold: #72ADE3;
+    --gold-light: #8BBDE8;
+    --muted: #A0AAB5;
+    --border: #3A4048;
+    --white: #363D44;
+    --deep: #1A2028;
+  }
+  [data-theme="dark"] nav { background: rgba(38,45,51,0.96); }
+  [data-theme="dark"] .nav-links a { color: #8A94A0 !important; }
+  [data-theme="dark"] .nav-tagline { color: rgba(244,242,238,0.45) !important; }
+  [data-theme="dark"] .nav-links a:hover { color: #E8E6E2 !important; }
+  [data-theme="dark"] .nav-links a.active { color: var(--gold) !important; }
+  [data-theme="dark"] .hero-section { background: radial-gradient(ellipse at 50% 0%, #363D44 0%, #262D33 65%); }
+  [data-theme="dark"] .video-card { background: #363D44; }
+  [data-theme="dark"] .search-wrap input { background: #363D44; }
+  [data-theme="dark"] .latest-section { background: #1A2028; }
+  [data-theme="dark"] .transcript-box { background: #262D33; }
+  [data-theme="dark"] .admin-modal-inner { background: #363D44; }
+  [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group textarea { background: #262D33; color: var(--ink); }
+  [data-theme="dark"] .tag-output { background: #262D33; }
+  [data-theme="dark"] .admin-video-row { background: #262D33; border-color: var(--border); }
+  [data-theme="dark"] footer { background: #1A2028; border-color: var(--border); }
+  [data-theme="dark"] .toast { background: var(--ink); color: var(--cream); }
+  [data-theme="dark"] .skeleton { background: linear-gradient(90deg, #3A4048 25%, #444C54 50%, #3A4048 75%); }
+  [data-theme="dark"] .video-tag, [data-theme="dark"] .topic-pill, [data-theme="dark"] .player-tag { border-color: #5A6470; color: #9AA4B0; }
+  [data-theme="dark"] .latest-tag { border-color: rgba(244,242,238,0.35); }
+  [data-theme="dark"] .prayer-form-inner { background: #262D33; border-color: var(--border); }
+  [data-theme="dark"] .prayer-page-sent { background: #2E3338; }
+  [data-theme="dark"] .prayer-page-verse { background: rgba(80,144,207,0.06); }
+  [data-theme="dark"] .reaction-btn { background: rgba(80,144,207,0.1); border-color: #5A6470; }
+  [data-theme="dark"] .sort-select { background: var(--white); color: var(--ink); border-color: var(--border); }
+
+  /* Manual light mode override (when system is dark but user wants light) */
+  [data-theme="light"] {
+    --cream: #F4F2EE;
+    --ink: #2A2825;
+    --gold: #5090CF;
+    --gold-light: #6BAAD8;
+    --muted: #7A7670;
+    --border: #E0DDD8;
+    --white: #FFFFFF;
+    --deep: #1E2B38;
+  }
+  [data-theme="light"] nav { background: rgba(244,242,238,0.95); }
+  [data-theme="light"] .nav-links a { color: var(--muted) !important; }
+  [data-theme="light"] .nav-tagline { color: var(--muted) !important; }
+  [data-theme="light"] .nav-links a:hover { color: var(--ink) !important; }
+  [data-theme="light"] .hero-section { background: radial-gradient(ellipse at 50% 0%, var(--cream) 0%, var(--white) 65%); }
+  [data-theme="light"] .video-card { background: var(--white); }
+  [data-theme="light"] .search-wrap input { background: var(--white); }
+  [data-theme="light"] .latest-section { background: #262D33; }
+  [data-theme="light"] .transcript-box { background: var(--white); }
+  [data-theme="light"] .admin-modal-inner { background: var(--white); }
+  [data-theme="light"] .form-group input, [data-theme="light"] .form-group textarea { background: var(--white); color: var(--ink); }
+  [data-theme="light"] .tag-output { background: var(--white); }
+  [data-theme="light"] footer { background: var(--deep); }
+  [data-theme="light"] .toast { background: var(--ink); color: var(--cream); }
+
   html { scroll-behavior: smooth; }
   body {
     background: var(--cream);
@@ -150,12 +220,27 @@
     color: var(--muted); letter-spacing: 0.02em;
   }
 
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    margin-left: 20px; display: flex; align-items: center;
+  }
+  .theme-toggle-btn {
+    background: none; border: none; cursor: pointer; padding: 4px;
+    opacity: 0.35; transition: opacity 0.2s, color 0.2s; display: flex; align-items: center; color: var(--ink);
+  }
+  .theme-toggle-btn:hover { opacity: 0.7; }
+  .theme-toggle-btn svg { width: 22px; height: 22px; display: block; }
+  [data-theme="dark"] .theme-toggle-btn { color: #7AAEDD; opacity: 0.55; }
+  @media (prefers-color-scheme: dark) { .theme-toggle-btn { color: #7AAEDD; opacity: 0.55; } }
+
   /* ── PAGES ── */
   .page { display: none; padding-top: 64px; min-height: 100vh; }
   .page.active { display: block; }
 
   /* ── HOME HERO ── */
   .hero-section {
+    position: relative;
     background: radial-gradient(ellipse at 50% 0%, var(--cream) 0%, var(--white) 65%);
     border-bottom: 1px solid var(--border);
     box-shadow: 0 2px 16px rgba(71,75,80,0.07);
@@ -173,6 +258,10 @@
     .hero-logo-light { display: none; }
     .hero-logo-dark { display: block; }
   }
+  [data-theme="dark"] .hero-logo-light { display: none; }
+  [data-theme="dark"] .hero-logo-dark { display: block; }
+  [data-theme="light"] .hero-logo-light { display: block; }
+  [data-theme="light"] .hero-logo-dark { display: none; }
   .hero p {
     font-size: 19px; color: var(--muted); max-width: 680px; margin: 0 auto 36px;
     letter-spacing: 0.03em;
@@ -255,6 +344,47 @@
   .desc-modal-watch:hover { background: var(--gold); }
   .desc-modal-close { flex: 1; padding: 13px; background: none; border: 1px solid var(--border); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
   .desc-modal-close:hover { border-color: var(--ink); color: var(--ink); }
+
+
+  /* ── SCRIPTURE OF THE DAY ── */
+  .scripture-card {
+    position: absolute; top: 88px; right: 40px; z-index: 10;
+    max-width: 280px; width: 100%;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(224,221,216,0.7);
+    padding: 20px 22px;
+    box-shadow: 0 4px 24px rgba(26,24,20,0.08);
+    animation: fadeUp 0.6s 0.3s ease both;
+    transition: opacity 0.2s;
+  }
+  [data-theme="dark"] .scripture-card {
+    background: rgba(38,45,51,0.82);
+    border-color: rgba(58,64,72,0.8);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+  @media (prefers-color-scheme: dark) {
+    .scripture-card {
+      background: rgba(38,45,51,0.82);
+      border-color: rgba(58,64,72,0.8);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+  }
+  .scripture-label {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; display: block;
+  }
+  .scripture-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-style: italic; font-weight: 300;
+    color: var(--ink); line-height: 1.7; margin-bottom: 10px;
+  }
+  .scripture-ref {
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); text-align: right; display: block;
+  }
+  .scripture-card.loading .scripture-verse { opacity: 0.4; }
+  @media (max-width: 900px) { .scripture-card { display: none; } }
 
   /* ── LATEST EPISODE FEATURE ── */
   .latest-section { background: #262D33; padding: 56px 0; display: none; }
@@ -824,8 +954,33 @@
     <a href="javascript:void(0)" onclick="scrollToVideos()" id="nav-videos">All Videos</a>
     <a href="javascript:void(0)" onclick="showPage('prayer')" id="nav-prayer">Prayer</a>
   </div>
-  <div class="nav-right">
+  <div class="nav-right" style="display:flex;align-items:center;gap:0;">
     <span class="nav-tagline">Where the Spirit Leads, We Bear Witness.</span>
+    <div class="theme-toggle">
+      <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle light / dark mode" title="Toggle light / dark mode">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Left half: sun rays -->
+          <clipPath id="left-half"><rect x="0" y="0" width="12" height="24"/></clipPath>
+          <clipPath id="right-half"><rect x="12" y="0" width="12" height="24"/></clipPath>
+          <!-- Sun (left half) -->
+          <g clip-path="url(#left-half)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="4"/>
+            <line x1="5.5" y1="5.5" x2="7" y2="7"/>
+            <line x1="2" y1="12" x2="4" y2="12"/>
+            <line x1="5.5" y1="18.5" x2="7" y2="17"/>
+            <line x1="12" y1="22" x2="12" y2="20"/>
+          </g>
+          <!-- Moon (right half) -->
+          <g clip-path="url(#right-half)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor" opacity="0.15"/>
+            <path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>
+          </g>
+          <!-- Center divider -->
+          <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </nav>
 </header>
@@ -835,6 +990,11 @@
 <!-- ══ HOME PAGE ══ -->
 <div id="page-home" class="page active">
   <div class="hero-section">
+    <div class="scripture-card" id="scripture-card">
+      <span class="scripture-label">✦ Scripture of the Day</span>
+      <div class="scripture-verse" id="scripture-verse">Loading…</div>
+      <span class="scripture-ref" id="scripture-ref"></span>
+    </div>
     <div class="hero">
       <div class="hero-logo-wrap">
         <img src="images/TheWaterandtheWordLogo.svg" alt="The Water and the Word" class="hero-logo hero-logo-light">
@@ -2247,6 +2407,86 @@ document.getElementById('admin-modal').addEventListener('click', e => { if (e.ta
 document.getElementById('edit-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditModal(); });
 document.getElementById('delete-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
 
+
+// ── THEME TOGGLE ──────────────────────────────────────────────────────────────
+function applyTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+}
+
+function toggleTheme() {
+  const currentlyDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    || (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const newDark = !currentlyDark;
+  applyTheme(newDark);
+  localStorage.setItem('watw_theme', newDark ? 'dark' : 'light');
+}
+
+// Set initial toggle state to match current theme
+(function initTheme() {
+  const saved = localStorage.getItem('watw_theme');
+  if (saved) applyTheme(saved === 'dark');
+})();
+
+
+// ── SCRIPTURE OF THE DAY ──────────────────────────────────────────────────────
+// Claude picks the reference, Bible API fetches the real text — no hallucination
+async function loadScripture() {
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const cacheKey = 'watw_scripture_' + today;
+  const cached = localStorage.getItem(cacheKey);
+
+  if (cached) {
+    try {
+      const { verse, ref } = JSON.parse(cached);
+      showScripture(verse, ref);
+      return;
+    } catch {}
+  }
+
+  // Step 1: Ask Claude to pick a verse reference for today
+  let ref = '';
+  try {
+    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 60,
+        system: 'You are a scripture selector. Given a date, return ONLY a single Bible verse reference (e.g. "John 3:16" or "Psalm 23:1") — nothing else. No explanation, no quotes, just the reference. Choose something meaningful, uplifting, and appropriate for a Christian prophecy ministry.',
+        messages: [{ role: 'user', content: 'Pick one Bible verse reference for today: ' + today }]
+      })
+    });
+    const aiData = await aiRes.json();
+    ref = aiData.content?.[0]?.text?.trim() || '';
+  } catch {}
+
+  if (!ref) { hideScripture(); return; }
+
+  // Step 2: Fetch the actual verse text from our ESV proxy (key stays server-side)
+  try {
+    const esvRes = await fetch('/api/esv?ref=' + encodeURIComponent(ref));
+    const esvData = await esvRes.json();
+    const verse = esvData.verse;
+    const cleanRef = esvData.ref || ref;
+
+    if (!verse) { hideScripture(); return; }
+
+    localStorage.setItem(cacheKey, JSON.stringify({ verse, ref: cleanRef }));
+    showScripture(verse, cleanRef);
+  } catch { hideScripture(); }
+}
+
+function showScripture(verse, ref) {
+  document.getElementById('scripture-verse').textContent = verse;
+  document.getElementById('scripture-ref').textContent = ref;
+  document.getElementById('scripture-card').classList.remove('loading');
+}
+
+function hideScripture() {
+  const card = document.getElementById('scripture-card');
+  if (card) card.style.display = 'none';
+}
+
 // ── THUMBNAIL HELPERS ─────────────────────────────────────────────────────────
 // Quality ladder: maxresdefault 1280px → sddefault 640px → hqdefault 480px
 function thumbFallback(img) {
@@ -2334,6 +2574,7 @@ async function loadVideos() {
   renderLatest();
   renderTopicPills();
   applySortAndRender();
+  loadScripture();
 
   // Check URL for deep link
   const ytId = getWatchParam();
