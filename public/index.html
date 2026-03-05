@@ -2429,12 +2429,16 @@ function toggleTheme() {
 
 
 // ── SCRIPTURE OF THE DAY ──────────────────────────────────────────────────────
-// Claude picks the reference, Bible API fetches the real text — no hallucination
 async function loadScripture() {
-  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split('T')[0];
   const cacheKey = 'watw_scripture_' + today;
-  const cached = localStorage.getItem(cacheKey);
 
+  // Clear old cache keys (keep only today's)
+  Object.keys(localStorage).filter(k => k.startsWith('watw_scripture_') && k !== cacheKey)
+    .forEach(k => localStorage.removeItem(k));
+
+  // Return cached verse if already fetched today
+  const cached = localStorage.getItem(cacheKey);
   if (cached) {
     try {
       const { verse, ref } = JSON.parse(cached);
@@ -2443,36 +2447,14 @@ async function loadScripture() {
     } catch {}
   }
 
-  // Step 1: Ask Claude to pick a verse reference for today
-  let ref = '';
+  // Fetch from serverless function (Claude + ESV, all server-side)
   try {
-    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 60,
-        system: 'You are a scripture selector. Given a date, return ONLY a single Bible verse reference (e.g. "John 3:16" or "Psalm 23:1") — nothing else. No explanation, no quotes, just the reference. Choose something meaningful, uplifting, and appropriate for a Christian prophecy ministry.',
-        messages: [{ role: 'user', content: 'Pick one Bible verse reference for today: ' + today }]
-      })
-    });
-    const aiData = await aiRes.json();
-    ref = aiData.content?.[0]?.text?.trim() || '';
-  } catch {}
-
-  if (!ref) { hideScripture(); return; }
-
-  // Step 2: Fetch the actual verse text from our ESV proxy (key stays server-side)
-  try {
-    const esvRes = await fetch('/api/esv?ref=' + encodeURIComponent(ref));
-    const esvData = await esvRes.json();
-    const verse = esvData.verse;
-    const cleanRef = esvData.ref || ref;
-
-    if (!verse) { hideScripture(); return; }
-
-    localStorage.setItem(cacheKey, JSON.stringify({ verse, ref: cleanRef }));
-    showScripture(verse, cleanRef);
+    const res = await fetch('/api/scripture');
+    if (!res.ok) { hideScripture(); return; }
+    const data = await res.json();
+    if (!data.verse) { hideScripture(); return; }
+    localStorage.setItem(cacheKey, JSON.stringify({ verse: data.verse, ref: data.ref }));
+    showScripture(data.verse, data.ref);
   } catch { hideScripture(); }
 }
 
