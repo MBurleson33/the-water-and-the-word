@@ -350,25 +350,18 @@
   .scripture-card {
     position: absolute; top: 88px; right: 40px; z-index: 10;
     max-width: 280px; width: 100%;
-    background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(224,221,216,0.7);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
     padding: 20px 22px;
-    box-shadow: 0 4px 24px rgba(26,24,20,0.08);
+    box-shadow: 0 4px 28px rgba(26,24,20,0.12);
     animation: fadeUp 0.6s 0.3s ease both;
-    transition: opacity 0.2s;
   }
   [data-theme="dark"] .scripture-card {
-    background: rgba(38,45,51,0.82);
-    border-color: rgba(58,64,72,0.8);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 28px rgba(0,0,0,0.35);
   }
   @media (prefers-color-scheme: dark) {
-    .scripture-card {
-      background: rgba(38,45,51,0.82);
-      border-color: rgba(58,64,72,0.8);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
-    }
+    .scripture-card { box-shadow: 0 4px 28px rgba(0,0,0,0.35); }
   }
   .scripture-label {
     font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
