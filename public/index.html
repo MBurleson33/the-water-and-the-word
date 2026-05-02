@@ -240,7 +240,6 @@
 
   /* ── HOME HERO ── */
   .hero-section {
-    position: relative;
     background: radial-gradient(ellipse at 50% 0%, var(--cream) 0%, var(--white) 65%);
     border-bottom: 1px solid var(--border);
     box-shadow: 0 2px 16px rgba(71,75,80,0.07);
@@ -345,40 +344,6 @@
   .desc-modal-watch:hover { background: var(--gold); }
   .desc-modal-close { flex: 1; padding: 13px; background: none; border: 1px solid var(--border); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
   .desc-modal-close:hover { border-color: var(--ink); color: var(--ink); }
-
-
-  /* ── SCRIPTURE OF THE DAY ── */
-  .scripture-card {
-    position: absolute; top: 88px; right: 40px; z-index: 10;
-    max-width: 280px; width: 100%;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--gold);
-    padding: 20px 22px;
-    box-shadow: 0 4px 28px rgba(26,24,20,0.12);
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-  [data-theme="dark"] .scripture-card {
-    box-shadow: 0 4px 28px rgba(0,0,0,0.35);
-  }
-  @media (prefers-color-scheme: dark) {
-    .scripture-card { box-shadow: 0 4px 28px rgba(0,0,0,0.35); }
-  }
-  .scripture-label {
-    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 10px; display: block;
-  }
-  .scripture-verse {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-style: italic; font-weight: 300;
-    color: var(--ink); line-height: 1.7; margin-bottom: 10px;
-  }
-  .scripture-ref {
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted); text-align: right; display: block;
-  }
-  .scripture-card.loading .scripture-verse { opacity: 0.4; }
-  @media (max-width: 900px) { .scripture-card { display: none; } }
 
   /* ── LATEST EPISODE FEATURE ── */
   .latest-section { background: #262D33; padding: 56px 0; display: none; }
@@ -932,6 +897,62 @@
     .latest-inner { grid-template-columns: 1fr; gap: 28px; padding: 0 20px; }
     .latest-section { padding: 40px 0; }
   }
+
+  /* ── ROTATING SCRIPTURE BANNER ── */
+  .scripture-banner {
+    background: var(--deep);
+    padding: 36px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(184,150,90,0.2);
+    border-bottom: 1px solid rgba(184,150,90,0.2);
+  }
+  .scripture-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(184,150,90,0.03) 0px, rgba(184,150,90,0.03) 1px,
+      transparent 1px, transparent 80px
+    );
+    pointer-events: none;
+  }
+  .scripture-banner-inner {
+    max-width: 860px; margin: 0 auto; position: relative;
+  }
+  .scripture-banner-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(184,150,90,0.7); margin-bottom: 14px; display: block;
+  }
+  .scripture-banner-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-style: italic; font-weight: 300;
+    color: rgba(244,242,238,0.88); line-height: 1.75;
+    transition: opacity 0.6s ease;
+    min-height: 2em;
+  }
+  .scripture-banner-verse.fade { opacity: 0; }
+  .scripture-banner-ref {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(184,150,90,0.8); margin-top: 14px; display: block;
+    transition: opacity 0.6s ease;
+  }
+  .scripture-banner-ref.fade { opacity: 0; }
+  .scripture-banner-dots {
+    display: flex; justify-content: center; gap: 6px; margin-top: 18px;
+  }
+  .scripture-banner-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(184,150,90,0.3); transition: background 0.4s;
+  }
+  .scripture-banner-dot.active { background: rgba(184,150,90,0.8); }
+  @media (max-width: 768px) {
+    .scripture-banner { padding: 28px 24px; }
+    .scripture-banner-verse { font-size: 17px; }
+  }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -984,9 +1005,6 @@
 <!-- ══ HOME PAGE ══ -->
 <div id="page-home" class="page active">
   <div class="hero-section">
-    <div class="scripture-card" id="scripture-card">
-      <span class="scripture-label">✦ Scripture of the Day</span>
-      <div class="scripture-verse" id="scripture-verse">Loading…</div>
       <span class="scripture-ref" id="scripture-ref"></span>
     </div>
     <div class="hero">
@@ -2422,45 +2440,85 @@ function toggleTheme() {
 })();
 
 
-// ── SCRIPTURE OF THE DAY ──────────────────────────────────────────────────────
-async function loadScripture() {
-  const today = new Date().toISOString().split('T')[0];
-  const cacheKey = 'watw_scripture_' + today;
 
-  // Clear old cache keys (keep only today's)
-  Object.keys(localStorage).filter(k => k.startsWith('watw_scripture_') && k !== cacheKey)
-    .forEach(k => localStorage.removeItem(k));
 
-  // Return cached verse if already fetched today
-  const cached = localStorage.getItem(cacheKey);
-  if (cached) {
-    try {
-      const { verse, ref } = JSON.parse(cached);
-      showScripture(verse, ref);
-      return;
-    } catch {}
+// ── ROTATING SCRIPTURE BANNER ─────────────────────────────────────────────────
+const SCRIPTURES = [
+  { ref: 'Acts 16:14', verse: 'One who heard us was a woman named Lydia, from the city of Thyatira, a seller of purple goods, who was a worshiper of God. The Lord opened her heart to pay attention to what was said by Paul.' },
+  { ref: 'Acts 17:18', verse: 'Some of the Epicurean and Stoic philosophers also conversed with him. And some said, “What does this babbler wish to say?” Others said, “He seems to be a preacher of foreign divinities”—because he was preaching Jesus and the resurrection.' },
+  { ref: 'Acts 17:32', verse: 'Now when they heard of the resurrection of the dead, some mocked. But others said, “We will hear you again about this.”' },
+  { ref: 'John 3:3–6', verse: 'Jesus answered him, “Truly, truly, I say to you, unless one is born again he cannot see the kingdom of God.” Nicodemus said to him, “How can a man be born when he is old? Can he enter a second time into his mother’s womb and be born?” Jesus answered, “Truly, truly, I say to you, unless one is born of water and the Spirit, he cannot enter the kingdom of God. That which is born of the flesh is flesh, and that which is born of the Spirit is spirit.”' },
+  { ref: 'John 5:44', verse: 'How can you believe, when you receive glory from one another and do not seek the glory that comes from the only God?' },
+  { ref: 'John 6:44–45', verse: 'No one can come to me unless the Father who sent me draws him. And I will raise him up on the last day. It is written in the Prophets, ‘And they will all be taught by God.’ Everyone who has heard and learned from the Father comes to me—' },
+  { ref: 'John 8:43', verse: 'Why do you not understand what I say? It is because you cannot bear to hear my word.' },
+  { ref: 'John 8:51–52', verse: 'Truly, truly, I say to you, if anyone keeps my word, he will never see death.” The Jews said to him, “Now we know that you have a demon! Abraham died, as did the prophets, yet you say, ‘If anyone keeps my word, he will never taste death.’' },
+  { ref: 'John 10:20', verse: 'Many of them said, “He has a demon, and is insane; why listen to him?”' },
+  { ref: 'John 10:26–27', verse: 'But you do not believe because you are not among my sheep. My sheep hear my voice, and I know them, and they follow me.' },
+  { ref: 'John 12:37', verse: 'Though he had done so many signs before them, they still did not believe in him,' },
+  { ref: 'John 14:26', verse: 'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.' },
+  { ref: 'John 15:26', verse: 'But when the Helper comes, whom I will send to you from the Father, the Spirit of truth, who proceeds from the Father, he will bear witness about me.' },
+  { ref: 'Romans 8:5–8', verse: 'For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit set their minds on the things of the Spirit. For to set the mind on the flesh is death, but to set the mind on the Spirit is life and peace. For the mind that is set on the flesh is hostile to God, for it does not submit to God’s law; indeed, it cannot. Those who are in the flesh cannot please God.' },
+  { ref: '1 Corinthians 1:18', verse: 'For the word of the cross is folly to those who are perishing, but to us who are being saved it is the power of God.' },
+  { ref: '1 Corinthians 1:23', verse: 'But we preach Christ crucified, a stumbling block to Jews and folly to Gentiles,' },
+  { ref: '1 Corinthians 2:12', verse: 'Now we have received not the spirit of the world, but the Spirit who is from God, that we might understand the things freely given us by God.' },
+  { ref: '1 Corinthians 15:44', verse: 'It is sown a natural body; it is raised a spiritual body. If there is a natural body, there is also a spiritual body.' },
+  { ref: '1 Corinthians 15:46', verse: 'But it is not the spiritual that is first but the natural, and then the spiritual.' },
+  { ref: '2 Corinthians 4:4–6', verse: 'In their case the god of this world has blinded the minds of the unbelievers, to keep them from seeing the light of the gospel of the glory of Christ, who is the image of God. For what we proclaim is not ourselves, but Jesus Christ as Lord, with ourselves as your servants for Jesus’ sake. For God, who said, “Let light shine out of darkness,” has shone in our hearts to give the light of the knowledge of the glory of God in the face of Jesus Christ.' },
+  { ref: 'Proverbs 14:6', verse: 'A scoffer seeks wisdom in vain, but knowledge is easy for a man of understanding.' },
+  { ref: 'Matthew 13:11–17', verse: 'And he answered them, “To you it has been given to know the secrets of the kingdom of heaven, but to them it has not been given. For to the one who has, more will be given, and he will have an abundance, but from the one who has not, even what he has will be taken away. This is why I speak to them in parables, because seeing they do not see, and hearing they do not hear, nor do they understand. Indeed, in their case the prophecy of Isaiah is fulfilled that says: ‘You will indeed hear but never understand, and you will indeed see but never perceive. For this people’s heart has grown dull, and with their ears they can barely hear, and their eyes they have closed, lest they should see with their eyes and hear with their ears and understand with their heart and turn, and I would heal them.’ But blessed are your eyes, for they see, and your ears, for they hear. For truly, I say to you, many prophets and righteous people longed to see what you see, and did not see it, and to hear what you hear, and did not hear it.' },
+  { ref: 'Matthew 13:13–15', verse: 'This is why I speak to them in parables, because seeing they do not see, and hearing they do not hear, nor do they understand. Indeed, in their case the prophecy of Isaiah is fulfilled that says: ‘You will indeed hear but never understand, and you will indeed see but never perceive. For this people’s heart has grown dull, and with their ears they can barely hear, and their eyes they have closed, lest they should see with their eyes and hear with their ears and understand with their heart and turn, and I would heal them.’' },
+  { ref: 'James 3:15', verse: 'This is not the wisdom that comes down from above, but is earthly, unspiritual, demonic.' },
+  { ref: 'Jude 1:19', verse: 'It is these who cause divisions, worldly people, devoid of the Spirit.' },
+  { ref: '1 John 2:20', verse: 'But you have been anointed by the Holy One, and you all have knowledge.' },
+  { ref: '1 John 2:27', verse: 'But the anointing that you received from him abides in you, and you have no need that anyone should teach you. But as his anointing teaches you about everything, and is true, and is no lie—just as it has taught you, abide in him.' },
+  { ref: '1 John 5:20', verse: 'And we know that the Son of God has come and has given us understanding, so that we may know him who is true; and we are in him who is true, in his Son Jesus Christ. He is the true God and eternal life.' },
+];
+
+let sbIndex = 0;
+let sbTimer = null;
+
+function initScriptureBanner() {
+  const dots = document.getElementById('sb-dots');
+  // Create dots
+  dots.innerHTML = SCRIPTURES.map((_, i) =>
+    `<div class="scripture-banner-dot${i === 0 ? ' active' : ''}" onclick="goToScripture(${i})"></div>`
+  ).join('');
+  showScriptureBanner(0);
+  sbTimer = setInterval(() => advanceScripture(), 60000);
+}
+
+function showScriptureBanner(index, animate = false) {
+  const verseEl = document.getElementById('sb-verse');
+  const refEl   = document.getElementById('sb-ref');
+  const dots    = document.querySelectorAll('.scripture-banner-dot');
+
+  if (animate) {
+    verseEl.classList.add('fade');
+    refEl.classList.add('fade');
+    setTimeout(() => {
+      verseEl.textContent = SCRIPTURES[index].verse;
+      refEl.textContent   = SCRIPTURES[index].ref;
+      verseEl.classList.remove('fade');
+      refEl.classList.remove('fade');
+    }, 600);
+  } else {
+    verseEl.textContent = SCRIPTURES[index].verse;
+    refEl.textContent   = SCRIPTURES[index].ref;
   }
 
-  // Fetch from serverless function (Claude + ESV, all server-side)
-  try {
-    const res = await fetch('/api/scripture');
-    if (!res.ok) { hideScripture(); return; }
-    const data = await res.json();
-    if (!data.verse) { hideScripture(); return; }
-    localStorage.setItem(cacheKey, JSON.stringify({ verse: data.verse, ref: data.ref }));
-    showScripture(data.verse, data.ref);
-  } catch { hideScripture(); }
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  sbIndex = index;
 }
 
-function showScripture(verse, ref) {
-  document.getElementById('scripture-verse').textContent = verse;
-  document.getElementById('scripture-ref').textContent = ref;
-  document.getElementById('scripture-card').classList.remove('loading');
+function advanceScripture() {
+  const next = (sbIndex + 1) % SCRIPTURES.length;
+  showScriptureBanner(next, true);
 }
 
-function hideScripture() {
-  const card = document.getElementById('scripture-card');
-  if (card) card.style.display = 'none';
+function goToScripture(index) {
+  clearInterval(sbTimer);
+  showScriptureBanner(index, true);
+  sbTimer = setInterval(() => advanceScripture(), 60000);
 }
 
 // ── THUMBNAIL HELPERS ─────────────────────────────────────────────────────────
@@ -2550,7 +2608,7 @@ async function loadVideos() {
   renderLatest();
   renderTopicPills();
   applySortAndRender();
-  loadScripture();
+  initScriptureBanner();
 
   // Check URL for deep link
   const ytId = getWatchParam();
