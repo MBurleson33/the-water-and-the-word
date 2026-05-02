@@ -253,7 +253,8 @@
   .hero-logo-wrap { display: flex; justify-content: center; margin-bottom: 64px; }
   .hero-logo { height: 200px; width: auto; display: block; }
   .hero-logo-light, .hero-logo-dark { height: 200px; width: auto; }
-  .hero-logo-dark { display: none; }
+  .hero-logo-light { mix-blend-mode: multiply; }
+  .hero-logo-dark { display: none; mix-blend-mode: screen; }
   @media (prefers-color-scheme: dark) {
     .hero-logo-light { display: none; }
     .hero-logo-dark { display: block; }
