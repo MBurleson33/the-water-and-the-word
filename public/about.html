@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — The Water and the Word</title>
+  <meta name="description" content="The Water and the Word is a faith journey video journal bearing witness to the Holy Spirit — how He leads, moves, and transforms lives.">
+  <meta property="og:title" content="About — The Water and the Word">
+  <meta property="og:description" content="Spirit-led. Scripture-grounded. A place set apart for those who sense that something is stirring.">
+  <meta property="og:image" content="https://thewaterandtheword.com/images/TheWaterandtheWordLogo.png">
+  <link rel="icon" href="images/favicon.png">
+
+  <!-- Theme init before paint -->
+  <script>
+    (function() {
+      const saved = localStorage.getItem('watw_theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F4F2EE;
+      --ink: #474B50;
+      --gold: #2E6FB5;
+      --gold-light: #5B80A5;
+      --muted: #58697A;
+      --border: #DDD9D2;
+      --white: #FFFFFF;
+      --deep: #0e3963;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --cream: #2E3338; --ink: #E8E6E2; --gold: #72ADE3;
+        --gold-light: #8BBDE8; --muted: #A0AAB5; --border: #3A4048;
+        --white: #363D44; --deep: #0e3963;
+      }
+    }
+    [data-theme="dark"] {
+      --cream: #2E3338; --ink: #E8E6E2; --gold: #72ADE3;
+      --gold-light: #8BBDE8; --muted: #A0AAB5; --border: #3A4048;
+      --white: #363D44; --deep: #0e3963;
+    }
+    [data-theme="light"] {
+      --cream: #F4F2EE; --ink: #474B50; --gold: #2E6FB5;
+      --gold-light: #5B80A5; --muted: #58697A; --border: #DDD9D2;
+      --white: #FFFFFF; --deep: #0e3963;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background: var(--cream); color: var(--ink);
+      min-height: 100vh; display: flex; flex-direction: column;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── NAV ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(244,242,238,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    [data-theme="dark"] header, @media (prefers-color-scheme: dark) { header { background: rgba(38,45,51,0.96); } }
+    nav {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 48px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.active { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 0; }
+    .nav-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-style: italic; font-weight: 300;
+      color: var(--muted); letter-spacing: 0.03em;
+    }
+    .theme-toggle { margin-left: 20px; display: flex; align-items: center; }
+    .theme-toggle-btn {
+      background: none; border: none; cursor: pointer; padding: 4px;
+      opacity: 0.35; transition: opacity 0.2s, color 0.2s;
+      display: flex; align-items: center; color: var(--ink);
+    }
+    .theme-toggle-btn:hover { opacity: 0.7; }
+    .theme-toggle-btn svg { width: 22px; height: 22px; display: block; }
+    [data-theme="dark"] .theme-toggle-btn { color: #7AAEDD; opacity: 0.55; }
+    @media (prefers-color-scheme: dark) { .theme-toggle-btn { color: #7AAEDD; opacity: 0.55; } }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      .nav-tagline { display: none; }
+    }
+
+    /* ── HERO ── */
+    .about-hero {
+      background: var(--deep);
+      padding: 100px 48px 80px;
+      text-align: center;
+      animation: fadeUp 0.7s ease both;
+    }
+    .about-hero-eyebrow {
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(196,154,108,0.85); margin-bottom: 24px; display: block;
+    }
+    .about-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px; font-weight: 300; line-height: 1.1;
+      color: rgba(244,242,238,0.95); margin-bottom: 24px;
+    }
+    .about-hero h1 em { font-style: italic; color: #c49a6c; }
+    .about-hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic; font-weight: 300;
+      color: rgba(244,242,238,0.6); max-width: 560px; margin: 0 auto;
+      line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .about-hero { padding: 64px 24px 56px; }
+      .about-hero h1 { font-size: 42px; }
+    }
+
+    /* ── CONTENT ── */
+    .about-content {
+      flex: 1;
+      max-width: 800px; margin: 0 auto;
+      padding: 80px 48px 100px;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+    .about-content p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 300; line-height: 1.85;
+      color: var(--ink); margin-bottom: 32px;
+    }
+    .about-content p strong {
+      font-weight: 600; color: var(--ink);
+    }
+    .about-divider {
+      width: 48px; height: 1px; background: var(--gold);
+      margin: 48px 0; opacity: 0.5;
+    }
+    .about-verse-block {
+      border-left: 2px solid #c49a6c;
+      padding: 24px 32px;
+      margin: 48px 0;
+      background: rgba(196,154,108,0.04);
+    }
+    .about-verse-block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-style: italic; font-weight: 300;
+      color: var(--ink); margin-bottom: 12px; line-height: 1.75;
+    }
+    .about-verse-block cite {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #c49a6c; font-style: normal;
+    }
+    .about-cta {
+      margin-top: 56px; display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .about-cta a {
+      display: inline-block; padding: 14px 32px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .about-cta a.primary {
+      background: var(--gold); color: white;
+    }
+    .about-cta a.primary:hover { background: var(--deep); }
+    .about-cta a.secondary {
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .about-cta a.secondary:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 768px) {
+      .about-content { padding: 48px 24px 64px; }
+      .about-content p { font-size: 19px; }
+    }
+
+    /* ── SCRIPTURE BANNER ── */
+    .scripture-banner {
+      background: var(--deep); padding: 36px 80px;
+      text-align: center; position: relative; overflow: hidden;
+      border-top: 1px solid rgba(196,154,108,0.2);
+      border-bottom: 1px solid rgba(196,154,108,0.2);
+    }
+    .scripture-banner-inner { max-width: 860px; margin: 0 auto; }
+    .scripture-banner-label {
+      font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(196,154,108,0.7); margin-bottom: 14px; display: block;
+    }
+    .scripture-banner-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic; font-weight: 300;
+      color: rgba(244,242,238,0.88); line-height: 1.75;
+      transition: opacity 0.6s ease; min-height: 2em;
+    }
+    .scripture-banner-verse.fade { opacity: 0; }
+    .scripture-banner-ref {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(196,154,108,0.8); margin-top: 14px; display: block;
+      transition: opacity 0.6s ease;
+    }
+    .scripture-banner-ref.fade { opacity: 0; }
+    .scripture-banner-dots {
+      display: flex; justify-content: center; gap: 6px; margin-top: 18px;
+    }
+    .scripture-banner-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: rgba(196,154,108,0.3); transition: background 0.4s; cursor: pointer;
+    }
+    .scripture-banner-dot.active { background: rgba(196,154,108,0.8); }
+    @media (max-width: 768px) {
+      .scripture-banner { padding: 28px 24px; }
+      .scripture-banner-verse { font-size: 17px; }
+    }
+
+    /* ── FOOTER ── */
+    footer { background: var(--deep); padding: 64px 48px 40px; }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px;
+      padding-bottom: 48px; border-bottom: 1px solid rgba(244,242,238,0.1);
+    }
+    .footer-brand img { height: 90px; width: auto; margin-bottom: 16px; mix-blend-mode: screen; }
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px;
+      font-style: italic; font-weight: 300; color: rgba(244,242,238,0.75);
+      line-height: 1.5; max-width: 260px; margin-top: 4px;
+    }
+    .footer-col-title {
+      font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(244,242,238,0.6); margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 16px; color: rgba(244,242,238,0.80);
+      text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em;
+    }
+    .footer-links a:hover { color: #7AAEDD; }
+    .footer-verse {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px;
+      font-style: italic; font-weight: 300; color: rgba(244,242,238,0.75);
+      line-height: 1.7; margin-bottom: 8px;
+    }
+    .footer-verse-ref {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(244,242,238,0.45);
+    }
+    .footer-bottom {
+      max-width: 1400px; margin: 32px auto 0;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy {
+      font-size: 13px; letter-spacing: 0.08em;
+      color: rgba(244,242,238,0.5);
+    }
+    .footer-back-top {
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Josefin Sans', sans-serif; font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(244,242,238,0.5); transition: color 0.2s;
+    }
+    .footer-back-top:hover { color: rgba(244,242,238,0.85); }
+    .footer-back-top svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 48px 24px 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav aria-label="Main navigation">
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about" class="active">About</a>
+      <a href="/#videos">All Videos</a>
+      <a href="/#prayer">Prayer</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-tagline">Where the Spirit Leads, We Bear Witness.</span>
+      <div class="theme-toggle">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle light / dark mode" title="Toggle light / dark mode">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <clipPath id="left-half"><rect x="0" y="0" width="12" height="24"/></clipPath>
+            <clipPath id="right-half"><rect x="12" y="0" width="12" height="24"/></clipPath>
+            <g clip-path="url(#left-half)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4"/>
+              <line x1="12" y1="2" x2="12" y2="4"/>
+              <line x1="5.5" y1="5.5" x2="7" y2="7"/>
+              <line x1="2" y1="12" x2="4" y2="12"/>
+              <line x1="5.5" y1="18.5" x2="7" y2="17"/>
+              <line x1="12" y1="22" x2="12" y2="20"/>
+            </g>
+            <g clip-path="url(#right-half)" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z" fill="currentColor" opacity="0.15"/>
+              <path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>
+            </g>
+            <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="about-hero">
+  <span class="about-hero-eyebrow">✦ The Voice Behind The Channel</span>
+  <h1>About <em>The Water<br>and the Word</em></h1>
+  <p class="about-hero-sub">A place set apart for those who sense that something is stirring — in Scripture, in the world, and in the Spirit.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="about-content">
+  <p>Welcome. <strong>The Water and the Word</strong> is a faith journey video journal bearing witness to the Holy Spirit — how He leads, moves, and transforms lives.</p>
+
+  <p>The name comes from a simple conviction: that the water of the Spirit and the Word of God are inseparable. You cannot have one without the other. This channel is committed to both — Spirit-led, Scripture-grounded.</p>
+
+  <div class="about-verse-block">
+    <p>"That he might sanctify and cleanse it with the washing of water by the word."</p>
+    <cite>— Ephesians 5:26</cite>
+  </div>
+
+  <p>Each episode is a prayer, a study, and a conversation. Whether you have been walking with the Lord for decades or are just beginning to ask questions about prophecy and the end times, this channel is for you.</p>
+
+  <p>Every video is tagged and fully searchable so you can find exactly what you are looking for — or discover something new entirely.</p>
+
+  <div class="about-divider"></div>
+
+  <p><strong>New episodes drop regularly.</strong> Subscribe on YouTube and explore the full library right here.</p>
+
+  <div class="about-cta">
+    <a href="/" class="primary">Explore Episodes</a>
+    <a href="https://www.youtube.com/@thewaterandtheword" target="_blank" rel="noopener" class="secondary">YouTube Channel</a>
+  </div>
+</div>
+
+<!-- ROTATING SCRIPTURE BANNER -->
+<div class="scripture-banner">
+  <div class="scripture-banner-inner">
+    <span class="scripture-banner-label">✦ Scripture</span>
+    <div class="scripture-banner-verse" id="sb-verse"></div>
+    <span class="scripture-banner-ref" id="sb-ref"></span>
+    <div class="scripture-banner-dots" id="sb-dots"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/TheWaterandtheWordLogo - White.png" alt="The Water and the Word">
+      <p class="footer-tagline">Where the Spirit Leads,<br>We Bear Witness.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/#prayer">Prayer</a></li>
+        <li><a href="https://www.youtube.com/@thewaterandtheword" target="_blank" rel="noopener">YouTube Channel</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Scripture</div>
+      <p class="footer-verse">"That he might sanctify and cleanse it with the washing of water by the word."</p>
+      <p class="footer-verse-ref">— Ephesians 5:26</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© <span id="footer-year"></span> The Water and the Word — All Rights Reserved</div>
+    <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+      Back to top
+    </button>
+  </div>
+</footer>
+
+<script>
+// ── THEME ─────────────────────────────────────────────────────────────────────
+function applyTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+}
+function toggleTheme() {
+  const currentlyDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    || (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  applyTheme(!currentlyDark);
+  localStorage.setItem('watw_theme', !currentlyDark ? 'dark' : 'light');
+}
+
+// ── COPYRIGHT YEAR ────────────────────────────────────────────────────────────
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+// ── ROTATING SCRIPTURE BANNER ─────────────────────────────────────────────────
+const SCRIPTURES = [
+  { ref: 'Acts 16:14', verse: 'One who heard us was a woman named Lydia, from the city of Thyatira, a seller of purple goods, who was a worshiper of God. The Lord opened her heart to pay attention to what was said by Paul.' },
+  { ref: 'John 3:3–6', verse: 'Jesus answered him, "Truly, truly, I say to you, unless one is born again he cannot see the kingdom of God." Nicodemus said to him, "How can a man be born when he is old?" Jesus answered, "Truly, truly, I say to you, unless one is born of water and the Spirit, he cannot enter the kingdom of God. That which is born of the flesh is flesh, and that which is born of the Spirit is spirit."' },
+  { ref: 'John 10:26–27', verse: 'But you do not believe because you are not among my sheep. My sheep hear my voice, and I know them, and they follow me.' },
+  { ref: 'John 14:26', verse: 'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.' },
+  { ref: 'John 15:26', verse: 'But when the Helper comes, whom I will send to you from the Father, the Spirit of truth, who proceeds from the Father, he will bear witness about me.' },
+  { ref: 'Romans 8:5–8', verse: 'For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit set their minds on the things of the Spirit. For to set the mind on the flesh is death, but to set the mind on the Spirit is life and peace.' },
+  { ref: '1 Corinthians 1:18', verse: 'For the word of the cross is folly to those who are perishing, but to us who are being saved it is the power of God.' },
+  { ref: '1 John 2:27', verse: 'But the anointing that you received from him abides in you, and you have no need that anyone should teach you. But as his anointing teaches you about everything, and is true, and is no lie—just as it has taught you, abide in him.' },
+  { ref: '1 John 5:20', verse: 'And we know that the Son of God has come and has given us understanding, so that we may know him who is true; and we are in him who is true, in his Son Jesus Christ. He is the true God and eternal life.' },
+  { ref: 'Matthew 13:11', verse: 'To you it has been given to know the secrets of the kingdom of heaven, but to them it has not been given.' },
+];
+
+let sbIndex = 0, sbTimer = null;
+
+function initScriptureBanner() {
+  const dots = document.getElementById('sb-dots');
+  dots.innerHTML = SCRIPTURES.map((_, i) =>
+    `<div class="scripture-banner-dot${i === 0 ? ' active' : ''}" onclick="goToScripture(${i})"></div>`
+  ).join('');
+  showScriptureBanner(0);
+  sbTimer = setInterval(() => advanceScripture(), 60000);
+}
+
+function showScriptureBanner(index, animate = false) {
+  const verseEl = document.getElementById('sb-verse');
+  const refEl   = document.getElementById('sb-ref');
+  const dots    = document.querySelectorAll('.scripture-banner-dot');
+  if (animate) {
+    verseEl.classList.add('fade'); refEl.classList.add('fade');
+    setTimeout(() => {
+      verseEl.textContent = SCRIPTURES[index].verse;
+      refEl.textContent   = SCRIPTURES[index].ref;
+      verseEl.classList.remove('fade'); refEl.classList.remove('fade');
+    }, 600);
+  } else {
+    verseEl.textContent = SCRIPTURES[index].verse;
+    refEl.textContent   = SCRIPTURES[index].ref;
+  }
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  sbIndex = index;
+}
+
+function advanceScripture() {
+  showScriptureBanner((sbIndex + 1) % SCRIPTURES.length, true);
+}
+
+function goToScripture(index) {
+  clearInterval(sbTimer);
+  showScriptureBanner(index, true);
+  sbTimer = setInterval(() => advanceScripture(), 60000);
+}
+
+initScriptureBanner();
+</script>
+</body>
+</html>
