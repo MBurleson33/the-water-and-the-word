@@ -159,18 +159,6 @@
   .desc-modal-close { flex: 1; padding: 13px; background: none; border: 1px solid var(--border); font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; transition: all 0.2s; }
   .desc-modal-close:hover { border-color: var(--ink); color: var(--ink); }
 
-  /* ── SCRIPTURE BANNER ── */
-  .scripture-banner { background: var(--deep); padding: 36px 80px; text-align: center; border-top: 1px solid rgba(196,154,108,0.2); border-bottom: 1px solid rgba(196,154,108,0.2); }
-  .scripture-banner-inner { max-width: 860px; margin: 0 auto; }
-  .scripture-banner-label { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(196,154,108,0.7); margin-bottom: 14px; display: block; }
-  .scripture-banner-verse { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(244,242,238,0.88); line-height: 1.75; transition: opacity 0.6s ease; min-height: 2em; }
-  .scripture-banner-verse.fade { opacity: 0; }
-  .scripture-banner-ref { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(196,154,108,0.8); margin-top: 14px; display: block; transition: opacity 0.6s ease; }
-  .scripture-banner-ref.fade { opacity: 0; }
-  .scripture-banner-dots { display: flex; justify-content: center; gap: 6px; margin-top: 18px; }
-  .scripture-banner-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(196,154,108,0.3); transition: background 0.4s; cursor: pointer; }
-  .scripture-banner-dot.active { background: rgba(196,154,108,0.8); }
-
   /* ── FOOTER ── */
   footer { background: var(--deep); padding: 64px 48px 40px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(244,242,238,0.1); }
@@ -296,10 +284,6 @@
 </div>
 
 <!-- SCRIPTURE BANNER -->
-<div class="scripture-banner">
-  <div class="scripture-banner-inner">
-    <span class="scripture-banner-label">✦ Scripture</span>
-    <div class="scripture-banner-verse" id="sb-verse"></div>
     <span class="scripture-banner-ref" id="sb-ref"></span>
     <div class="scripture-banner-dots" id="sb-dots"></div>
   </div>
@@ -505,29 +489,6 @@ document.addEventListener('click',function(e){
 });
 
 // ── SCRIPTURE BANNER ──────────────────────────────────────────────────────────
-const SCRIPTURES=[
-  {ref:'John 14:26',verse:'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.'},
-  {ref:'1 Corinthians 1:18',verse:'For the word of the cross is folly to those who are perishing, but to us who are being saved it is the power of God.'},
-  {ref:'John 10:26–27',verse:'But you do not believe because you are not among my sheep. My sheep hear my voice, and I know them, and they follow me.'},
-  {ref:'Romans 8:5–8',verse:'For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit set their minds on the things of the Spirit.'},
-  {ref:'1 John 5:20',verse:'And we know that the Son of God has come and has given us understanding, so that we may know him who is true; and we are in him who is true, in his Son Jesus Christ.'},
-];
-let sbIndex=0,sbTimer=null;
-function initScriptureBanner(){const dots=document.getElementById('sb-dots');dots.innerHTML=SCRIPTURES.map((_,i)=>`<div class="scripture-banner-dot${i===0?' active':''}" onclick="goToScripture(${i})"></div>`).join('');showScriptureBanner(0);sbTimer=setInterval(()=>advanceScripture(),60000);}
-function showScriptureBanner(index,animate=false){const v=document.getElementById('sb-verse'),r=document.getElementById('sb-ref'),dots=document.querySelectorAll('.scripture-banner-dot');if(animate){v.classList.add('fade');r.classList.add('fade');setTimeout(()=>{v.textContent=SCRIPTURES[index].verse;r.textContent=SCRIPTURES[index].ref;v.classList.remove('fade');r.classList.remove('fade');},600);}else{v.textContent=SCRIPTURES[index].verse;r.textContent=SCRIPTURES[index].ref;}dots.forEach((d,i)=>d.classList.toggle('active',i===index));sbIndex=index;}
-function advanceScripture(){showScriptureBanner((sbIndex+1)%SCRIPTURES.length,true);}
-function goToScripture(index){clearInterval(sbTimer);showScriptureBanner(index,true);sbTimer=setInterval(()=>advanceScripture(),60000);}
-
-// ── LOAD VIDEOS ───────────────────────────────────────────────────────────────
-async function loadVideos(){
-  const skeletonCard=`<div class="skeleton-card"><div class="skeleton skeleton-thumb"></div><div class="skeleton-body"><div class="skeleton skeleton-line skeleton-short"></div><div class="skeleton skeleton-line skeleton-title"></div><div class="skeleton skeleton-line" style="width:90%"></div><div class="skeleton skeleton-tags"><div class="skeleton skeleton-tag"></div><div class="skeleton skeleton-tag"></div></div></div></div>`;
-  document.getElementById('video-grid').innerHTML=skeletonCard.repeat(8);
-  const {data,error}=await _supabase.from('videos').select('*').order('created_at',{ascending:false});
-  if(error){document.getElementById('video-grid').innerHTML='<div class="empty-state"><h3>Could not load videos</h3><p>Please check back soon.</p></div>';return;}
-  videos=(data||[]).map(dbRowToVideo);
-  renderTopicPills();
-  applySortAndRender();
-  initScriptureBanner();
   // Check URL for pre-filtered search
   const params=new URLSearchParams(window.location.search);
   const q=params.get('q');
