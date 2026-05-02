@@ -902,7 +902,7 @@
 
   /* ── ROTATING SCRIPTURE BANNER ── */
   .scripture-banner {
-    background: #0e1f35;
+    background: #1a2d47;
     padding: 36px 80px;
     text-align: center;
     position: relative;
@@ -912,7 +912,7 @@
   }
   .scripture-banner-canvas {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    opacity: 0.55; transition: opacity 1s ease;
+    opacity: 0.7; transition: opacity 1s ease;
     pointer-events: none;
   }
   .scripture-banner-inner {
@@ -2455,15 +2455,15 @@ function toggleTheme() {
 // Watercolor palette sets — each set used for 3 verses, then fades to next
 const SB_PALETTES = [
   // Warm rose & blush
-  ['rgba(180,120,110,0.35)', 'rgba(210,160,140,0.25)', 'rgba(140,80,90,0.2)', 'rgba(190,140,110,0.15)'],
-  // Dusty sage & moss
-  ['rgba(100,130,110,0.35)', 'rgba(140,165,130,0.25)', 'rgba(80,110,90,0.2)', 'rgba(160,180,150,0.15)'],
+  ['rgba(210,150,140,0.55)', 'rgba(235,185,170,0.4)', 'rgba(180,110,120,0.35)', 'rgba(220,170,145,0.3)'],
+  // Dusty sage & mint
+  ['rgba(130,170,145,0.55)', 'rgba(165,200,170,0.4)', 'rgba(100,145,120,0.35)', 'rgba(185,210,180,0.3)'],
   // Dusty blue & periwinkle
-  ['rgba(90,120,170,0.35)', 'rgba(120,150,200,0.25)', 'rgba(70,100,150,0.2)', 'rgba(150,170,210,0.15)'],
+  ['rgba(120,155,210,0.55)', 'rgba(155,185,230,0.4)', 'rgba(95,130,190,0.35)', 'rgba(175,200,235,0.3)'],
   // Warm amber & gold
-  ['rgba(180,140,80,0.35)', 'rgba(210,170,100,0.25)', 'rgba(150,110,60,0.2)', 'rgba(200,160,90,0.15)'],
-  // Muted mauve & thistle
-  ['rgba(150,110,150,0.35)', 'rgba(180,140,180,0.25)', 'rgba(120,90,130,0.2)', 'rgba(170,140,170,0.15)'],
+  ['rgba(215,170,100,0.55)', 'rgba(235,195,130,0.4)', 'rgba(185,140,75,0.35)', 'rgba(225,190,120,0.3)'],
+  // Muted mauve & lavender
+  ['rgba(185,145,190,0.55)', 'rgba(210,170,210,0.4)', 'rgba(155,120,165,0.35)', 'rgba(200,170,205,0.3)'],
 ];
 
 let sbPaletteIndex = 0;
@@ -2508,7 +2508,7 @@ function transitionPalette(palette) {
   sbCanvas.style.opacity = '0';
   setTimeout(() => {
     spawnBlobs(palette);
-    sbCanvas.style.opacity = '0.55';
+    sbCanvas.style.opacity = '0.7';
   }, 900);
 }
 
