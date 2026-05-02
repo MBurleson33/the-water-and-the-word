@@ -81,18 +81,6 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   @media (max-width: 768px) { .page-hero { padding: 136px 24px 56px; } .page-hero h1 { font-size: 42px; } .page-content { padding: 48px 24px 64px; } }
 
-  /* ── SCRIPTURE BANNER ── */
-  .scripture-banner { background: var(--deep); padding: 36px 80px; text-align: center; border-top: 1px solid rgba(196,154,108,0.2); border-bottom: 1px solid rgba(196,154,108,0.2); }
-  .scripture-banner-inner { max-width: 860px; margin: 0 auto; }
-  .scripture-banner-label { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(196,154,108,0.7); margin-bottom: 14px; display: block; }
-  .scripture-banner-verse { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(244,242,238,0.88); line-height: 1.75; transition: opacity 0.6s ease; min-height: 2em; }
-  .scripture-banner-verse.fade { opacity: 0; }
-  .scripture-banner-ref { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(196,154,108,0.8); margin-top: 14px; display: block; transition: opacity 0.6s ease; }
-  .scripture-banner-ref.fade { opacity: 0; }
-  .scripture-banner-dots { display: flex; justify-content: center; gap: 6px; margin-top: 18px; }
-  .scripture-banner-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(196,154,108,0.3); transition: background 0.4s; cursor: pointer; }
-  .scripture-banner-dot.active { background: rgba(196,154,108,0.8); }
-
   /* ── FOOTER ── */
   footer { background: var(--deep); padding: 64px 48px 40px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(244,242,238,0.1); }
@@ -170,10 +158,6 @@
   </div>
 </div>
 
-<div class="scripture-banner">
-  <div class="scripture-banner-inner">
-    <span class="scripture-banner-label">✦ Scripture</span>
-    <div class="scripture-banner-verse" id="sb-verse"></div>
     <span class="scripture-banner-ref" id="sb-ref"></span>
     <div class="scripture-banner-dots" id="sb-dots"></div>
   </div>
@@ -217,20 +201,6 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 async function submitPrayer(){const name=document.getElementById('prayer-name').value.trim()||'Anonymous';const message=document.getElementById('prayer-message').value.trim();if(!message){showToast('Please write your prayer request before submitting.');return;}const btn=document.getElementById('prayer-btn');btn.disabled=true;btn.textContent='Sending…';try{const res=await fetch('/api/prayer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,message,yt_id:null,episode_title:null})});if(!res.ok)throw new Error();document.getElementById('prayer-form').style.display='none';document.getElementById('prayer-sent').classList.add('show');}catch(e){showToast('Could not submit prayer. Please try again.');btn.disabled=false;btn.textContent='Send My Prayer ✦';}}
 function resetPrayerForm(){document.getElementById('prayer-name').value='';document.getElementById('prayer-message').value='';document.getElementById('prayer-form').style.display='';const btn=document.getElementById('prayer-btn');btn.disabled=false;btn.textContent='Send My Prayer ✦';document.getElementById('prayer-sent').classList.remove('show');}
 document.getElementById('footer-year').textContent=new Date().getFullYear();
-const SCRIPTURES=[
-  {ref:'Philippians 4:6–7',verse:'Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.'},
-  {ref:'Romans 8:26',verse:'Likewise the Spirit helps us in our weakness. For we do not know what to pray for as we ought, but the Spirit himself intercedes for us with groanings too deep for words.'},
-  {ref:'Matthew 6:6',verse:'But when you pray, go into your room and shut the door and pray to your Father who is in secret. And your Father who sees in secret will reward you.'},
-  {ref:'1 John 5:14',verse:'And this is the confidence that we have toward him, that if we ask anything according to his will he hears us.'},
-  {ref:'James 5:16',verse:'The prayer of a righteous person has great power as it is working.'},
-  {ref:'John 14:26',verse:'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.'},
-];
-let sbIndex=0,sbTimer=null;
-function initScriptureBanner(){const dots=document.getElementById('sb-dots');dots.innerHTML=SCRIPTURES.map((_,i)=>`<div class="scripture-banner-dot${i===0?' active':''}" onclick="goToScripture(${i})"></div>`).join('');showScriptureBanner(0);sbTimer=setInterval(()=>advanceScripture(),60000);}
-function showScriptureBanner(index,animate=false){const v=document.getElementById('sb-verse'),r=document.getElementById('sb-ref'),dots=document.querySelectorAll('.scripture-banner-dot');if(animate){v.classList.add('fade');r.classList.add('fade');setTimeout(()=>{v.textContent=SCRIPTURES[index].verse;r.textContent=SCRIPTURES[index].ref;v.classList.remove('fade');r.classList.remove('fade');},600);}else{v.textContent=SCRIPTURES[index].verse;r.textContent=SCRIPTURES[index].ref;}dots.forEach((d,i)=>d.classList.toggle('active',i===index));sbIndex=index;}
-function advanceScripture(){showScriptureBanner((sbIndex+1)%SCRIPTURES.length,true);}
-function goToScripture(index){clearInterval(sbTimer);showScriptureBanner(index,true);sbTimer=setInterval(()=>advanceScripture(),60000);}
-initScriptureBanner();
 </script>
 </body>
 </html>
