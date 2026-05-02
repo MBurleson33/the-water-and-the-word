@@ -902,7 +902,7 @@
 
   /* ── ROTATING SCRIPTURE BANNER ── */
   .scripture-banner {
-    background: #1a2d47;
+    background: #4a6080;
     padding: 36px 80px;
     text-align: center;
     position: relative;
@@ -1002,6 +1002,17 @@
 
 <!-- ══ HOME PAGE ══ -->
 <div id="page-home" class="page active">
+<!-- ROTATING SCRIPTURE BANNER -->
+<div class="scripture-banner">
+  <canvas class="scripture-banner-canvas" id="sb-canvas"></canvas>
+  <div class="scripture-banner-inner">
+    <span class="scripture-banner-label">✦ Scripture</span>
+    <div class="scripture-banner-verse" id="sb-verse"></div>
+    <span class="scripture-banner-ref" id="sb-ref"></span>
+    <div class="scripture-banner-dots" id="sb-dots"></div>
+  </div>
+</div>
+
   <div class="hero-section">
       <span class="scripture-ref" id="scripture-ref"></span>
     </div>
@@ -1056,17 +1067,6 @@
       Clear Search
     </button>
   </div>
-
-<!-- ROTATING SCRIPTURE BANNER -->
-<div class="scripture-banner">
-  <canvas class="scripture-banner-canvas" id="sb-canvas"></canvas>
-  <div class="scripture-banner-inner">
-    <span class="scripture-banner-label">✦ Scripture</span>
-    <div class="scripture-banner-verse" id="sb-verse"></div>
-    <span class="scripture-banner-ref" id="sb-ref"></span>
-    <div class="scripture-banner-dots" id="sb-dots"></div>
-  </div>
-</div>
 
   <div class="section-label" id="section-label">
     <span>All Episodes</span>
