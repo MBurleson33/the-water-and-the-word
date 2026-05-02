@@ -67,18 +67,6 @@
   .page-cta a.secondary:hover { border-color: var(--gold); color: var(--gold); }
   @media (max-width: 768px) { .page-hero { padding: 136px 24px 56px; } .page-hero h1 { font-size: 42px; } .page-content { padding: 48px 24px 64px; } }
 
-  /* ── SCRIPTURE BANNER ── */
-  .scripture-banner { background: var(--deep); padding: 36px 80px; text-align: center; border-top: 1px solid rgba(196,154,108,0.2); border-bottom: 1px solid rgba(196,154,108,0.2); }
-  .scripture-banner-inner { max-width: 860px; margin: 0 auto; }
-  .scripture-banner-label { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(196,154,108,0.7); margin-bottom: 14px; display: block; }
-  .scripture-banner-verse { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(244,242,238,0.88); line-height: 1.75; transition: opacity 0.6s ease; min-height: 2em; }
-  .scripture-banner-verse.fade { opacity: 0; }
-  .scripture-banner-ref { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(196,154,108,0.8); margin-top: 14px; display: block; transition: opacity 0.6s ease; }
-  .scripture-banner-ref.fade { opacity: 0; }
-  .scripture-banner-dots { display: flex; justify-content: center; gap: 6px; margin-top: 18px; }
-  .scripture-banner-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(196,154,108,0.3); transition: background 0.4s; cursor: pointer; }
-  .scripture-banner-dot.active { background: rgba(196,154,108,0.8); }
-
   /* ── FOOTER ── */
   footer { background: var(--deep); padding: 64px 48px 40px; }
   .footer-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(244,242,238,0.1); }
@@ -154,10 +142,6 @@
   </div>
 </div>
 
-<div class="scripture-banner">
-  <div class="scripture-banner-inner">
-    <span class="scripture-banner-label">✦ Scripture</span>
-    <div class="scripture-banner-verse" id="sb-verse"></div>
     <span class="scripture-banner-ref" id="sb-ref"></span>
     <div class="scripture-banner-dots" id="sb-dots"></div>
   </div>
@@ -196,21 +180,6 @@
 function applyTheme(dark){document.documentElement.setAttribute('data-theme',dark?'dark':'light');}
 function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark'||(!document.documentElement.getAttribute('data-theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches);applyTheme(!d);localStorage.setItem('watw_theme',!d?'dark':'light');}
 document.getElementById('footer-year').textContent=new Date().getFullYear();
-const SCRIPTURES=[
-  {ref:'John 14:26',verse:'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.'},
-  {ref:'John 15:26',verse:'But when the Helper comes, whom I will send to you from the Father, the Spirit of truth, who proceeds from the Father, he will bear witness about me.'},
-  {ref:'Romans 8:5–8',verse:'For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit set their minds on the things of the Spirit. For to set the mind on the flesh is death, but to set the mind on the Spirit is life and peace.'},
-  {ref:'1 Corinthians 1:18',verse:'For the word of the cross is folly to those who are perishing, but to us who are being saved it is the power of God.'},
-  {ref:'1 John 2:27',verse:'But the anointing that you received from him abides in you, and you have no need that anyone should teach you. But as his anointing teaches you about everything, and is true, and is no lie—just as it has taught you, abide in him.'},
-  {ref:'John 10:26–27',verse:'But you do not believe because you are not among my sheep. My sheep hear my voice, and I know them, and they follow me.'},
-  {ref:'1 John 5:20',verse:'And we know that the Son of God has come and has given us understanding, so that we may know him who is true; and we are in him who is true, in his Son Jesus Christ. He is the true God and eternal life.'},
-];
-let sbIndex=0,sbTimer=null;
-function initScriptureBanner(){const dots=document.getElementById('sb-dots');dots.innerHTML=SCRIPTURES.map((_,i)=>`<div class="scripture-banner-dot${i===0?' active':''}" onclick="goToScripture(${i})"></div>`).join('');showScriptureBanner(0);sbTimer=setInterval(()=>advanceScripture(),60000);}
-function showScriptureBanner(index,animate=false){const v=document.getElementById('sb-verse'),r=document.getElementById('sb-ref'),dots=document.querySelectorAll('.scripture-banner-dot');if(animate){v.classList.add('fade');r.classList.add('fade');setTimeout(()=>{v.textContent=SCRIPTURES[index].verse;r.textContent=SCRIPTURES[index].ref;v.classList.remove('fade');r.classList.remove('fade');},600);}else{v.textContent=SCRIPTURES[index].verse;r.textContent=SCRIPTURES[index].ref;}dots.forEach((d,i)=>d.classList.toggle('active',i===index));sbIndex=index;}
-function advanceScripture(){showScriptureBanner((sbIndex+1)%SCRIPTURES.length,true);}
-function goToScripture(index){clearInterval(sbTimer);showScriptureBanner(index,true);sbTimer=setInterval(()=>advanceScripture(),60000);}
-initScriptureBanner();
 </script>
 </body>
 </html>
