@@ -902,21 +902,17 @@
 
   /* ── ROTATING SCRIPTURE BANNER ── */
   .scripture-banner {
-    background: var(--deep);
+    background: #0e1f35;
     padding: 36px 80px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(184,150,90,0.2);
-    border-bottom: 1px solid rgba(184,150,90,0.2);
+    border-top: 1px solid rgba(184,150,90,0.15);
+    border-bottom: 1px solid rgba(184,150,90,0.15);
   }
-  .scripture-banner::before {
-    content: ''; position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      rgba(184,150,90,0.03) 0px, rgba(184,150,90,0.03) 1px,
-      transparent 1px, transparent 80px
-    );
+  .scripture-banner-canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0.55; transition: opacity 1s ease;
     pointer-events: none;
   }
   .scripture-banner-inner {
@@ -1060,6 +1056,17 @@
       Clear Search
     </button>
   </div>
+
+<!-- ROTATING SCRIPTURE BANNER -->
+<div class="scripture-banner">
+  <canvas class="scripture-banner-canvas" id="sb-canvas"></canvas>
+  <div class="scripture-banner-inner">
+    <span class="scripture-banner-label">✦ Scripture</span>
+    <div class="scripture-banner-verse" id="sb-verse"></div>
+    <span class="scripture-banner-ref" id="sb-ref"></span>
+    <div class="scripture-banner-dots" id="sb-dots"></div>
+  </div>
+</div>
 
   <div class="section-label" id="section-label">
     <span>All Episodes</span>
@@ -1276,16 +1283,6 @@
   </div>
 </div>
 </main>
-
-<!-- ROTATING SCRIPTURE BANNER -->
-<div class="scripture-banner">
-  <div class="scripture-banner-inner">
-    <span class="scripture-banner-label">✦ Scripture</span>
-    <div class="scripture-banner-verse" id="sb-verse"></div>
-    <span class="scripture-banner-ref" id="sb-ref"></span>
-    <div class="scripture-banner-dots" id="sb-dots"></div>
-  </div>
-</div>
 
 <!-- FOOTER -->
 <footer role="contentinfo">
@@ -2455,6 +2452,100 @@ function toggleTheme() {
 
 
 // ── ROTATING SCRIPTURE BANNER ─────────────────────────────────────────────────
+// Watercolor palette sets — each set used for 3 verses, then fades to next
+const SB_PALETTES = [
+  // Warm rose & blush
+  ['rgba(180,120,110,0.35)', 'rgba(210,160,140,0.25)', 'rgba(140,80,90,0.2)', 'rgba(190,140,110,0.15)'],
+  // Dusty sage & moss
+  ['rgba(100,130,110,0.35)', 'rgba(140,165,130,0.25)', 'rgba(80,110,90,0.2)', 'rgba(160,180,150,0.15)'],
+  // Dusty blue & periwinkle
+  ['rgba(90,120,170,0.35)', 'rgba(120,150,200,0.25)', 'rgba(70,100,150,0.2)', 'rgba(150,170,210,0.15)'],
+  // Warm amber & gold
+  ['rgba(180,140,80,0.35)', 'rgba(210,170,100,0.25)', 'rgba(150,110,60,0.2)', 'rgba(200,160,90,0.15)'],
+  // Muted mauve & thistle
+  ['rgba(150,110,150,0.35)', 'rgba(180,140,180,0.25)', 'rgba(120,90,130,0.2)', 'rgba(170,140,170,0.15)'],
+];
+
+let sbPaletteIndex = 0;
+let sbCanvas = null, sbCtx = null;
+let sbBlobs = [];
+let sbAnimFrame = null;
+
+function initWatercolor() {
+  sbCanvas = document.getElementById('sb-canvas');
+  if (!sbCanvas) return;
+  resizeSbCanvas();
+  window.addEventListener('resize', resizeSbCanvas);
+  spawnBlobs(SB_PALETTES[0]);
+  animateWatercolor();
+}
+
+function resizeSbCanvas() {
+  if (!sbCanvas) return;
+  sbCanvas.width = sbCanvas.offsetWidth;
+  sbCanvas.height = sbCanvas.offsetHeight;
+  sbCtx = sbCanvas.getContext('2d');
+}
+
+function spawnBlobs(palette) {
+  const w = sbCanvas.width || 800;
+  const h = sbCanvas.height || 160;
+  sbBlobs = palette.map((color, i) => ({
+    x: (0.15 + i * 0.22 + Math.random() * 0.1) * w,
+    y: (0.2 + Math.random() * 0.6) * h,
+    rx: (0.18 + Math.random() * 0.14) * w,
+    ry: (0.35 + Math.random() * 0.3) * h,
+    color,
+    angle: Math.random() * Math.PI,
+    dx: (Math.random() - 0.5) * 0.18,
+    dy: (Math.random() - 0.5) * 0.06,
+    dangle: (Math.random() - 0.5) * 0.004,
+  }));
+}
+
+function transitionPalette(palette) {
+  // Fade out canvas, swap blobs, fade back in
+  sbCanvas.style.opacity = '0';
+  setTimeout(() => {
+    spawnBlobs(palette);
+    sbCanvas.style.opacity = '0.55';
+  }, 900);
+}
+
+function animateWatercolor() {
+  if (!sbCtx || !sbCanvas) return;
+  const w = sbCanvas.width;
+  const h = sbCanvas.height;
+  sbCtx.clearRect(0, 0, w, h);
+
+  // Draw each blob as a soft radial ellipse
+  sbBlobs.forEach(b => {
+    // Drift
+    b.x += b.dx; b.y += b.dy; b.angle += b.dangle;
+    // Soft boundary bounce
+    if (b.x < -b.rx * 0.3) b.dx = Math.abs(b.dx);
+    if (b.x > w + b.rx * 0.3) b.dx = -Math.abs(b.dx);
+    if (b.y < -b.ry * 0.3) b.dy = Math.abs(b.dy);
+    if (b.y > h + b.ry * 0.3) b.dy = -Math.abs(b.dy);
+
+    sbCtx.save();
+    sbCtx.translate(b.x, b.y);
+    sbCtx.rotate(b.angle);
+    const grad = sbCtx.createRadialGradient(0, 0, 0, 0, 0, Math.max(b.rx, b.ry));
+    grad.addColorStop(0, b.color);
+    grad.addColorStop(0.5, b.color.replace(/[\d.]+\)$/, v => (parseFloat(v) * 0.5) + ')'));
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    sbCtx.scale(b.rx / Math.max(b.rx, b.ry), b.ry / Math.max(b.rx, b.ry));
+    sbCtx.beginPath();
+    sbCtx.arc(0, 0, Math.max(b.rx, b.ry), 0, Math.PI * 2);
+    sbCtx.fillStyle = grad;
+    sbCtx.fill();
+    sbCtx.restore();
+  });
+
+  sbAnimFrame = requestAnimationFrame(animateWatercolor);
+}
+
 const SCRIPTURES = [
   { ref: 'Acts 16:14', verse: 'One who heard us was a woman named Lydia, from the city of Thyatira, a seller of purple goods, who was a worshiper of God. The Lord opened her heart to pay attention to what was said by Paul.' },
   { ref: 'Acts 17:18', verse: 'Some of the Epicurean and Stoic philosophers also conversed with him. And some said, “What does this babbler wish to say?” Others said, “He seems to be a preacher of foreign divinities”—because he was preaching Jesus and the resurrection.' },
@@ -2490,6 +2581,7 @@ let sbIndex = 0;
 let sbTimer = null;
 
 function initScriptureBanner() {
+  initWatercolor();
   const dots = document.getElementById('sb-dots');
   // Create dots
   dots.innerHTML = SCRIPTURES.map((_, i) =>
@@ -2520,6 +2612,10 @@ function showScriptureBanner(index, animate = false) {
 
   dots.forEach((d, i) => d.classList.toggle('active', i === index));
   sbIndex = index;
+
+  // Rotate palette every 3 verses
+  const newPalette = Math.floor(index / 3) % SB_PALETTES.length;
+  if (newPalette !== sbPaletteIndex) { sbPaletteIndex = newPalette; transitionPalette(SB_PALETTES[sbPaletteIndex]); }
 }
 
 function advanceScripture() {
