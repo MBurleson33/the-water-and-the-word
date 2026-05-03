@@ -940,14 +940,7 @@
     transition: opacity 0.6s ease;
   }
   .scripture-banner-ref.fade { opacity: 0; }
-  .scripture-banner-dots {
-    display: flex; justify-content: center; gap: 6px; margin-top: 20px;
-  }
-  .scripture-banner-dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: rgba(196,154,108,0.3); transition: background 0.4s; cursor: pointer;
-  }
-  .scripture-banner-dot.active { background: rgba(196,154,108,0.8); }
+
   @media (max-width: 768px) {
     .scripture-banner { padding: 32px 24px; }
     .scripture-banner-verse { font-size: 19px; }
@@ -1031,7 +1024,6 @@
     <span class="scripture-banner-label">✦ Scripture</span>
     <div class="scripture-banner-verse" id="sb-verse"></div>
     <span class="scripture-banner-ref" id="sb-ref"></span>
-    <div class="scripture-banner-dots" id="sb-dots"></div>
   </div>
 </div>
 
@@ -2481,10 +2473,6 @@ let sbTimer = null;
 
 function initScriptureBanner() {
   loadScriptureImages();
-  const dots = document.getElementById('sb-dots');
-  dots.innerHTML = SCRIPTURES.map((_, i) =>
-    `<div class="scripture-banner-dot${i === 0 ? ' active' : ''}" onclick="goToScripture(${i})"></div>`
-  ).join('');
   showScriptureBanner(0);
   sbTimer = setInterval(() => advanceScripture(), 60000);
 }
@@ -2492,7 +2480,6 @@ function initScriptureBanner() {
 function showScriptureBanner(index, animate = false) {
   const verseEl = document.getElementById('sb-verse');
   const refEl   = document.getElementById('sb-ref');
-  const dots    = document.querySelectorAll('.scripture-banner-dot');
   if (animate) {
     verseEl.classList.add('fade'); refEl.classList.add('fade');
     setTimeout(() => {
@@ -2504,7 +2491,6 @@ function showScriptureBanner(index, animate = false) {
     verseEl.textContent = SCRIPTURES[index].verse;
     refEl.textContent   = SCRIPTURES[index].ref;
   }
-  dots.forEach((d, i) => d.classList.toggle('active', i === index));
   sbIndex = index;
   // Rotate background image every 3 verses
   maybeRotateImage(index);
@@ -2512,12 +2498,6 @@ function showScriptureBanner(index, animate = false) {
 
 function advanceScripture() {
   showScriptureBanner((sbIndex + 1) % SCRIPTURES.length, true);
-}
-
-function goToScripture(index) {
-  clearInterval(sbTimer);
-  showScriptureBanner(index, true);
-  sbTimer = setInterval(() => advanceScripture(), 60000);
 }
 
 // Unsplash-sourced images — soft botanical/floral, rotated every 3 verses
