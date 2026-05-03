@@ -2454,6 +2454,72 @@ function toggleTheme() {
 
 
 // ── ROTATING SCRIPTURE BANNER ─────────────────────────────────────────────────
+const SCRIPTURES = [
+  { ref: 'Acts 16:14', verse: 'One who heard us was a woman named Lydia, from the city of Thyatira, a seller of purple goods, who was a worshiper of God. The Lord opened her heart to pay attention to what was said by Paul.' },
+  { ref: 'Acts 17:32', verse: 'Now when they heard of the resurrection of the dead, some mocked. But others said, "We will hear you again about this."' },
+  { ref: 'John 3:3–6', verse: 'Jesus answered him, "Truly, truly, I say to you, unless one is born again he cannot see the kingdom of God." Jesus answered, "Truly, truly, I say to you, unless one is born of water and the Spirit, he cannot enter the kingdom of God. That which is born of the flesh is flesh, and that which is born of the Spirit is spirit."' },
+  { ref: 'John 5:44', verse: 'How can you believe, when you receive glory from one another and do not seek the glory that comes from the only God?' },
+  { ref: 'John 6:44–45', verse: 'No one can come to me unless the Father who sent me draws him. And I will raise him up on the last day. It is written in the Prophets, "And they will all be taught by God." Everyone who has heard and learned from the Father comes to me—' },
+  { ref: 'John 8:43', verse: 'Why do you not understand what I say? It is because you cannot bear to hear my word.' },
+  { ref: 'John 10:26–27', verse: 'But you do not believe because you are not among my sheep. My sheep hear my voice, and I know them, and they follow me.' },
+  { ref: 'John 14:26', verse: 'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.' },
+  { ref: 'John 15:26', verse: 'But when the Helper comes, whom I will send to you from the Father, the Spirit of truth, who proceeds from the Father, he will bear witness about me.' },
+  { ref: 'Romans 8:5–8', verse: 'For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit set their minds on the things of the Spirit. For to set the mind on the flesh is death, but to set the mind on the Spirit is life and peace.' },
+  { ref: '1 Corinthians 1:18', verse: 'For the word of the cross is folly to those who are perishing, but to us who are being saved it is the power of God.' },
+  { ref: '1 Corinthians 2:12', verse: 'Now we have received not the spirit of the world, but the Spirit who is from God, that we might understand the things freely given us by God.' },
+  { ref: '2 Corinthians 4:4–6', verse: 'In their case the god of this world has blinded the minds of the unbelievers, to keep them from seeing the light of the gospel of the glory of Christ, who is the image of God.' },
+  { ref: 'Proverbs 14:6', verse: 'A scoffer seeks wisdom in vain, but knowledge is easy for a man of understanding.' },
+  { ref: 'Matthew 13:11', verse: 'To you it has been given to know the secrets of the kingdom of heaven, but to them it has not been given.' },
+  { ref: 'James 3:15', verse: 'This is not the wisdom that comes down from above, but is earthly, unspiritual, demonic.' },
+  { ref: 'Jude 1:19', verse: 'It is these who cause divisions, worldly people, devoid of the Spirit.' },
+  { ref: '1 John 2:27', verse: 'But the anointing that you received from him abides in you, and you have no need that anyone should teach you. But as his anointing teaches you about everything, and is true, and is no lie—just as it has taught you, abide in him.' },
+  { ref: '1 John 5:20', verse: 'And we know that the Son of God has come and has given us understanding, so that we may know him who is true; and we are in him who is true, in his Son Jesus Christ. He is the true God and eternal life.' },
+];
+
+let sbIndex = 0;
+let sbTimer = null;
+
+function initScriptureBanner() {
+  loadScriptureImages();
+  const dots = document.getElementById('sb-dots');
+  dots.innerHTML = SCRIPTURES.map((_, i) =>
+    `<div class="scripture-banner-dot${i === 0 ? ' active' : ''}" onclick="goToScripture(${i})"></div>`
+  ).join('');
+  showScriptureBanner(0);
+  sbTimer = setInterval(() => advanceScripture(), 60000);
+}
+
+function showScriptureBanner(index, animate = false) {
+  const verseEl = document.getElementById('sb-verse');
+  const refEl   = document.getElementById('sb-ref');
+  const dots    = document.querySelectorAll('.scripture-banner-dot');
+  if (animate) {
+    verseEl.classList.add('fade'); refEl.classList.add('fade');
+    setTimeout(() => {
+      verseEl.textContent = SCRIPTURES[index].verse;
+      refEl.textContent   = SCRIPTURES[index].ref;
+      verseEl.classList.remove('fade'); refEl.classList.remove('fade');
+    }, 600);
+  } else {
+    verseEl.textContent = SCRIPTURES[index].verse;
+    refEl.textContent   = SCRIPTURES[index].ref;
+  }
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  sbIndex = index;
+  // Rotate background image every 3 verses
+  maybeRotateImage(index);
+}
+
+function advanceScripture() {
+  showScriptureBanner((sbIndex + 1) % SCRIPTURES.length, true);
+}
+
+function goToScripture(index) {
+  clearInterval(sbTimer);
+  showScriptureBanner(index, true);
+  sbTimer = setInterval(() => advanceScripture(), 60000);
+}
+
 // Unsplash-sourced images — soft botanical/floral, rotated every 3 verses
 let sbImages = [];
 let sbImageIndex = 0;
