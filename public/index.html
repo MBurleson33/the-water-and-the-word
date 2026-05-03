@@ -910,13 +910,6 @@
     border-top: 1px solid #e8e4de;
     border-bottom: 1px solid #e8e4de;
   }
-  .scripture-banner-bg {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
-    opacity: 0.12; transition: opacity 1.2s ease, background-image 0s;
-    pointer-events: none;
-  }
-  .scripture-banner-bg.fade-img { opacity: 0; }
   .scripture-banner-inner {
     max-width: 860px; margin: 0 auto; position: relative; z-index: 1;
   }
@@ -940,6 +933,14 @@
     transition: opacity 0.6s ease;
   }
   .scripture-banner-ref.fade { opacity: 0; }
+
+  /* Dark mode overrides */
+  [data-theme="dark"] .scripture-banner { background: #1e2530; border-color: #2a3040; }
+  [data-theme="dark"] .scripture-banner-verse { color: rgba(232,230,226,0.88); }
+  @media (prefers-color-scheme: dark) {
+    .scripture-banner { background: #1e2530; border-color: #2a3040; }
+    .scripture-banner-verse { color: rgba(232,230,226,0.88); }
+  }
 
   @media (max-width: 768px) {
     .scripture-banner { padding: 32px 24px; }
@@ -1019,7 +1020,6 @@
   <!-- LATEST EPISODE -->
 <!-- ROTATING SCRIPTURE BANNER -->
 <div class="scripture-banner">
-  <div class="scripture-banner-bg" id="sb-bg"></div>
   <div class="scripture-banner-inner">
     <span class="scripture-banner-label">✦ Scripture</span>
     <div class="scripture-banner-verse" id="sb-verse"></div>
@@ -2492,8 +2492,6 @@ function showScriptureBanner(index, animate = false) {
     refEl.textContent   = SCRIPTURES[index].ref;
   }
   sbIndex = index;
-  // Rotate background image every 3 verses
-  maybeRotateImage(index);
 }
 
 function advanceScripture() {
