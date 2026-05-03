@@ -902,31 +902,33 @@
 
   /* ── ROTATING SCRIPTURE BANNER ── */
   .scripture-banner {
-    background: #4a6080;
-    padding: 36px 80px;
+    background: #ffffff;
+    padding: 48px 80px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-top: 1px solid rgba(184,150,90,0.15);
-    border-bottom: 1px solid rgba(184,150,90,0.15);
+    border-top: 1px solid #e8e4de;
+    border-bottom: 1px solid #e8e4de;
   }
-  .scripture-banner-canvas {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    opacity: 0.7; transition: opacity 1s ease;
+  .scripture-banner-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0.12; transition: opacity 1.2s ease, background-image 0s;
     pointer-events: none;
   }
+  .scripture-banner-bg.fade-img { opacity: 0; }
   .scripture-banner-inner {
-    max-width: 860px; margin: 0 auto; position: relative;
+    max-width: 860px; margin: 0 auto; position: relative; z-index: 1;
   }
   .scripture-banner-label {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: rgba(184,150,90,0.7); margin-bottom: 14px; display: block;
+    color: #c49a6c; margin-bottom: 14px; display: block;
   }
   .scripture-banner-verse {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-style: italic; font-weight: 300;
-    color: rgba(244,242,238,0.88); line-height: 1.75;
+    font-size: 22px; font-style: italic; font-weight: 300;
+    color: #2a2825; line-height: 1.85;
     transition: opacity 0.6s ease;
     min-height: 2em;
   }
@@ -934,21 +936,21 @@
   .scripture-banner-ref {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(184,150,90,0.8); margin-top: 14px; display: block;
+    color: #c49a6c; margin-top: 16px; display: block;
     transition: opacity 0.6s ease;
   }
   .scripture-banner-ref.fade { opacity: 0; }
   .scripture-banner-dots {
-    display: flex; justify-content: center; gap: 6px; margin-top: 18px;
+    display: flex; justify-content: center; gap: 6px; margin-top: 20px;
   }
   .scripture-banner-dot {
     width: 4px; height: 4px; border-radius: 50%;
-    background: rgba(184,150,90,0.3); transition: background 0.4s;
+    background: rgba(196,154,108,0.3); transition: background 0.4s; cursor: pointer;
   }
-  .scripture-banner-dot.active { background: rgba(184,150,90,0.8); }
+  .scripture-banner-dot.active { background: rgba(196,154,108,0.8); }
   @media (max-width: 768px) {
-    .scripture-banner { padding: 28px 24px; }
-    .scripture-banner-verse { font-size: 17px; }
+    .scripture-banner { padding: 32px 24px; }
+    .scripture-banner-verse { font-size: 19px; }
   }
 
 </style>
@@ -1024,7 +1026,7 @@
   <!-- LATEST EPISODE -->
 <!-- ROTATING SCRIPTURE BANNER -->
 <div class="scripture-banner">
-  <canvas class="scripture-banner-canvas" id="sb-canvas"></canvas>
+  <div class="scripture-banner-bg" id="sb-bg"></div>
   <div class="scripture-banner-inner">
     <span class="scripture-banner-label">✦ Scripture</span>
     <div class="scripture-banner-verse" id="sb-verse"></div>
@@ -2452,181 +2454,53 @@ function toggleTheme() {
 
 
 // ── ROTATING SCRIPTURE BANNER ─────────────────────────────────────────────────
-// Watercolor palette sets — each set used for 3 verses, then fades to next
-const SB_PALETTES = [
-  // Warm rose & blush
-  ['rgba(210,150,140,0.55)', 'rgba(235,185,170,0.4)', 'rgba(180,110,120,0.35)', 'rgba(220,170,145,0.3)'],
-  // Dusty sage & mint
-  ['rgba(130,170,145,0.55)', 'rgba(165,200,170,0.4)', 'rgba(100,145,120,0.35)', 'rgba(185,210,180,0.3)'],
-  // Dusty blue & periwinkle
-  ['rgba(120,155,210,0.55)', 'rgba(155,185,230,0.4)', 'rgba(95,130,190,0.35)', 'rgba(175,200,235,0.3)'],
-  // Warm amber & gold
-  ['rgba(215,170,100,0.55)', 'rgba(235,195,130,0.4)', 'rgba(185,140,75,0.35)', 'rgba(225,190,120,0.3)'],
-  // Muted mauve & lavender
-  ['rgba(185,145,190,0.55)', 'rgba(210,170,210,0.4)', 'rgba(155,120,165,0.35)', 'rgba(200,170,205,0.3)'],
+// Unsplash-sourced images — soft botanical/floral, rotated every 3 verses
+const SB_IMAGE_QUERIES = [
+  'watercolor+flowers+soft',
+  'botanical+pastel+floral',
+  'soft+pink+roses+watercolor',
+  'pressed+flowers+delicate',
+  'pastel+botanical+illustration',
 ];
 
-let sbPaletteIndex = 0;
-let sbCanvas = null, sbCtx = null;
-let sbBlobs = [];
-let sbAnimFrame = null;
+let sbImages = [];
+let sbImageIndex = 0;
+let sbVersesSinceImageChange = 0;
 
-function initWatercolor() {
-  sbCanvas = document.getElementById('sb-canvas');
-  if (!sbCanvas) return;
-  resizeSbCanvas();
-  window.addEventListener('resize', resizeSbCanvas);
-  spawnBlobs(SB_PALETTES[0]);
-  animateWatercolor();
-}
-
-function resizeSbCanvas() {
-  if (!sbCanvas) return;
-  sbCanvas.width = sbCanvas.offsetWidth;
-  sbCanvas.height = sbCanvas.offsetHeight;
-  sbCtx = sbCanvas.getContext('2d');
-}
-
-function spawnBlobs(palette) {
-  const w = sbCanvas.width || 800;
-  const h = sbCanvas.height || 160;
-  sbBlobs = palette.map((color, i) => ({
-    x: (0.15 + i * 0.22 + Math.random() * 0.1) * w,
-    y: (0.2 + Math.random() * 0.6) * h,
-    rx: (0.18 + Math.random() * 0.14) * w,
-    ry: (0.35 + Math.random() * 0.3) * h,
-    color,
-    angle: Math.random() * Math.PI,
-    dx: (Math.random() - 0.5) * 0.18,
-    dy: (Math.random() - 0.5) * 0.06,
-    dangle: (Math.random() - 0.5) * 0.004,
-  }));
-}
-
-function transitionPalette(palette) {
-  // Fade out canvas, swap blobs, fade back in
-  sbCanvas.style.opacity = '0';
-  setTimeout(() => {
-    spawnBlobs(palette);
-    sbCanvas.style.opacity = '0.7';
-  }, 900);
-}
-
-function animateWatercolor() {
-  if (!sbCtx || !sbCanvas) return;
-  const w = sbCanvas.width;
-  const h = sbCanvas.height;
-  sbCtx.clearRect(0, 0, w, h);
-
-  // Draw each blob as a soft radial ellipse
-  sbBlobs.forEach(b => {
-    // Drift
-    b.x += b.dx; b.y += b.dy; b.angle += b.dangle;
-    // Soft boundary bounce
-    if (b.x < -b.rx * 0.3) b.dx = Math.abs(b.dx);
-    if (b.x > w + b.rx * 0.3) b.dx = -Math.abs(b.dx);
-    if (b.y < -b.ry * 0.3) b.dy = Math.abs(b.dy);
-    if (b.y > h + b.ry * 0.3) b.dy = -Math.abs(b.dy);
-
-    sbCtx.save();
-    sbCtx.translate(b.x, b.y);
-    sbCtx.rotate(b.angle);
-    const grad = sbCtx.createRadialGradient(0, 0, 0, 0, 0, Math.max(b.rx, b.ry));
-    grad.addColorStop(0, b.color);
-    grad.addColorStop(0.5, b.color.replace(/[\d.]+\)$/, v => (parseFloat(v) * 0.5) + ')'));
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    sbCtx.scale(b.rx / Math.max(b.rx, b.ry), b.ry / Math.max(b.rx, b.ry));
-    sbCtx.beginPath();
-    sbCtx.arc(0, 0, Math.max(b.rx, b.ry), 0, Math.PI * 2);
-    sbCtx.fillStyle = grad;
-    sbCtx.fill();
-    sbCtx.restore();
-  });
-
-  sbAnimFrame = requestAnimationFrame(animateWatercolor);
-}
-
-const SCRIPTURES = [
-  { ref: 'Acts 16:14', verse: 'One who heard us was a woman named Lydia, from the city of Thyatira, a seller of purple goods, who was a worshiper of God. The Lord opened her heart to pay attention to what was said by Paul.' },
-  { ref: 'Acts 17:18', verse: 'Some of the Epicurean and Stoic philosophers also conversed with him. And some said, “What does this babbler wish to say?” Others said, “He seems to be a preacher of foreign divinities”—because he was preaching Jesus and the resurrection.' },
-  { ref: 'Acts 17:32', verse: 'Now when they heard of the resurrection of the dead, some mocked. But others said, “We will hear you again about this.”' },
-  { ref: 'John 3:3–6', verse: 'Jesus answered him, “Truly, truly, I say to you, unless one is born again he cannot see the kingdom of God.” Nicodemus said to him, “How can a man be born when he is old? Can he enter a second time into his mother’s womb and be born?” Jesus answered, “Truly, truly, I say to you, unless one is born of water and the Spirit, he cannot enter the kingdom of God. That which is born of the flesh is flesh, and that which is born of the Spirit is spirit.”' },
-  { ref: 'John 5:44', verse: 'How can you believe, when you receive glory from one another and do not seek the glory that comes from the only God?' },
-  { ref: 'John 6:44–45', verse: 'No one can come to me unless the Father who sent me draws him. And I will raise him up on the last day. It is written in the Prophets, ‘And they will all be taught by God.’ Everyone who has heard and learned from the Father comes to me—' },
-  { ref: 'John 8:43', verse: 'Why do you not understand what I say? It is because you cannot bear to hear my word.' },
-  { ref: 'John 8:51–52', verse: 'Truly, truly, I say to you, if anyone keeps my word, he will never see death.” The Jews said to him, “Now we know that you have a demon! Abraham died, as did the prophets, yet you say, ‘If anyone keeps my word, he will never taste death.’' },
-  { ref: 'John 10:20', verse: 'Many of them said, “He has a demon, and is insane; why listen to him?”' },
-  { ref: 'John 10:26–27', verse: 'But you do not believe because you are not among my sheep. My sheep hear my voice, and I know them, and they follow me.' },
-  { ref: 'John 12:37', verse: 'Though he had done so many signs before them, they still did not believe in him,' },
-  { ref: 'John 14:26', verse: 'But the Helper, the Holy Spirit, whom the Father will send in my name, he will teach you all things and bring to your remembrance all that I have said to you.' },
-  { ref: 'John 15:26', verse: 'But when the Helper comes, whom I will send to you from the Father, the Spirit of truth, who proceeds from the Father, he will bear witness about me.' },
-  { ref: 'Romans 8:5–8', verse: 'For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit set their minds on the things of the Spirit. For to set the mind on the flesh is death, but to set the mind on the Spirit is life and peace. For the mind that is set on the flesh is hostile to God, for it does not submit to God’s law; indeed, it cannot. Those who are in the flesh cannot please God.' },
-  { ref: '1 Corinthians 1:18', verse: 'For the word of the cross is folly to those who are perishing, but to us who are being saved it is the power of God.' },
-  { ref: '1 Corinthians 1:23', verse: 'But we preach Christ crucified, a stumbling block to Jews and folly to Gentiles,' },
-  { ref: '1 Corinthians 2:12', verse: 'Now we have received not the spirit of the world, but the Spirit who is from God, that we might understand the things freely given us by God.' },
-  { ref: '1 Corinthians 15:44', verse: 'It is sown a natural body; it is raised a spiritual body. If there is a natural body, there is also a spiritual body.' },
-  { ref: '1 Corinthians 15:46', verse: 'But it is not the spiritual that is first but the natural, and then the spiritual.' },
-  { ref: '2 Corinthians 4:4–6', verse: 'In their case the god of this world has blinded the minds of the unbelievers, to keep them from seeing the light of the gospel of the glory of Christ, who is the image of God. For what we proclaim is not ourselves, but Jesus Christ as Lord, with ourselves as your servants for Jesus’ sake. For God, who said, “Let light shine out of darkness,” has shone in our hearts to give the light of the knowledge of the glory of God in the face of Jesus Christ.' },
-  { ref: 'Proverbs 14:6', verse: 'A scoffer seeks wisdom in vain, but knowledge is easy for a man of understanding.' },
-  { ref: 'Matthew 13:11–17', verse: 'And he answered them, “To you it has been given to know the secrets of the kingdom of heaven, but to them it has not been given. For to the one who has, more will be given, and he will have an abundance, but from the one who has not, even what he has will be taken away. This is why I speak to them in parables, because seeing they do not see, and hearing they do not hear, nor do they understand. Indeed, in their case the prophecy of Isaiah is fulfilled that says: ‘You will indeed hear but never understand, and you will indeed see but never perceive. For this people’s heart has grown dull, and with their ears they can barely hear, and their eyes they have closed, lest they should see with their eyes and hear with their ears and understand with their heart and turn, and I would heal them.’ But blessed are your eyes, for they see, and your ears, for they hear. For truly, I say to you, many prophets and righteous people longed to see what you see, and did not see it, and to hear what you hear, and did not hear it.' },
-  { ref: 'Matthew 13:13–15', verse: 'This is why I speak to them in parables, because seeing they do not see, and hearing they do not hear, nor do they understand. Indeed, in their case the prophecy of Isaiah is fulfilled that says: ‘You will indeed hear but never understand, and you will indeed see but never perceive. For this people’s heart has grown dull, and with their ears they can barely hear, and their eyes they have closed, lest they should see with their eyes and hear with their ears and understand with their heart and turn, and I would heal them.’' },
-  { ref: 'James 3:15', verse: 'This is not the wisdom that comes down from above, but is earthly, unspiritual, demonic.' },
-  { ref: 'Jude 1:19', verse: 'It is these who cause divisions, worldly people, devoid of the Spirit.' },
-  { ref: '1 John 2:20', verse: 'But you have been anointed by the Holy One, and you all have knowledge.' },
-  { ref: '1 John 2:27', verse: 'But the anointing that you received from him abides in you, and you have no need that anyone should teach you. But as his anointing teaches you about everything, and is true, and is no lie—just as it has taught you, abide in him.' },
-  { ref: '1 John 5:20', verse: 'And we know that the Son of God has come and has given us understanding, so that we may know him who is true; and we are in him who is true, in his Son Jesus Christ. He is the true God and eternal life.' },
-];
-
-let sbIndex = 0;
-let sbTimer = null;
-
-function initScriptureBanner() {
-  initWatercolor();
-  const dots = document.getElementById('sb-dots');
-  // Create dots
-  dots.innerHTML = SCRIPTURES.map((_, i) =>
-    `<div class="scripture-banner-dot${i === 0 ? ' active' : ''}" onclick="goToScripture(${i})"></div>`
-  ).join('');
-  showScriptureBanner(0);
-  sbTimer = setInterval(() => advanceScripture(), 60000);
-}
-
-function showScriptureBanner(index, animate = false) {
-  const verseEl = document.getElementById('sb-verse');
-  const refEl   = document.getElementById('sb-ref');
-  const dots    = document.querySelectorAll('.scripture-banner-dot');
-
-  if (animate) {
-    verseEl.classList.add('fade');
-    refEl.classList.add('fade');
-    setTimeout(() => {
-      verseEl.textContent = SCRIPTURES[index].verse;
-      refEl.textContent   = SCRIPTURES[index].ref;
-      verseEl.classList.remove('fade');
-      refEl.classList.remove('fade');
-    }, 600);
-  } else {
-    verseEl.textContent = SCRIPTURES[index].verse;
-    refEl.textContent   = SCRIPTURES[index].ref;
+async function loadScriptureImages() {
+  // Unsplash Source API — no key needed, returns random images by keyword
+  // We pre-load a set so there's no delay on rotation
+  const queries = SB_IMAGE_QUERIES;
+  const loaded = [];
+  for (const q of queries) {
+    const url = `https://source.unsplash.com/1200x400/?${q}`;
+    loaded.push(url);
   }
-
-  dots.forEach((d, i) => d.classList.toggle('active', i === index));
-  sbIndex = index;
-
-  // Rotate palette every 3 verses
-  const newPalette = Math.floor(index / 3) % SB_PALETTES.length;
-  if (newPalette !== sbPaletteIndex) { sbPaletteIndex = newPalette; transitionPalette(SB_PALETTES[sbPaletteIndex]); }
+  sbImages = loaded;
+  if (sbImages.length > 0) setBannerImage(sbImages[0], false);
 }
 
-function advanceScripture() {
-  const next = (sbIndex + 1) % SCRIPTURES.length;
-  showScriptureBanner(next, true);
+function setBannerImage(url, animate) {
+  const bg = document.getElementById('sb-bg');
+  if (!bg) return;
+  if (animate) {
+    bg.classList.add('fade-img');
+    setTimeout(() => {
+      bg.style.backgroundImage = `url('${url}')`;
+      bg.classList.remove('fade-img');
+    }, 1200);
+  } else {
+    bg.style.backgroundImage = `url('${url}')`;
+  }
 }
 
-function goToScripture(index) {
-  clearInterval(sbTimer);
-  showScriptureBanner(index, true);
-  sbTimer = setInterval(() => advanceScripture(), 60000);
+function maybeRotateImage(verseIndex) {
+  sbVersesSinceImageChange++;
+  if (sbVersesSinceImageChange >= 3 && sbImages.length > 0) {
+    sbVersesSinceImageChange = 0;
+    sbImageIndex = (sbImageIndex + 1) % sbImages.length;
+    setBannerImage(sbImages[sbImageIndex], true);
+  }
 }
 
 // ── THUMBNAIL HELPERS ─────────────────────────────────────────────────────────
