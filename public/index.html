@@ -2455,28 +2455,26 @@ function toggleTheme() {
 
 // ── ROTATING SCRIPTURE BANNER ─────────────────────────────────────────────────
 // Unsplash-sourced images — soft botanical/floral, rotated every 3 verses
-const SB_IMAGE_QUERIES = [
-  'watercolor+flowers+soft',
-  'botanical+pastel+floral',
-  'soft+pink+roses+watercolor',
-  'pressed+flowers+delicate',
-  'pastel+botanical+illustration',
-];
-
 let sbImages = [];
 let sbImageIndex = 0;
 let sbVersesSinceImageChange = 0;
 
 async function loadScriptureImages() {
-  // Unsplash Source API — no key needed, returns random images by keyword
-  // We pre-load a set so there's no delay on rotation
-  const queries = SB_IMAGE_QUERIES;
-  const loaded = [];
-  for (const q of queries) {
-    const url = `https://source.unsplash.com/1200x400/?${q}`;
-    loaded.push(url);
-  }
-  sbImages = loaded;
+  // Curated Unsplash photo IDs — soft botanical, floral watercolor, feminine
+  // Format: https://images.unsplash.com/photo-{id}?w=1400&q=80&auto=format&fit=crop
+  const photoIds = [
+    'photo-1490750967868-88df5691cc1d', // soft pink roses watercolor
+    'photo-1524601500432-1e1a4c71d692', // delicate white flowers
+    'photo-1487530811015-780780169ee3', // botanical pastel
+    'photo-1465188162913-8fb5709d6d57', // soft floral arrangement
+    'photo-1444021465936-c6ca81d39b84', // pressed botanical
+    'photo-1455582916367-25f75bfc6710', // watercolor blush flowers
+    'photo-1508610048659-a06b669e3321', // soft pink petals
+    'photo-1416879595882-3373a0480b5b', // botanical garden soft
+  ];
+  sbImages = photoIds.map(id =>
+    `https://images.unsplash.com/${id}?w=1400&q=70&auto=format&fit=crop`
+  );
   if (sbImages.length > 0) setBannerImage(sbImages[0], false);
 }
 
