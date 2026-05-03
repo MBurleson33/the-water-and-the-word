@@ -488,7 +488,15 @@ document.addEventListener('click',function(e){
   if(pill&&pill.dataset.tag){filterByTag(pill.dataset.tag);return;}
 });
 
-// ── SCRIPTURE BANNER ──────────────────────────────────────────────────────────
+// ── LOAD VIDEOS ───────────────────────────────────────────────────────────────
+async function loadVideos(){
+  const skeletonCard=`<div class="skeleton-card"><div class="skeleton skeleton-thumb"></div><div class="skeleton-body"><div class="skeleton skeleton-line skeleton-short"></div><div class="skeleton skeleton-line skeleton-title"></div><div class="skeleton skeleton-line" style="width:90%"></div><div class="skeleton skeleton-tags"><div class="skeleton skeleton-tag"></div><div class="skeleton skeleton-tag"></div></div></div></div>`;
+  document.getElementById('video-grid').innerHTML=skeletonCard.repeat(8);
+  const {data,error}=await _supabase.from('videos').select('*').order('created_at',{ascending:false});
+  if(error){document.getElementById('video-grid').innerHTML='<div class="empty-state"><h3>Could not load videos</h3><p>Please check back soon.</p></div>';return;}
+  videos=(data||[]).map(dbRowToVideo);
+  renderTopicPills();
+  applySortAndRender();
   // Check URL for pre-filtered search
   const params=new URLSearchParams(window.location.search);
   const q=params.get('q');
